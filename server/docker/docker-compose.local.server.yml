@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  server:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+    - ../src:/go/src/github.com/Doer-org/glyph
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+      - WEBHOOKURL=${WEBHOOKURL}
+      - LOGIMG=${LOGIMG}
+      - LOGNAME=${LOGNAME}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - PORT=${PORT}

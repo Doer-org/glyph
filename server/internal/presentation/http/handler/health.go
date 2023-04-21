@@ -11,7 +11,6 @@ import (
 func HealthHandler(ctx *gin.Context) {
 	logger := log.New()
 	logger.Info("", "helth : good")
-	logger.Error("", "health : good")
 	ctx.JSON(
 		http.StatusOK,
 		gin.H{"health": "good!"},

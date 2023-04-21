@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.9.0
-	github.com/seipan/logdis v0.0.0-20230417122714-b48e3ee3148b
+	github.com/seipan/logdis v0.0.0-20230421172753-ae7089a54275
 )
 
 require (

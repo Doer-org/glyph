@@ -24,7 +24,9 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: cd client && pnpm install
+        run: pnpm install
+        working-directory: client
 
       - name: Build
         run: pnpm build
+        working-directory: client

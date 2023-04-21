@@ -10,7 +10,7 @@ import (
 
 func HealthHandler(ctx *gin.Context) {
 	logger := log.New()
-	logger.Info("", "helth : good")
+	logger.Info("@glyph-dev	", "helth : good")
 	ctx.JSON(
 		http.StatusOK,
 		gin.H{"health": "good!"},

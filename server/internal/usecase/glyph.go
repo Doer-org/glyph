@@ -3,6 +3,7 @@ package usecase
 import (
 	"context"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
@@ -49,7 +50,9 @@ func (uu *GlyphUsecase) CreateGlyph(ctx context.Context, glyph *entity.Glyph) (*
 	glyph.Created_at = now
 	glyph.Updated_at = now
 	glyph.Id = utils.GetUlid()
+	log.Println(glyph)
 
 	resglyph, err := uu.repo.CreateGlyph(ctx, glyph)
+	log.Println(resglyph)
 	return resglyph, err
 }

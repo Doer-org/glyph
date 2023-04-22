@@ -19,13 +19,26 @@ func NewGlyphHandler(uc usecase.IGlyphUsecase) *GlyphHandler {
 }
 
 func (u *GlyphHandler) CreateGlyph(ctx *gin.Context) {
-	var glyphjson json.GlyphJson
-	if err := ctx.BindJSON(&glyphjson); err != nil {
+	var j json.GlyphJson
+	if err := ctx.BindJSON(&j); err != nil {
 		ctx.JSON(
 			http.StatusBadRequest,
 			gin.H{"error": err.Error()},
 		)
 		return
 	}
+	glyph, err := u.uc.CreateGlyph(ctx, json.GlyphJsonToEntity(&j))
+	if err != nil {
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
+	glyphjson := json.GlyphEntityToJson(glyph)
+	ctx.JSON(
+		http.StatusCreated,
+		gin.H{"data":glyphjson},
+	)
 
 }

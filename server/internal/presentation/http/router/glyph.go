@@ -12,6 +12,6 @@ func (r Router) InitGlyphRouter(conn *database.Conn) {
 	uc := usecase.NewGlyphUsecase(repo)
 	h := handler.NewGlyphHandler(uc)
 
-	g := r.Engine.Group("/glyph")
-	g.POST("/create", h.CreateGlyph)
+	g := r.Engine.Group("/glyphs")
+	g.POST("/", h.CreateGlyph)
 }

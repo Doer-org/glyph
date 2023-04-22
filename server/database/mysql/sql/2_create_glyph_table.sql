@@ -1,5 +1,5 @@
 CREATE TABLE `glyphs` (
-    `id`         VARCHAR(255) COLLATE utf8mb4_bin NOT NULL AUTO_INCREMENT,
+    `id`         VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
     `author_id`  VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
     `title`      VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
     `content`    VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,

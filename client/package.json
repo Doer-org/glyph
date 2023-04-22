@@ -26,5 +26,8 @@
   "engines": {
     "npm": "pnpm only",
     "yarn": "pnpm only"
+  },
+  "devDependencies": {
+    "rome": "12.0.0"
   }
 }

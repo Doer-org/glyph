@@ -1,9 +1,12 @@
+import { SideBar } from "@/components/share/SideBar";
+
 export default function ServiceLayout({
 	children,
 }: { children: React.ReactNode }) {
 	return (
-		<>
-			<main>{children}</main>
-		</>
+		<main className="flex">
+			<SideBar />
+			<div>{children}</div>
+		</main>
 	);
 }

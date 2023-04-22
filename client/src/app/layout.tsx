@@ -1,3 +1,4 @@
+import { Header } from "@/components/share/Header";
 import "./globals.css";
 
 export const metadata = {
@@ -10,7 +11,10 @@ export default function RootLayout({
 }: { children: React.ReactNode }) {
 	return (
 		<html lang="ja">
-			<body className="font-mono">{children}</body>
+			<body className="font-mono">
+				<Header />
+				{children}
+			</body>
 		</html>
 	);
 }

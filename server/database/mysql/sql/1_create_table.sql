@@ -1,5 +1,6 @@
-CREATE TABLE `sortings` (
- `id` int unsigned NOT NULL COMMENT 'ID',
- `memo` varchar(255) NOT NULL COMMENT '請求メモ',
+CREATE TABLE `users` (
+  `id`        varchar(255) COLLATE utf8mb4_bin NOT NULL ,
+  `name`      varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `img`       varchar(255) COLLATE utf8mb4_bin NOT NULL,
  PRIMARY KEY (`id`)
-) COMMENT='仕分け';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;

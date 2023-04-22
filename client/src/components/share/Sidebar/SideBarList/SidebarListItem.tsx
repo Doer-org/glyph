@@ -11,14 +11,14 @@ export const SideBarListItem: FC<TProps> = ({ children, parent, href }) => {
 		<LinkTo href={href}>
 			<Txt
 				elm="p"
-				weight={parent ? "bold" : undefined}
+				weight={parent ? "font-bold" : undefined}
 				className="hover:text-yellow-500"
 			>
 				{parent ? "" : "-"} {children}
 			</Txt>
 		</LinkTo>
 	) : (
-		<Txt elm="p" weight={parent ? "bold" : undefined}>
+		<Txt elm="p" weight={parent ? "font-bold" : undefined}>
 			{parent ? "" : "-"} {children}
 		</Txt>
 	);

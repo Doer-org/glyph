@@ -14,4 +14,6 @@ func (r Router) InitGlyphRouter(conn *database.Conn) {
 
 	g := r.Engine.Group("/glyphs")
 	g.POST("/", h.CreateGlyph)
+
+	g.DELETE("/:id", h.DeleteGlyph)
 }

@@ -19,6 +19,7 @@ type GlyphUsecase struct {
 
 type IGlyphUsecase interface {
 	CreateGlyph(ctx context.Context, glyph *entity.Glyph) (*entity.Glyph, error)
+	DeleteGlyph(id string) error
 }
 
 func NewGlyphUsecase(repo repository.IGlyphRepository) IGlyphUsecase {
@@ -55,4 +56,11 @@ func (uu *GlyphUsecase) CreateGlyph(ctx context.Context, glyph *entity.Glyph) (*
 	resglyph, err := uu.repo.CreateGlyph(ctx, glyph)
 	log.Println(resglyph)
 	return resglyph, err
+}
+
+func (uu *GlyphUsecase) DeleteGlyph(id string) error {
+	if id == "" {
+		return fmt.Errorf("id empty")
+	}
+	return nil
 }

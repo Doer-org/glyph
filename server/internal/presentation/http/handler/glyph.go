@@ -38,7 +38,24 @@ func (u *GlyphHandler) CreateGlyph(ctx *gin.Context) {
 	glyphjson := json.GlyphEntityToJson(glyph)
 	ctx.JSON(
 		http.StatusCreated,
-		gin.H{"data":glyphjson},
+		gin.H{"data": glyphjson},
+	)
+
+}
+
+func (u *GlyphHandler) DeleteGlyph(ctx *gin.Context) {
+	id := ctx.Param("id")
+	err := u.uc.DeleteGlyph(id)
+	if err != nil {
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
+	ctx.JSON(
+		http.StatusCreated,
+		gin.H{"data": "success"},
 	)
 
 }

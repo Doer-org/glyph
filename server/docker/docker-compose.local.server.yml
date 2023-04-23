@@ -8,7 +8,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-    - ../src:/go/src/github.com/Doer-org/glyph
+    - ../:/go/src/github.com/Doer-org/glyph
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
       - WEBHOOKURL=${WEBHOOKURL}

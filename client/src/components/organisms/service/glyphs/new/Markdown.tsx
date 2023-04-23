@@ -12,6 +12,22 @@ export const Markdown: FC = () => {
 				onChange={(e) => setMarkdown(e.target.value)}
 				className="border-2 p-2 w-full h-80"
 				value={markdown}
+				onDrop={(e) => {
+					console.log();
+				}}
+				onDragOver={(e) => {
+					e.preventDefault();
+					const files = e.dataTransfer.files;
+					console.log(files);
+					if (files.length === 0) return;
+					const file = files[0];
+					if (file.type.startsWith("image/")) {
+						console.log(file);
+					} else {
+						alert("画像ファイルをドロップしてください。");
+					}
+				}}
+				draggable={true}
 			/>
 
 			<div className="p-2 border-2  w-full">

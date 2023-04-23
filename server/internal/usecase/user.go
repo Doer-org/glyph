@@ -17,6 +17,8 @@ type UserUsecase struct {
 
 type IUserUsecase interface {
 	CreateUser(ctx context.Context, user *entity.User) (*entity.User, error)
+	DeleteUser(ctx context.Context, id string) error
+	GetUser(ctx context.Context, id string) (*entity.User, error)
 }
 
 func NewUserUsecase(repo repository.IUserRepository) IUserUsecase {
@@ -36,5 +38,21 @@ func (uu *UserUsecase) CreateUser(ctx context.Context, user *entity.User) (*enti
 	user.Id = id
 
 	resuser, err := uu.repo.CreateUser(ctx, user)
+	return resuser, err
+}
+
+func (uu *UserUsecase) DeleteUser(ctx context.Context, id string) error {
+	if id == "" {
+		return fmt.Errorf("id empty")
+	}
+	err := uu.repo.DeleteUser(ctx, id)
+	return err
+}
+
+func (uu *UserUsecase) GetUser(ctx context.Context, id string) (*entity.User, error) {
+	if id == "" {
+		return nil, fmt.Errorf("id empty")
+	}
+	resuser, err := uu.repo.GetUser(ctx, id)
 	return resuser, err
 }

@@ -19,7 +19,6 @@ GITHUB_REPOSITORY_NAME          := glyph
 DB_CONTAINER_NAME               := $(GITHUB_REPOSITORY_NAME)-database
 
 # dir
-SRC_DIR := ./src
 DATA_DIR := ./database/data
 
 # rm
@@ -60,7 +59,7 @@ attach-db: ## dockerのdbコンテナにアクセスする
 
 .PHONY: lint
 lint: ## goのコードを整形する
-	cd $(SRC_DIR) && gofmt -l -w .
+	gofmt -l -w .
 
 .PHONY: deploy
 deploy:

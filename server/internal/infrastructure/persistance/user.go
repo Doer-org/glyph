@@ -48,7 +48,17 @@ func (ur *UserRepository) DeleteUser(ctx context.Context, id string) error {
 }
 
 func (ur *UserRepository) GetUser(ctx context.Context, id string) (*entity.User, error) {
-	return nil, nil
+	query := `
+	SELECT * 
+	FROM users
+	WHERE id = ?
+	`
+	var dto userDto
+	err := ur.conn.DB.GetContext(ctx, &dto, query, id)
+	if err != nil {
+		return nil, err
+	}
+	return userDtoToEntity(&dto), nil
 }
 
 type userDto struct {

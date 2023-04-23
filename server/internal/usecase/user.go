@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
@@ -45,7 +46,11 @@ func (uu *UserUsecase) DeleteUser(ctx context.Context, id string) error {
 	if id == "" {
 		return fmt.Errorf("id empty")
 	}
-	err := uu.repo.DeleteUser(ctx, id)
+	_, err := uu.GetUser(ctx, id)
+	if err == sql.ErrNoRows {
+		return fmt.Errorf("The user with this id does not exist")
+	}
+	err = uu.repo.DeleteUser(ctx, id)
 	return err
 }
 

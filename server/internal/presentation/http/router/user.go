@@ -13,5 +13,7 @@ func (r Router) InitUserRouter(conn *database.Conn) {
 	h := handler.NewUserHandler(uc)
 
 	g := r.Engine.Group("/user")
-	g.POST("/create", h.CreateUser)
+	g.POST("/", h.CreateUser)
+	g.GET("/:id", h.GetUser)
+	g.DELETE("/:id", h.DeleteUser)
 }

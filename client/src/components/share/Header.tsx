@@ -1,4 +1,4 @@
-import { SvgLogo } from "../atoms/SvgLogo";
+import { SvgLogo } from "../atoms/svgs/SvgLogo";
 import { Title } from "../atoms/Title";
 import { Txt } from "../atoms/Txt";
 

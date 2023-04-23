@@ -1,5 +1,6 @@
 import { Title } from "@/components/atoms/Title";
 import { Txt } from "@/components/atoms/Txt";
+import { AnimatedSvgLogo } from "@/components/atoms/svgs/AnimatedSvgLogo";
 import { type NextPage } from "next";
 import Image from "next/image";
 
@@ -15,13 +16,7 @@ const About: NextPage = () => {
 				</Txt>
 			</div>
 			<div className="m-auto">
-				<Image
-					src="/glyph.svg"
-					alt="Glyph Logo"
-					width={280}
-					height={40}
-					className="m-auto"
-				/>
+				<AnimatedSvgLogo />
 			</div>
 		</main>
 	);

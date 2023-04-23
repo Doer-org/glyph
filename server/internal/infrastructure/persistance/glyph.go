@@ -34,7 +34,64 @@ func (ur *GlyphRepository) CreateGlyph(ctx context.Context, glyph *entity.Glyph)
 	return glyphDtoToEntity(&dto), nil
 }
 
-func (ur *GlyphRepository) DeleteGlyph(id string) error {
+func (ur *GlyphRepository) ReadGlyph(ctx context.Context, id string) (*entity.Glyph, error) {
+	query := `
+	SELECT * FROM glyphs WHERE id = ?;
+	`
+	var dto glyphDto
+	err := ur.conn.DB.GetContext(ctx, &dto, query, id)
+	resglyph := glyphDtoToEntity(&dto)
+	if err != nil {
+		return nil, err
+	}
+	return resglyph, nil
+}
+
+func (ur *GlyphRepository) ReadAllGlyphs(ctx context.Context) (entity.Glyphs, error) {
+	query := `
+	SELECT * FROM glyphs;
+	`
+	var dtos glyphDtos
+	err := ur.conn.DB.SelectContext(ctx, &dtos, query)
+	glyphs := glyphsDtosToEntity(dtos)
+	if err != nil {
+		return nil, err
+	}
+	return glyphs, nil
+}
+
+func (ur *GlyphRepository) ReadRelativeAllGlyphs(ctx context.Context, id string) (entity.Glyphs, error) {
+	query := `
+	SELECT * FROM glyphs WHERE id=:id;
+	`
+	var dtos glyphDtos
+	err := ur.conn.DB.GetContext(ctx, &dtos, query, id)
+	glyphs := glyphsDtosToEntity(dtos)
+	if err != nil {
+		return nil, err
+	}
+	return glyphs, nil
+}
+
+func (ur *GlyphRepository) EditGlyph(ctx context.Context, glyph *entity.Glyph) (*entity.Glyph, error) {
+	query := `
+	UPDATE glyphs 
+	SET title=:title, 
+		content=:content,
+		prev_glyph:=prev_glyph,
+		next_glyph:=next_glyph,
+		status:=status 
+	WHERE id=:id
+	`
+	dto := glyphEntityToDto(glyph)
+	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
+	if err != nil {
+		return nil, err
+	}
+	return glyphDtoToEntity(&dto), nil
+}
+
+func (ur *GlyphRepository) DeleteGlyph(ctx context.Context, id string) error {
 	query := `
 	DELETE FROM glyphs WHERE id=:id;
 	`
@@ -56,6 +113,7 @@ type glyphDto struct {
 	Created_at time.Time `db:"created_at"`
 	Updated_at time.Time `db:"updated_at"`
 }
+type glyphDtos []glyphDto
 
 func glyphDtoToEntity(dto *glyphDto) *entity.Glyph {
 	return &entity.Glyph{
@@ -83,4 +141,13 @@ func glyphEntityToDto(u *entity.Glyph) glyphDto {
 		Created_at: u.Created_at,
 		Updated_at: u.Updated_at,
 	}
+}
+
+func glyphsDtosToEntity(dtos glyphDtos) entity.Glyphs {
+	var glyphs entity.Glyphs
+	for _, dto := range dtos {
+		glyph := glyphDtoToEntity(&dto)
+		glyphs = append(glyphs, glyph)
+	}
+	return glyphs
 }

@@ -8,9 +8,9 @@ import (
 
 type IGlyphRepository interface {
 	CreateGlyph(ctx context.Context, glyph *entity.Glyph) (*entity.Glyph, error)
-	// ReadGlyph(id string) (entity.Glyph, error)
-	// ReadAllGlyphs() (entity.Glyphs, error)
-	// ReadRelativeAllGlyphs(id string) (entity.Glyphs, error)
-	// EditGlyph(id string, title string, content string, status string) (*entity.Glyph, error)
-	DeleteGlyph(id string) error
+	ReadGlyph(ctx context.Context, id string) (*entity.Glyph, error)
+	ReadAllGlyphs(ctx context.Context) (entity.Glyphs, error)
+	ReadRelativeAllGlyphs(ctx context.Context, id string) (entity.Glyphs, error)
+	EditGlyph(ctx context.Context, glyph *entity.Glyph) (*entity.Glyph, error)
+	DeleteGlyph(ctx context.Context, id string) error
 }

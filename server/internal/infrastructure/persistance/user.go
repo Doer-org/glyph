@@ -33,6 +33,34 @@ func (ur *UserRepository) CreateUser(ctx context.Context, user *entity.User) (*e
 	return userDtoToEntity(&dto), nil
 }
 
+func (ur *UserRepository) DeleteUser(ctx context.Context, id string) error {
+	query := `
+	DELETE FROM users
+	WHERE id = :id
+	`
+
+	_, err := ur.conn.DB.NamedExecContext(ctx, query, map[string]interface{}{"id": id})
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (ur *UserRepository) GetUser(ctx context.Context, id string) (*entity.User, error) {
+	query := `
+	SELECT * 
+	FROM users
+	WHERE id = ?
+	`
+	var dto userDto
+	err := ur.conn.DB.GetContext(ctx, &dto, query, id)
+	if err != nil {
+		return nil, err
+	}
+	return userDtoToEntity(&dto), nil
+}
+
 type userDto struct {
 	Id   string `db:"id"`
 	Name string `db:"name"`

@@ -48,6 +48,47 @@ func (u *UserHandler) CreateUser(ctx *gin.Context) {
 	)
 }
 
+func (u *UserHandler) DeleteUser(ctx *gin.Context) {
+	logger := log.New()
+	id := ctx.Param("id")
+
+	err := u.uc.DeleteUser(ctx, id)
+	if err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
+
+	ctx.JSON(
+		http.StatusOK,
+		gin.H{"data": "success"},
+	)
+}
+
+func (u *UserHandler) GetUser(ctx *gin.Context) {
+	logger := log.New()
+	id := ctx.Param("id")
+
+	user, err := u.uc.GetUser(ctx, id)
+	if err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
+
+	userjson := userEntityToJson(user)
+	ctx.JSON(
+		http.StatusOK,
+		gin.H{"data": userjson},
+	)
+}
+
 type userJson struct {
 	Id   string `json:"id"`
 	Name string `json:"name"`

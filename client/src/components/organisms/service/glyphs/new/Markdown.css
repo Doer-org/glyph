@@ -1,0 +1,79 @@
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3,
+.markdown-preview h4,
+.markdown-preview h5,
+.markdown-preview h6 {
+  font-weight: 600;
+}
+.markdown-preview h1 {
+    font-size: 1.5rem;
+  }
+.markdown-preview h2 {
+  font-size: 1.5rem;
+}
+.markdown-preview h3 {
+  font-size: 1.3rem;
+}
+.markdown-preview h4 {
+  font-size: 1.1rem;
+}
+.markdown-preview h5 {
+  font-size: 0.9rem;
+}
+.markdown-preview h6 {
+  font-size: 0.7rem;
+}
+.markdown-preview p code {
+  background-color: #ebebeb;
+}
+.markdown-preview p a {
+  color: #0000ee;
+}
+.markdown-preview p a:visited {
+  color: #551a8b;
+}
+.markdown-preview ul li {
+  list-style: inside;
+}
+.markdown-preview ul li ul {
+  margin-left: 1rem;
+}
+.markdown-preview ol li {
+  list-style: inside;
+  list-style-type: decimal;
+}
+.markdown-preview table {
+  border: 1px solid #afadad;
+}
+.markdown-preview table thead {
+  background-color: #ebebeb;
+}
+.markdown-preview table thead tr {
+  border-bottom: 1px solid #afadad;
+}
+.markdown-preview table thead tr th {
+  border-right: 1px solid #afadad;
+}
+.markdown-preview table thead tr th:last-child {
+  border-right: none;
+}
+.markdown-preview tbody tr {
+  border-bottom: 1px solid #afadad;
+}
+.markdown-preview tbody tr:last-child {
+  border-bottom: none;
+}
+.markdown-preview tbody tr td {
+  border-right: 1px solid #afadad;
+}
+.markdown-preview tbody tr td:last-child {
+  border-right: none;
+}
+.markdown-preview blockquote {
+  font-size: 0.95rem;
+  margin: 1.4rem 0;
+  border-left: 3px solid #b3bfc7;
+  padding: 2px 0 2px 0.7em;
+  color: #626e77;
+}

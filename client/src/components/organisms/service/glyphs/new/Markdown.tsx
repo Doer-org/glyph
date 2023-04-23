@@ -2,7 +2,7 @@
 
 import { FC, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import "./Markdown.css";
+import { CodeBlock } from "./CodeBlock";
 export const Markdown: FC = () => {
 	const [markdown, setMarkdown] = useState<string>("");
 	console.log("markdown!!");
@@ -15,7 +15,11 @@ export const Markdown: FC = () => {
 			/>
 
 			<div className="p-2 border-2  w-full">
-				<ReactMarkdown unwrapDisallowed={false} className="prose lg:prose-md">
+				<ReactMarkdown
+					unwrapDisallowed={false}
+					className="prose lg:prose-md"
+					components={CodeBlock}
+				>
 					{markdown}
 				</ReactMarkdown>
 			</div>

@@ -21,7 +21,14 @@ export default function Markdown() {
 
 	return (
 		<>
-			<div className="text-center mb-1 flex gap-5 justify-end">
+			<div className="text-center mb-1 flex gap-5 justify-end justify-items-end">
+				<div className="mt-auto ml-auto">
+					<div className="flex h-8 items-center m-auto">
+						<p className="px-3">タイトル :</p>
+						<input type="text" className="border-2 borde-black" />
+					</div>
+				</div>
+
 				<div>
 					<p>切り替え</p>
 					<Toggle bool={isPreview} toggle={togglePreview} />

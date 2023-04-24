@@ -18,9 +18,9 @@ export const SideBar = () => {
 						<SideBarListItem href="/service/comments">index</SideBarListItem>
 					</SideBarList>
 
-					<SideBarListItem parent>Statics</SideBarListItem>
+					<SideBarListItem parent>Statistics</SideBarListItem>
 					<SideBarList>
-						<SideBarListItem href="/service/statics">index</SideBarListItem>
+						<SideBarListItem href="/service/statistics">index</SideBarListItem>
 					</SideBarList>
 				</SideBarList>
 			</div>

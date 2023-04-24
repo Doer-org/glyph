@@ -44,7 +44,11 @@ func (uu *GlyphUsecase) CreateGlyph(ctx context.Context, glyph *entity.Glyph) (*
 	if !(glyph.Status == "Draft" || glyph.Status == "Private" || glyph.Status == "Public") {
 		return nil, fmt.Errorf("status types error")
 	}
-	now := time.Now()
+	jst, err := time.LoadLocation("Asia/Tokyo")
+	if err != nil {
+		return nil, fmt.Errorf("can't get time")
+	}
+	now := time.Now().In(jst)
 	glyph.Created_at = now
 	glyph.Updated_at = now
 	glyph.Id = utils.GetUlid()
@@ -88,6 +92,13 @@ func (uu *GlyphUsecase) EditGlyph(ctx context.Context, glyph *entity.Glyph) (*en
 	if !(glyph.Status == "Draft" || glyph.Status == "Private" || glyph.Status == "Public") {
 		return nil, fmt.Errorf("status types error")
 	}
+	jst, err := time.LoadLocation("Asia/Tokyo")
+	if err != nil {
+		return nil, fmt.Errorf("can't get time")
+	}
+	now := time.Now().In(jst)
+	glyph.Updated_at = now
+
 	resglyph, err := uu.repo.EditGlyph(ctx, glyph)
 	return resglyph, err
 }

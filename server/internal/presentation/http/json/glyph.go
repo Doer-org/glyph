@@ -7,8 +7,8 @@ import (
 )
 
 type GlyphJson struct {
-	Author_id  string    `json:"author_id"`
 	Id         string    `json:"id"`
+	Author_id  string    `json:"author_id"`
 	Title      string    `json:"title"`
 	Content    string    `json:"content"`
 	Prev_glyph string    `json:"prev_glyph"`
@@ -22,8 +22,8 @@ type GlyphsJson []GlyphJson
 
 func GlyphEntityToJson(c *entity.Glyph) *GlyphJson {
 	return &GlyphJson{
-		Author_id:  c.Author_id,
 		Id:         c.Id,
+		Author_id:  c.Author_id,
 		Title:      c.Title,
 		Content:    c.Content,
 		Prev_glyph: c.Prev_glyph,
@@ -45,8 +45,8 @@ func GlyphsEntityToJson(c entity.Glyphs) *GlyphsJson {
 
 func GlyphJsonToEntity(j *GlyphJson) *entity.Glyph {
 	return &entity.Glyph{
-		Author_id:  j.Author_id,
 		Id:         j.Id,
+		Author_id:  j.Author_id,
 		Title:      j.Title,
 		Content:    j.Content,
 		Prev_glyph: j.Prev_glyph,

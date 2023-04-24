@@ -80,7 +80,8 @@ func (ur *GlyphRepository) EditGlyph(ctx context.Context, glyph *entity.Glyph) (
 		content=:content,
 		prev_glyph:=prev_glyph,
 		next_glyph:=next_glyph,
-		status:=status 
+		status:=status,
+		updated_at:=updated_at 
 	WHERE id=:id
 	`
 	dto := glyphEntityToDto(glyph)
@@ -95,7 +96,7 @@ func (ur *GlyphRepository) DeleteGlyph(ctx context.Context, id string) error {
 	query := `
 	DELETE FROM glyphs WHERE id=:id;
 	`
-	_, err := ur.conn.DB.NamedExec(query, id)
+	_, err := ur.conn.DB.NamedExecContext(ctx, query, id)
 	if err != nil {
 		return err
 	}
@@ -103,8 +104,8 @@ func (ur *GlyphRepository) DeleteGlyph(ctx context.Context, id string) error {
 }
 
 type glyphDto struct {
-	Author_id  string    `db:"author_id"`
 	Id         string    `db:"id"`
+	Author_id  string    `db:"author_id"`
 	Title      string    `db:"title"`
 	Content    string    `db:"content"`
 	Prev_glyph string    `db:"prev_glyph"`

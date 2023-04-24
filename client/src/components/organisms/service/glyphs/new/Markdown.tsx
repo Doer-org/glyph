@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useMemo, useState } from "react";
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { CodeBlock } from "./CodeBlock";
 import SimpleMDE from "react-simplemde-editor";
@@ -11,11 +11,12 @@ import {
 	options,
 } from "./MarkdownUtils";
 
-export const Markdown: FC = () => {
+// dynamicでimportする際にアロー関数で定義すると読み込めなくなるのでここのみexport default
+export default function Markdown() {
 	const [markdown, setMarkdown] = useState<string>("");
 
 	return (
-		<div>
+		<>
 			<SimpleMDE
 				id="simple-mde"
 				value={markdown}
@@ -28,6 +29,6 @@ export const Markdown: FC = () => {
 					{markdown}
 				</ReactMarkdown>
 			</div>
-		</div>
+		</>
 	);
-};
+}

@@ -78,11 +78,11 @@ func (ur *GlyphRepository) EditGlyph(ctx context.Context, glyph *entity.Glyph) (
 	UPDATE glyphs 
 	SET title=:title, 
 		content=:content,
-		prev_glyph:=prev_glyph,
-		next_glyph:=next_glyph,
-		status:=status,
-		updated_at:=updated_at 
-	WHERE id=:id
+		prev_glyph=:prev_glyph,
+		next_glyph=:next_glyph,
+		status=:status,
+		updated_at=:updated_at 
+	WHERE id=:id;
 	`
 	dto := glyphEntityToDto(glyph)
 	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)

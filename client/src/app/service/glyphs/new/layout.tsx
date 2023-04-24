@@ -5,10 +5,10 @@ export default function GlyphsLayout({
 }: { children: React.ReactNode }) {
 	return (
 		<>
-			<Txt elm="h2" size="text-3xl" className="text-center">
+			<Txt elm="h2" size="text-3xl" className="text-center my-10">
 				Glyph作成
 			</Txt>
-			<div className="my-5">{children}</div>
+			{children}
 		</>
 	);
 }

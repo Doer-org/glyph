@@ -12,30 +12,38 @@ import {
 } from "./MarkdownUtils";
 import { useToggle } from "@/hooks/common/useToggle";
 import Toggle from "@/components/atoms/Toggle";
+import { Input } from "@/components/atoms/Input";
+import { Button } from "@/components/atoms/Button";
 
 // dynamicでimportする際にアロー関数で定義すると読み込めなくなるのでここのみexport default
 export default function Markdown() {
 	const [markdown, setMarkdown] = useState<string>("");
 	const { bool: isPreview, toggle: togglePreview } = useToggle();
 	const { bool: isPublic, toggle: togglePublic } = useToggle();
+	const [title, setTitle] = useState<string>("");
 
 	return (
 		<>
-			<div className="text-center mb-1 flex gap-5 justify-end justify-items-end">
-				<div className="mt-auto ml-auto">
-					<div className="flex h-8 items-center m-auto">
-						<p className="px-3">タイトル :</p>
-						<input type="text" className="border-2 borde-black" />
-					</div>
-				</div>
+			<div className="text-center mb-1 flex items-end justify-between">
+				<Input
+					type="text"
+					label="タイトル："
+					content={title}
+					changeContent={setTitle}
+				/>
 
-				<div>
-					<p>切り替え</p>
-					<Toggle bool={isPreview} toggle={togglePreview} />
-				</div>
-				<div>
-					<p>外部に公開</p>
-					<Toggle bool={isPublic} toggle={togglePublic} />
+				<div className="flex gap-3 items-end">
+					<div>
+						<p>切り替え</p>
+						<Toggle bool={isPreview} toggle={togglePreview} />
+					</div>
+					<div>
+						<p>外部に公開</p>
+						<Toggle bool={isPublic} toggle={togglePublic} />
+					</div>
+					<div className="mx-5">
+						<Button border>保存</Button>
+					</div>
 				</div>
 			</div>
 			{isPreview ? (

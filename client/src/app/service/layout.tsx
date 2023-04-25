@@ -7,7 +7,7 @@ export default function ServiceLayout({
 		<main>
 			<SideBar />
 			<div className="md:pl-[240px] pl-0">
-				<div className="p-20">{children}</div>
+				<div className=" xl:p-20  lg:p-10">{children}</div>
 			</div>
 		</main>
 	);

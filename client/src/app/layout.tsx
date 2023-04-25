@@ -13,7 +13,7 @@ export default function RootLayout({
 		<html lang="ja">
 			<body className="font-mono">
 				<Header />
-				{children}
+				<div>{children}</div>
 			</body>
 		</html>
 	);

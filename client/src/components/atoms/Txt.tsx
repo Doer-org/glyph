@@ -19,11 +19,8 @@ type TProps = {
 
 export const Txt: FC<TProps> = ({ elm, children, size, weight, className }) => {
 	const Element: React.ElementType = elm;
-
-	const fontWeight = `font-${weight}`;
-
 	return (
-		<Element className={`${className ?? ""} ${size} ${fontWeight}`}>
+		<Element className={`${className ?? ""} ${size} ${weight}`}>
 			{children}
 		</Element>
 	);

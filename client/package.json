@@ -1,33 +1,41 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@types/node": "18.15.13",
-    "@types/react": "18.0.37",
-    "@types/react-dom": "18.0.11",
-    "autoprefixer": "10.4.14",
-    "eslint": "8.38.0",
-    "eslint-config-next": "13.3.0",
-    "next": "13.3.0",
-    "postcss": "8.4.23",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "tailwindcss": "3.3.1",
-    "typescript": "5.0.4"
-  },
-  "engines": {
-    "npm": "pnpm only",
-    "yarn": "pnpm only"
-  },
-  "devDependencies": {
-    "rome": "12.0.0"
-  }
+	"name": "client",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"preinstall": "npx only-allow pnpm",
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@types/node": "18.15.13",
+		"@types/react": "18.0.37",
+		"@types/react-dom": "18.0.11",
+		"@types/react-syntax-highlighter": "^15.5.6",
+		"@uiw/react-md-editor": "^3.20.8",
+		"autoprefixer": "10.4.14",
+		"eslint": "8.38.0",
+		"eslint-config-next": "13.3.0",
+		"next": "13.3.0",
+		"next-remove-imports": "^1.0.11",
+		"postcss": "8.4.23",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-markdown": "^8.0.7",
+		"react-syntax-highlighter": "^15.5.0",
+		"tailwindcss": "3.3.1",
+		"typescript": "5.0.4"
+	},
+	"engines": {
+		"npm": "pnpm only",
+		"yarn": "pnpm only"
+	},
+	"devDependencies": {
+		"@tailwindcss/typography": "^0.5.9",
+		"easymde": "^2.18.0",
+		"react-simplemde-editor": "^5.2.0",
+		"rome": "12.0.0"
+	}
 }

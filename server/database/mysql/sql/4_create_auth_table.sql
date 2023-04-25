@@ -1,4 +1,4 @@
-CREATE TABLE `discord_auth` (
+CREATE TABLE `discord_auths` (
   `user_id` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT 'ユーザID',
   `access_token` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT 'OAuth2のアクセストークン',
   `refresh_token` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT 'OAuth2のリフレッシュトークン',

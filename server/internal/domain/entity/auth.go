@@ -15,7 +15,7 @@ type AuthStates struct {
 	RedirectURL string
 }
 
-type GoogleAuth struct {
+type DiscordAuth struct {
 	UserID       string
 	AccessToken  string
 	RefreshToken string

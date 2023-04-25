@@ -11,7 +11,7 @@ import {
 	options,
 } from "../../_common/markdown/MarkdownUtils";
 import { useToggle } from "@/hooks/common/useToggle";
-import Toggle from "@/components/atoms/Toggle";
+import { ToggleButton } from "@/components/atoms/Toggle";
 import { Input } from "@/components/atoms/Input";
 import { Button } from "@/components/atoms/Button";
 
@@ -37,11 +37,11 @@ export default function GlyphEditor() {
 				<div className="flex gap-3 items-end justify-center">
 					<div>
 						<p>切り替え</p>
-						<Toggle bool={isPreview} toggle={togglePreview} />
+						<ToggleButton bool={isPreview} toggle={togglePreview} />
 					</div>
 					<div>
 						<p>外部に公開</p>
-						<Toggle bool={isPublic} toggle={togglePublic} />
+						<ToggleButton bool={isPublic} toggle={togglePublic} />
 					</div>
 					<div className="mx-5">
 						<Button border>保存</Button>

@@ -1,3 +1,4 @@
+import { Txt } from "@/components/atoms/Txt";
 import { TGlyph } from "@/types/Glyph";
 import { FC } from "react";
 
@@ -6,5 +7,14 @@ type TProps = {
 };
 
 export const Glyph: FC<TProps> = ({ glyph }) => {
-	return <div>Glyph一つ分</div>;
+	return (
+		<div className="border border-black rounded-md p-2 m-2">
+			<Txt elm="h2" size="text-2xl">
+				{glyph.title}
+			</Txt>
+
+			<p>{glyph.content}</p>
+			<p>{glyph.author_id}</p>
+		</div>
+	);
 };

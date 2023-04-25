@@ -8,7 +8,7 @@ const GlyphsPage: NextPage = () => {
 		{
 			id: "1",
 			author_id: "uu",
-			title: "glyph1",
+			title: "F#勉強会",
 			content: "## aaa  ggg",
 			prev_glyph: "1",
 			next_glyph: "2",
@@ -19,7 +19,7 @@ const GlyphsPage: NextPage = () => {
 		{
 			id: "2",
 			author_id: "ee",
-			title: "glyph2",
+			title: "React勉強会",
 			content: "## bbb eee",
 			prev_glyph: "2",
 			next_glyph: "4",

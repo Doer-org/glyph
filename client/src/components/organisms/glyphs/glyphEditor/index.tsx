@@ -2,21 +2,21 @@
 
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { CodeBlock } from "./CodeBlock";
+import { CodeBlock } from "../../_common/markdown/CodeBlock";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import {
 	handleImageDrop,
 	handleMarkdownChange,
 	options,
-} from "./MarkdownUtils";
+} from "../../_common/markdown/MarkdownUtils";
 import { useToggle } from "@/hooks/common/useToggle";
 import Toggle from "@/components/atoms/Toggle";
 import { Input } from "@/components/atoms/Input";
 import { Button } from "@/components/atoms/Button";
 
 // dynamicでimportする際にアロー関数で定義すると読み込めなくなるのでここのみexport default
-export default function Markdown() {
+export default function GlyphEditor() {
 	const [markdown, setMarkdown] = useState<string>("");
 	const { bool: isPreview, toggle: togglePreview } = useToggle();
 	const { bool: isPublic, toggle: togglePublic } = useToggle();

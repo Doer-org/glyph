@@ -6,7 +6,7 @@ export default function ServiceLayout({
 	return (
 		<main>
 			<SideBar />
-			<div className="md:pl-[240px] pl-0">
+			<div className="md:pl-[240px] pt-20 ">
 				<div className="p-10">{children}</div>
 			</div>
 		</main>

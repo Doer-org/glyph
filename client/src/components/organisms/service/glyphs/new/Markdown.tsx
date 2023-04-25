@@ -24,15 +24,17 @@ export default function Markdown() {
 
 	return (
 		<>
-			<div className="text-center mb-1 flex items-end justify-between">
-				<Input
-					type="text"
-					label="タイトル："
-					content={title}
-					changeContent={setTitle}
-				/>
+			<div className="text-center mb-1 lg:flex items-end lg:justify-between justify-center py-3">
+				<div className="ms-3">
+					<Input
+						type="text"
+						label="タイトル："
+						content={title}
+						changeContent={setTitle}
+					/>
+				</div>
 
-				<div className="flex gap-3 items-end">
+				<div className="flex gap-3 items-end justify-center">
 					<div>
 						<p>切り替え</p>
 						<Toggle bool={isPreview} toggle={togglePreview} />
@@ -44,6 +46,7 @@ export default function Markdown() {
 					<div className="mx-5">
 						<Button border>保存</Button>
 					</div>
+					<Button border>下書き保存</Button>
 				</div>
 			</div>
 			{isPreview ? (

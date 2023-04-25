@@ -6,7 +6,7 @@ type TProps = {
 };
 export const Glyphs: FC<TProps> = ({ glyphs }) => {
 	return (
-		<div className="grid grid-cols-2">
+		<div className="grid grid-cols-1  place-items-center">
 			{glyphs.map((glyph: TGlyph) => {
 				return <Glyph glyph={glyph} key={glyph.id} />;
 			})}

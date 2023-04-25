@@ -57,10 +57,9 @@ func (r *Router) cors() {
 			"Content-Type",
 			"Content-Length",
 			"Accept-Encoding",
+			"X-CSRF-Token",
 			"Authorization",
 		},
-		// cookieなどの情報を必要とするかどうか
-		AllowCredentials: true,
 		// preflightリクエストの結果をキャッシュする時間
 		MaxAge: 24 * time.Hour,
 	}))

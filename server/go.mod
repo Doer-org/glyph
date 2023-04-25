@@ -8,6 +8,7 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/oklog/ulid v1.3.1
+	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/seipan/logdis v0.0.0-20230421172753-ae7089a54275
 	golang.org/x/oauth2 v0.7.0
 )

@@ -9,7 +9,7 @@ export const IosToggleButton: FC<TProps> = ({ bool, toggle }) => {
 		<button
 			onClick={toggle}
 			className={`${
-				bool ? "bg-green-400" : "bg-gray-300"
+				bool ? "bg-yellow-300" : "bg-gray-300"
 			} relative inline-block w-14 h-8 rounded-full transition-colors duration-300 focus:outline-none`}
 		>
 			<span

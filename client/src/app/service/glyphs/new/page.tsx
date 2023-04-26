@@ -1,6 +1,7 @@
 import { Txt } from "@/components/atoms/Txt";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
+
 const GlyphEditor = dynamic(
 	() => import("@/components/organisms/glyphs/glyphEditor"),
 	{ ssr: false },

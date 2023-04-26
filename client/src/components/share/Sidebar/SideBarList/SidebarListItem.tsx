@@ -3,12 +3,18 @@ import { Txt } from "@/components/atoms/Txt";
 import { FC, ReactNode } from "react";
 type TProps = {
 	children: ReactNode;
-	parent?: boolean;
-	href?: string;
+	href: string;
+	logo?: ReactNode;
 };
-export const SideBarListItem: FC<TProps> = ({ children, parent, href }) => {
-	return href ? (
-		<LinkTo href={href}>
+export const SideBarListItem: FC<TProps> = ({
+	children,
+
+	href,
+	logo,
+}) => {
+	return (
+		<LinkTo href={href} className="flex items-center gap-3">
+			{logo}
 			<Txt
 				elm="p"
 				weight={parent ? "font-bold" : undefined}
@@ -17,9 +23,5 @@ export const SideBarListItem: FC<TProps> = ({ children, parent, href }) => {
 				{parent ? "" : "-"} {children}
 			</Txt>
 		</LinkTo>
-	) : (
-		<Txt elm="p" weight={parent ? "font-bold" : undefined}>
-			{parent ? "" : "-"} {children}
-		</Txt>
 	);
 };

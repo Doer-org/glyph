@@ -14,8 +14,9 @@ func (r Router) InitGlyphRouter(conn *database.Conn) {
 
 	g := r.Engine.Group("/glyphs")
 	g.POST("/", h.CreateGlyph)
-	g.GET("/list", h.ReadAllGlyphs)
 	g.GET("/:id", h.ReadGlyph)
+	g.GET("/user/:author_id", h.ReadGlyphsbyUserId)
+	g.GET("/list", h.ReadAllGlyphs)
 	g.GET("/list/:id", h.ReadRelativeAllGlyphs)
 	g.PUT("/:id", h.EditGlyph)
 	g.DELETE("/:id", h.DeleteGlyph)

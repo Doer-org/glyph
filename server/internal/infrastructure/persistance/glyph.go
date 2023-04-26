@@ -57,6 +57,19 @@ func (ur *GlyphRepository) ReadGlyph(ctx context.Context, id string) (*entity.Gl
 	return resglyph, nil
 }
 
+func (ur *GlyphRepository) ReadGlyphsbyUserId(ctx context.Context, author_id string) (entity.Glyphs, error) {
+	query := `
+	SELECT * FROM glyphs WHERE author_id = ?;
+	`
+	var dtos glyphDtos
+	err := ur.conn.DB.SelectContext(ctx, &dtos, query, author_id)
+	glyphs := glyphsDtosToEntity(dtos)
+	if err != nil {
+		return nil, err
+	}
+	return glyphs, nil
+}
+
 func (ur *GlyphRepository) ReadAllGlyphs(ctx context.Context) (entity.Glyphs, error) {
 	query := `
 	SELECT * FROM glyphs;
@@ -132,6 +145,8 @@ type glyphDto struct {
 type glyphDtos []glyphDto
 
 func glyphDtoToEntity(dto *glyphDto) *entity.Glyph {
+	dto.Created_at = dto.Created_at.In(time.FixedZone("Asia/Tokyo", 9*60*60))
+	dto.Updated_at = dto.Updated_at.In(time.FixedZone("Asia/Tokyo", 9*60*60))
 	return &entity.Glyph{
 		Id:         dto.Id,
 		Author_id:  dto.Author_id,

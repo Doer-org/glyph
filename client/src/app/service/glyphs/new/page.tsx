@@ -2,8 +2,8 @@ import { Txt } from "@/components/atoms/Txt";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 
-const GlyphEditor = dynamic(
-	() => import("@/components/organisms/glyphs/glyphEditor"),
+const GlyphCreateForm = dynamic(
+	() => import("@/components/organisms/glyphs/glyphCreateForm"),
 	{ ssr: false },
 );
 const GlyphNewPage: NextPage = () => {
@@ -12,7 +12,7 @@ const GlyphNewPage: NextPage = () => {
 			<Txt elm="h2" size="text-3xl" className="text-center pb-10">
 				Glyph作成
 			</Txt>
-			<GlyphEditor />
+			<GlyphCreateForm />
 		</>
 	);
 };

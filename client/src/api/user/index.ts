@@ -1,18 +1,18 @@
 import { apiClient } from '../core';
-import { User, UserCreate } from './types';
+import { UserResponse, UserCreate } from './types';
 
 export const createUser = async (user: UserCreate) =>
-  await apiClient.post<User>(
+  await apiClient.post<UserResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/user/create`,
     user
   );
 
 export const readUser = async (user_id: string) =>
-  await apiClient.get<User>(
+  await apiClient.get<UserResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${user_id}`
   );
 
 export const deleteUser = async (user_id: string) =>
-  await apiClient.delete<User>(
+  await apiClient.delete(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${user_id}`
   );

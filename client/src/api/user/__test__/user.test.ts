@@ -26,5 +26,5 @@ test('User: Create => Delete', async () => {
   });
   if (resp.type === 'error') throw new Error('Create User failed');
   const resp2 = await deleteUser(resp.value.data.id);
-  expect(resp2.ok).toBe(true);
+  expect(resp2.type).toBe('ok');
 });

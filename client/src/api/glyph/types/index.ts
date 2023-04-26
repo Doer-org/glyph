@@ -34,7 +34,7 @@ type GlyphBase = {
   next_glyph: string;
   created_at: string;
   updated_at: string;
-}; 
+};
 
 export type GlyphCreate = Omit<GlyphBase, 'id' | 'created_at' | 'updated_at'>;
 
@@ -42,3 +42,11 @@ export type GlyphEdit = Omit<
   GlyphBase,
   'author_id' | 'created_at' | 'updated_at'
 >;
+
+const glyphDeleteResponseSchema = {
+  properties: {
+    data: { type: 'string' },
+  },
+} as const;
+
+export type GlyphDeleteResponse = JTDDataType<typeof glyphDeleteResponseSchema>;

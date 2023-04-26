@@ -5,6 +5,7 @@ import (
 
 	"github.com/Doer-org/glyph/internal/presentation/http/json"
 	"github.com/Doer-org/glyph/internal/usecase"
+	"github.com/Doer-org/glyph/log"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,8 +20,10 @@ func NewGlyphHandler(uc usecase.IGlyphUsecase) *GlyphHandler {
 }
 
 func (u *GlyphHandler) CreateGlyph(ctx *gin.Context) {
+	logger := log.New()
 	var j json.GlyphJson
 	if err := ctx.BindJSON(&j); err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
 		ctx.JSON(
 			http.StatusBadRequest,
 			gin.H{"error": err.Error()},
@@ -29,6 +32,7 @@ func (u *GlyphHandler) CreateGlyph(ctx *gin.Context) {
 	}
 	glyph, err := u.uc.CreateGlyph(ctx, json.GlyphJsonToEntity(&j))
 	if err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
 		ctx.JSON(
 			http.StatusBadRequest,
 			gin.H{"error": err.Error()},
@@ -44,9 +48,11 @@ func (u *GlyphHandler) CreateGlyph(ctx *gin.Context) {
 }
 
 func (u *GlyphHandler) ReadGlyph(ctx *gin.Context) {
+	logger := log.New()
 	id := ctx.Param("id")
 	glyph, err := u.uc.ReadGlyph(ctx, id)
 	if err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
 		ctx.JSON(
 			http.StatusBadRequest,
 			gin.H{"error": err.Error()},
@@ -61,8 +67,10 @@ func (u *GlyphHandler) ReadGlyph(ctx *gin.Context) {
 }
 
 func (u *GlyphHandler) ReadAllGlyphs(ctx *gin.Context) {
+	logger := log.New()
 	glyphs, err := u.uc.ReadAllGlyphs(ctx)
 	if err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
 		ctx.JSON(
 			http.StatusBadRequest,
 			gin.H{"error": err.Error()},
@@ -77,9 +85,11 @@ func (u *GlyphHandler) ReadAllGlyphs(ctx *gin.Context) {
 }
 
 func (u *GlyphHandler) ReadRelativeAllGlyphs(ctx *gin.Context) {
+	logger := log.New()
 	id := ctx.Param("id")
 	glyphs, err := u.uc.ReadRelativeAllGlyphs(ctx, id)
 	if err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
 		ctx.JSON(
 			http.StatusBadRequest,
 			gin.H{"error": err.Error()},
@@ -94,9 +104,11 @@ func (u *GlyphHandler) ReadRelativeAllGlyphs(ctx *gin.Context) {
 }
 
 func (u *GlyphHandler) EditGlyph(ctx *gin.Context) {
+	logger := log.New()
 	id := ctx.Param("id")
 	var j json.GlyphJson
 	if err := ctx.BindJSON(&j); err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
 		ctx.JSON(
 			http.StatusBadRequest,
 			gin.H{"error": err.Error()},
@@ -105,6 +117,7 @@ func (u *GlyphHandler) EditGlyph(ctx *gin.Context) {
 	}
 	glyphjson, err := u.uc.EditGlyph(ctx, json.GlyphJsonToEntity(&j), id)
 	if err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
 		ctx.JSON(
 			http.StatusBadRequest,
 			gin.H{"error": err.Error()},
@@ -117,9 +130,11 @@ func (u *GlyphHandler) EditGlyph(ctx *gin.Context) {
 }
 
 func (u *GlyphHandler) DeleteGlyph(ctx *gin.Context) {
+	logger := log.New()
 	id := ctx.Param("id")
 	err := u.uc.DeleteGlyph(ctx, id)
 	if err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
 		ctx.JSON(
 			http.StatusBadRequest,
 			gin.H{"error": err.Error()},

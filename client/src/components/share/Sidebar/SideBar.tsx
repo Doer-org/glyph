@@ -3,7 +3,7 @@ import { SideBarList } from "./SideBarList/SideBarList";
 import { SideBarListItem } from "./SideBarList/SidebarListItem";
 import { GrDocumentText } from "react-icons/gr";
 import { MdOutlineComment } from "react-icons/md";
-import { BsGraphDown } from "react-icons/bs";
+import { GoGraph } from "react-icons/go";
 export const SideBar = () => {
 	return (
 		<div className=" bg-slate-50 text-black min-h-screen top-0 fixed w-[230px] md:block hidden pt-5 border-r-2 border-slate-500 m-auto">
@@ -24,7 +24,7 @@ export const SideBar = () => {
 
 					<SideBarListItem
 						href="/service/statistics"
-						logo={<BsGraphDown size={25} />}
+						logo={<GoGraph size={25} />}
 					>
 						Statistics
 					</SideBarListItem>

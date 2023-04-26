@@ -25,7 +25,7 @@ export const readRelativeAllGlyphs = async (glyph_id: string) =>
 
 export const editGlyph = async (glyph: GlyphEdit) =>
   await apiClient.put<GlyphResponse>(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/glyphs/`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/glyphs/${glyph.id}`,
     glyph
   );
 

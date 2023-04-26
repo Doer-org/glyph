@@ -20,3 +20,11 @@ export type UserCreate = {
   name: string;
   img: string;
 };
+
+const userDeleteResponseSchema = {
+  properties: {
+    data: { type: 'string' },
+  },
+} as const;
+
+export type GlyphDeleteResponse = JTDDataType<typeof userDeleteResponseSchema>;

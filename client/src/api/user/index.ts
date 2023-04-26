@@ -3,7 +3,7 @@ import { UserResponse, UserCreate } from './types';
 
 export const createUser = async (user: UserCreate) =>
   await apiClient.post<UserResponse>(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/user/create`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/user`,
     user
   );
 

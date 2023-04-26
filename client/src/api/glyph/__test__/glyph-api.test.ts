@@ -45,7 +45,7 @@ test('Glyph：Create => Edit', async () => {
     prev_glyph: 'string',
     next_glyph: 'string',
   });
-  expect(resp2.type === 'ok').toBe(true);
+  expect(resp2.type).toBe('ok');
 });
 
 test('Glyph：Create => Read => Delete', async () => {
@@ -61,5 +61,5 @@ test('Glyph：Create => Read => Delete', async () => {
   const resp2 = await readGlyph(resp.value.data.id);
   if (resp2.type === 'error') throw new Error('Read Glyph failed');
   const resp3 = await deleteGlyph(resp2.value.data.id);
-  expect(resp3.ok).toBe(true);
+  expect(resp3.type).toBe('ok');
 });

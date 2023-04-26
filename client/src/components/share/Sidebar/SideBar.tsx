@@ -4,7 +4,7 @@ import { SideBarListItem } from "./SideBarList/SidebarListItem";
 
 export const SideBar = () => {
 	return (
-		<div className="bg-slate-200 text-black h-screen top-0 fixed w-[230px] md:block hidden pt-5 border-r-2 border-slate-500">
+		<div className="bg-slate-200 text-black min-h-screen top-0 fixed w-[230px] md:block hidden pt-5 border-r-2 border-slate-500">
 			<div className="mt-16">
 				<SideBarList>
 					<SideBarListItem parent>Glyph</SideBarListItem>

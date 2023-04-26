@@ -4,7 +4,7 @@ type TProps = {
 	bool: boolean;
 	toggle: () => void;
 };
-export const IosToggleButton: FC<TProps> = ({ bool, toggle }) => {
+export const ToggleButton: FC<TProps> = ({ bool, toggle }) => {
 	return (
 		<button
 			onClick={toggle}
@@ -20,5 +20,3 @@ export const IosToggleButton: FC<TProps> = ({ bool, toggle }) => {
 		</button>
 	);
 };
-
-export default IosToggleButton;

@@ -1,4 +1,5 @@
-import { User, UserCreate, apiClient } from '../core';
+import { apiClient } from '../core';
+import { User, UserCreate } from './types';
 
 export const createUser = async (user: UserCreate) =>
   await apiClient.post<User>(

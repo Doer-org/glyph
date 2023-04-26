@@ -66,6 +66,25 @@ func (u *GlyphHandler) ReadGlyph(ctx *gin.Context) {
 	)
 }
 
+func (u *GlyphHandler) ReadGlyphsbyUserId(ctx *gin.Context) {
+	logger := log.New()
+	author_id := ctx.Param("author_id")
+	glyphs, err := u.uc.ReadGlyphsbyUserId(ctx, author_id)
+	if err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
+	glyphsjson := json.GlyphsEntityToJson(glyphs)
+	ctx.JSON(
+		http.StatusOK,
+		gin.H{"data": glyphsjson},
+	)
+}
+
 func (u *GlyphHandler) ReadAllGlyphs(ctx *gin.Context) {
 	logger := log.New()
 	glyphs, err := u.uc.ReadAllGlyphs(ctx)

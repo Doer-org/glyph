@@ -4,7 +4,7 @@ type TProps = {
 };
 export const CommentBox: FC<TProps> = ({ children }) => {
 	return (
-		<div className=" h-[50vh] border rounded-md w-full p-2 relative">
+		<div className="h-[50vh] border rounded-md w-full p-2 relative overflow-y-scroll">
 			{children}
 		</div>
 	);

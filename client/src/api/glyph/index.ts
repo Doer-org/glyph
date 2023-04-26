@@ -5,7 +5,7 @@ import {
   GlyphEdit,
   GlyphRead,
   apiClient,
-} from './core';
+} from '../core';
 
 export const createGlyph = async (glyph: GlyphCreate) =>
   await apiClient.post<Glyph>(

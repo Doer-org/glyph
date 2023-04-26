@@ -1,4 +1,4 @@
-import { apiClient, Health } from './core';
+import { apiClient, Health } from '../core';
 
 export const healthCheck = async () => {
   return await apiClient.get<Health>(

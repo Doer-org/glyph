@@ -12,10 +12,8 @@ type Comment struct {
 
 type CommentByUserId struct {
 	Id		 string
-	User_id  string
 	Glyph_id   string
 	Glyph_title string
-	Contents   string
 	Created_at time.Time
 }
 

@@ -16,5 +16,6 @@ func Exec() {
 	r := router.NewRouter()
 	r.InitHealthRouter()
 	r.InitUserRouter(conn)
+	r.InitGlyphRouter(conn)
 	r.Serve()
 }

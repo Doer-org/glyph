@@ -68,7 +68,7 @@ export const apiClient = {
     });
     return await resp2result<T>(data);
   },
-  delete: async <T extends AnySchema>(
+  delete: async (
     url: string,
     body?: Record<string, unknown> | Record<string, unknown>[]
   ) => {
@@ -79,6 +79,6 @@ export const apiClient = {
       },
       body: JSON.stringify(body),
     });
-    return await resp2result<T>(data);
+    return data;
   },
 };

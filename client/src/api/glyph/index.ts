@@ -30,6 +30,6 @@ export const editGlyph = async (glyph: GlyphEdit) =>
   );
 
 export const deleteGlyph = async (glyph_id: string) =>
-  await apiClient.delete<any>(
+  await apiClient.delete(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/glyphs/${glyph_id}`
   );

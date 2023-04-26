@@ -145,6 +145,8 @@ type glyphDto struct {
 type glyphDtos []glyphDto
 
 func glyphDtoToEntity(dto *glyphDto) *entity.Glyph {
+	dto.Created_at = dto.Created_at.In(time.FixedZone("Asia/Tokyo", 9*60*60))
+	dto.Updated_at = dto.Updated_at.In(time.FixedZone("Asia/Tokyo", 9*60*60))
 	return &entity.Glyph{
 		Id:         dto.Id,
 		Author_id:  dto.Author_id,

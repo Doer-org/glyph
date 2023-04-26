@@ -1,3 +1,4 @@
+import { StyledLinkTo } from "@/components/atoms/StyledLinkTo";
 import { Txt } from "@/components/atoms/Txt";
 import { Glyphs } from "@/components/organisms/glyphs";
 import { TGlyph } from "@/types/Glyph";
@@ -34,6 +35,10 @@ const GlyphsPage: NextPage = () => {
 			<Txt elm="h2" size="text-3xl" className="text-center pb-10">
 				Glyph一覧
 			</Txt>
+			<div className="text-center mb-10">
+				<StyledLinkTo href="/service/glyphs/new">Glyph作成</StyledLinkTo>
+			</div>
+
 			<Glyphs glyphs={glyphsMock} />
 		</>
 	);

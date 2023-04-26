@@ -94,6 +94,7 @@ func (u *GlyphHandler) ReadRelativeAllGlyphs(ctx *gin.Context) {
 }
 
 func (u *GlyphHandler) EditGlyph(ctx *gin.Context) {
+	id := ctx.Param("id")
 	var j json.GlyphJson
 	if err := ctx.BindJSON(&j); err != nil {
 		ctx.JSON(
@@ -102,7 +103,7 @@ func (u *GlyphHandler) EditGlyph(ctx *gin.Context) {
 		)
 		return
 	}
-	glyphjson, err := u.uc.EditGlyph(ctx, json.GlyphJsonToEntity(&j))
+	glyphjson, err := u.uc.EditGlyph(ctx, json.GlyphJsonToEntity(&j), id)
 	if err != nil {
 		ctx.JSON(
 			http.StatusBadRequest,

@@ -23,13 +23,23 @@ func NewGlyphRepository(conn *database.Conn) repository.IGlyphRepository {
 
 func (ur *GlyphRepository) CreateGlyph(ctx context.Context, glyph *entity.Glyph) (*entity.Glyph, error) {
 	query := `
-	INSERT INTO glyphs (id, author_id, title, content, prev_glyph, next_glyph, status, created_at, updated_at)
-	VALUES (:id, :author_id, :title, :content, :prev_glyph, :next_glyph, :status, :created_at, :updated_at)
+	INSERT INTO glyphs (id, author_id, title, content, prev_glyph, next_glyph, status, created_at, updated_at, is_study)
+	VALUES (:id, :author_id, :title, :content, :prev_glyph, :next_glyph, :status, :created_at, :updated_at, :is_study)
 	`
 	dto := glyphEntityToDto(glyph)
 	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
 	if err != nil {
 		return nil, err
+	}
+	if dto.Prev_glyph != "" {
+		query := `UPDATE glyphs 
+		SET next_glyph=:id 
+		WHERE id=:prev_glyph;
+		`
+		_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
+		if err != nil {
+			return nil, err
+		}
 	}
 	return glyphDtoToEntity(&dto), nil
 }
@@ -61,19 +71,21 @@ func (ur *GlyphRepository) ReadAllGlyphs(ctx context.Context) (entity.Glyphs, er
 }
 
 func (ur *GlyphRepository) ReadRelativeAllGlyphs(ctx context.Context, id string) (entity.Glyphs, error) {
-	query := `
-	SELECT * FROM glyphs WHERE id=:id;
-	`
-	var dtos glyphDtos
-	err := ur.conn.DB.GetContext(ctx, &dtos, query, id)
-	glyphs := glyphsDtosToEntity(dtos)
+	nextGlyphs, err := ur.getNextRelativeGlyph(ctx, id)
 	if err != nil {
 		return nil, err
 	}
-	return glyphs, nil
+	prevGlyphs, err := ur.getPrevRelativeGlyph(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	var resglyphs entity.Glyphs
+	resglyphs = append(resglyphs, prevGlyphs...)
+	resglyphs = append(resglyphs, nextGlyphs...)
+	return resglyphs, nil
 }
 
-func (ur *GlyphRepository) EditGlyph(ctx context.Context, glyph *entity.Glyph) (*entity.Glyph, error) {
+func (ur *GlyphRepository) EditGlyph(ctx context.Context, glyph *entity.Glyph, id string) (*entity.Glyph, error) {
 	query := `
 	UPDATE glyphs 
 	SET title=:title, 
@@ -81,10 +93,12 @@ func (ur *GlyphRepository) EditGlyph(ctx context.Context, glyph *entity.Glyph) (
 		prev_glyph=:prev_glyph,
 		next_glyph=:next_glyph,
 		status=:status,
-		updated_at=:updated_at 
+		updated_at=:updated_at ,
+		is_study=:is_study
 	WHERE id=:id;
 	`
 	dto := glyphEntityToDto(glyph)
+	dto.Id = id
 	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
 	if err != nil {
 		return nil, err
@@ -94,9 +108,9 @@ func (ur *GlyphRepository) EditGlyph(ctx context.Context, glyph *entity.Glyph) (
 
 func (ur *GlyphRepository) DeleteGlyph(ctx context.Context, id string) error {
 	query := `
-	DELETE FROM glyphs WHERE id=:id;
+	DELETE FROM glyphs WHERE id = ?;
 	`
-	_, err := ur.conn.DB.NamedExecContext(ctx, query, id)
+	_, err := ur.conn.DB.ExecContext(ctx, query, id)
 	if err != nil {
 		return err
 	}
@@ -113,6 +127,7 @@ type glyphDto struct {
 	Status     string    `db:"status"`
 	Created_at time.Time `db:"created_at"`
 	Updated_at time.Time `db:"updated_at"`
+	Is_study   bool      `db:"is_study"`
 }
 type glyphDtos []glyphDto
 
@@ -127,6 +142,7 @@ func glyphDtoToEntity(dto *glyphDto) *entity.Glyph {
 		Status:     dto.Status,
 		Created_at: dto.Created_at,
 		Updated_at: dto.Updated_at,
+		Is_study:   dto.Is_study,
 	}
 }
 
@@ -141,6 +157,7 @@ func glyphEntityToDto(u *entity.Glyph) glyphDto {
 		Status:     u.Status,
 		Created_at: u.Created_at,
 		Updated_at: u.Updated_at,
+		Is_study:   u.Is_study,
 	}
 }
 
@@ -151,4 +168,49 @@ func glyphsDtosToEntity(dtos glyphDtos) entity.Glyphs {
 		glyphs = append(glyphs, glyph)
 	}
 	return glyphs
+}
+
+func (ur *GlyphRepository) getNextRelativeGlyph(ctx context.Context, id string) (entity.Glyphs, error) {
+	query := `
+	SELECT * FROM glyphs WHERE id = ?;
+	`
+	var glyphs entity.Glyphs
+	for {
+		var dto glyphDto
+		err := ur.conn.DB.GetContext(ctx, &dto, query, id)
+		glyph := glyphDtoToEntity(&dto)
+		next_id := glyph.Next_glyph
+		if err != nil {
+			return nil, err
+		}
+		if next_id == "" {
+			return glyphs, nil
+		} else {
+			glyphs = append(glyphs, glyph)
+			id = next_id
+		}
+	}
+
+}
+func (ur *GlyphRepository) getPrevRelativeGlyph(ctx context.Context, id string) (entity.Glyphs, error) {
+	query := `
+	SELECT * FROM glyphs WHERE id = ?;
+	`
+	var glyphs entity.Glyphs
+	for {
+		var dto glyphDto
+		err := ur.conn.DB.GetContext(ctx, &dto, query, id)
+		glyph := glyphDtoToEntity(&dto)
+		prev_id := glyph.Prev_glyph
+		if err != nil {
+			return nil, err
+		}
+		if prev_id == "" {
+			return glyphs, nil
+		} else {
+			glyphs = append(glyphs, glyph)
+			id = prev_id
+		}
+	}
+
 }

@@ -3,8 +3,8 @@ package entity
 import "time"
 
 type Glyph struct {
-	Author_id  string
 	Id         string
+	Author_id  string
 	Title      string
 	Content    string
 	Prev_glyph string
@@ -12,6 +12,7 @@ type Glyph struct {
 	Status     string
 	Created_at time.Time
 	Updated_at time.Time
+	Is_study   bool
 }
 
 type Glyphs []*Glyph

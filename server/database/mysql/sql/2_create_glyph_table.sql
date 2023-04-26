@@ -8,5 +8,6 @@ CREATE TABLE `glyphs` (
     `status`     VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
     `created_at` DATETIME COLLATE utf8mb4_bin NOT NULL,
     `updated_at` DATETIME COLLATE utf8mb4_bin NOT NULL,
+    `is_study`   BOOLEAN COLLATE utf8mb4_bin NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin;

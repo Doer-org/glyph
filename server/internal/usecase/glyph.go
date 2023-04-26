@@ -21,7 +21,7 @@ type IGlyphUsecase interface {
 	ReadGlyph(ctx context.Context, id string) (*entity.Glyph, error)
 	ReadAllGlyphs(ctx context.Context) (entity.Glyphs, error)
 	ReadRelativeAllGlyphs(ctx context.Context, id string) (entity.Glyphs, error)
-	EditGlyph(ctx context.Context, glyph *entity.Glyph) (*entity.Glyph, error)
+	EditGlyph(ctx context.Context, glyph *entity.Glyph, id string) (*entity.Glyph, error)
 	DeleteGlyph(ctx context.Context, id string) error
 }
 
@@ -52,6 +52,7 @@ func (uu *GlyphUsecase) CreateGlyph(ctx context.Context, glyph *entity.Glyph) (*
 	glyph.Created_at = now
 	glyph.Updated_at = now
 	glyph.Id = utils.GetUlid()
+	glyph.Is_study = false
 
 	resglyph, err := uu.repo.CreateGlyph(ctx, glyph)
 	return resglyph, err
@@ -79,8 +80,8 @@ func (uu *GlyphUsecase) ReadRelativeAllGlyphs(ctx context.Context, id string) (e
 	return resglyphs, err
 }
 
-func (uu *GlyphUsecase) EditGlyph(ctx context.Context, glyph *entity.Glyph) (*entity.Glyph, error) {
-	if glyph.Id == "" {
+func (uu *GlyphUsecase) EditGlyph(ctx context.Context, glyph *entity.Glyph, id string) (*entity.Glyph, error) {
+	if id == "" {
 		return nil, fmt.Errorf("id empty")
 	}
 	if glyph.Title == "" {
@@ -99,7 +100,7 @@ func (uu *GlyphUsecase) EditGlyph(ctx context.Context, glyph *entity.Glyph) (*en
 	now := time.Now().In(jst)
 	glyph.Updated_at = now
 
-	resglyph, err := uu.repo.EditGlyph(ctx, glyph)
+	resglyph, err := uu.repo.EditGlyph(ctx, glyph, id)
 	return resglyph, err
 }
 

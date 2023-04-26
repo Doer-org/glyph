@@ -50,9 +50,7 @@ export default function GlyphCreateForm() {
 				</div>
 			</div>
 			{isPreview ? (
-				<div className="p-2 border-2  w-full rounded-md">
-					<GlyphPreviewer markdown={markdown} />
-				</div>
+				<GlyphPreviewer markdown={markdown} />
 			) : (
 				<GlyphEditor markdown={markdown} setMarkdown={setMarkdown} />
 			)}

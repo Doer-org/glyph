@@ -10,18 +10,24 @@ type Discord struct {
 	Config *oauth2.Config
 }
 
-func NewGoogle(redirecturl string) *Discord {
-	return newGoogle(redirecturl)
+func NewDiscord(redirecturl string) *Discord {
+	return newDiscord(redirecturl)
 }
 
-func newGoogle(redirecturl string) *Discord {
-	google := &Discord{
+func newDiscord(redirecturl string) *Discord {
+	discord := &Discord{
 		Config: &oauth2.Config{
-			ClientID:     os.Getenv("Google_ID"),
-			ClientSecret: os.Getenv("Google_SECRET"),
+			ClientID:     os.Getenv("Discord_ID"),
+			ClientSecret: os.Getenv("Discord_SECRET"),
+			Endpoint:     endpoint,
 			Scopes:       []string{"openid", "email", "profile"},
 			RedirectURL:  redirecturl,
 		},
 	}
-	return google
+	return discord
+}
+
+var endpoint = oauth2.Endpoint{
+	AuthURL:  "https://discord.com/oauth2/authorize",
+	TokenURL: "https://discordapp.com/api/oauth2/token",
 }

@@ -16,7 +16,7 @@ type Client struct {
 }
 
 func NewClient(redirecturl string) repository.IDiscordRepository {
-	auth := NewGoogle(redirecturl)
+	auth := NewDiscord(redirecturl)
 	return &Client{auth: auth, cache: cache.New(10*time.Minute, 20*time.Minute)}
 }
 

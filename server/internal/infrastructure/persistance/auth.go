@@ -2,6 +2,7 @@ package persistance
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"time"
 
@@ -57,6 +58,22 @@ func (repo *AuthRepository) UpdateToken(ctx context.Context, userId string, toke
 }
 
 func (repo *AuthRepository) StoreORUpdateToken(ctx context.Context, userId string, token *oauth2.Token) error {
+	found, err := repo.GetTokenByUserID(ctx, userId)
+	if err != nil && err != sql.ErrNoRows {
+		return err
+	}
+	if found != nil {
+		if err := repo.UpdateToken(ctx, userId, token); err != nil {
+			return err
+		}
+	} else if err == sql.ErrNoRows {
+		if err := repo.StoreToken(ctx, userId, token); err != nil {
+			return fmt.Errorf("storeToken: %w", err)
+		}
+	} else {
+		return fmt.Errorf("found is empty, and ent is not found")
+	}
+	return nil
 }
 
 func (repo *AuthRepository) GetTokenByUserID(ctx context.Context, userId string) (*oauth2.Token, error) {
@@ -80,24 +97,93 @@ func (repo *AuthRepository) GetTokenByUserID(ctx context.Context, userId string)
 }
 
 func (repo *AuthRepository) StoreSession(ctx context.Context, sessionID string, userId string) error {
+	dto := &loginSessionsDto{}
+	dto.Id = sessionID
+	dto.UserID = userId
+	dto.Expiry = time.Now().Add(time.Hour * 24 * 1)
+
+	query := `
+	INSERT INTO login_sessions (id, user_id, expiry)
+	VALUES (:id, :user_id, :expiry)
+	`
+	_, err := repo.conn.DB.NamedExecContext(ctx, query, &dto)
+	return err
 }
 
 func (repo *AuthRepository) DeleteSession(ctx context.Context, sessionID string) error {
+	query := `
+	DELETE FROM login_sessions
+	WHERE id = :id
+	`
+	_, err := repo.conn.DB.NamedExecContext(ctx, query, map[string]interface{}{"id": sessionID})
+	return err
 }
 
 func (repo *AuthRepository) GetUserIdFromSession(ctx context.Context, sessionId string) (string, error) {
-}
+	var dto loginSessionsDto
 
-func (repo *AuthRepository) StoreState(ctx context.Context, authState *entity.AuthStates) error {
-}
-
-func (repo *AuthRepository) FindStateByState(ctx context.Context, state string) (*entity.AuthStates, error) {
-
-}
-func (repo *AuthRepository) DeleteState(ctx context.Context, state string) error {
+	query := `
+	SELECT *
+	FROM login_sessions
+	WHERE id = ?
+	LIMIT 1
+	`
+	err := repo.conn.DB.GetContext(ctx, &dto, query, sessionId)
+	if err != nil {
+		return "", err
+	}
+	return dto.UserID, nil
 }
 
 func (repo *AuthRepository) GetExpiryFromSession(ctx context.Context, sessionId string) (time.Time, error) {
+	var dto loginSessionsDto
+
+	query := `
+	SELECT *
+	FROM login_sessions
+	WHERE id = ?
+	LIMIT 1
+	`
+	err := repo.conn.DB.GetContext(ctx, &dto, query, sessionId)
+	if err != nil {
+		return time.Time{}, err
+	}
+	return dto.Expiry, nil
+}
+
+func (repo *AuthRepository) StoreState(ctx context.Context, authState *entity.AuthStates) error {
+	dto := authStatesEntityToDto(authState)
+	query := `
+	INSERT INTO auth_states (state, redirect_url)
+	VALUES (:state, :redirect_url)
+	`
+
+	_, err := repo.conn.DB.NamedExecContext(ctx, query, &dto)
+	return err
+}
+
+func (repo *AuthRepository) FindStateByState(ctx context.Context, state string) (*entity.AuthStates, error) {
+	var dto authStatesDto
+	query := `
+	SELECT *
+	FROM auth_states
+	WHERE state = ?
+	LIMIT 1
+	`
+
+	err := repo.conn.DB.GetContext(ctx, &dto, query, state)
+	if err != nil {
+		return nil, err
+	}
+	return authStatesDtoToEntity(&dto), nil
+}
+func (repo *AuthRepository) DeleteState(ctx context.Context, state string) error {
+	query := `
+	DELETE FROM auth_states
+	WHERE state = :state
+	`
+	_, err := repo.conn.DB.NamedExecContext(ctx, query, map[string]interface{}{"state": state})
+	return err
 }
 
 type loginSessionsDto struct {
@@ -131,5 +217,19 @@ func loginSessionEntityToDto(u *entity.LoginSessions) loginSessionsDto {
 		Id:     u.ID,
 		UserID: u.UserID,
 		Expiry: u.Expiry,
+	}
+}
+
+func authStatesEntityToDto(u *entity.AuthStates) authStatesDto {
+	return authStatesDto{
+		State:       u.State,
+		RedirectURL: u.RedirectURL,
+	}
+}
+
+func authStatesDtoToEntity(dto *authStatesDto) *entity.AuthStates {
+	return &entity.AuthStates{
+		State:       dto.State,
+		RedirectURL: dto.RedirectURL,
 	}
 }

@@ -20,7 +20,7 @@ type Auth struct {
 	userRepo    repository.IUserRepository
 }
 
-type IAuthRepository interface {
+type IAuthUsecase interface {
 	GetAuthURL(ctx context.Context, redirectURL string) (url string, state string, err error)
 	Authorization(ctx context.Context, state, code string) (string, string, error)
 	GetUserIdFromSession(ctx context.Context, sessionId string) (string, error)
@@ -30,7 +30,7 @@ type IAuthRepository interface {
 	CheckSessionExpiry(ctx context.Context, sessionID string) (bool, error)
 }
 
-func NewAuth(ra repository.IAuthRepository, rg repository.IDiscordRepository, ur repository.IUserRepository) IAuthRepository {
+func NewAuthUsecase(ra repository.IAuthRepository, rg repository.IDiscordRepository, ur repository.IUserRepository) IAuthUsecase {
 	return &Auth{
 		repoAuth:    ra,
 		discordRepo: rg,

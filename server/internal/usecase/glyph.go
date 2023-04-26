@@ -68,14 +68,13 @@ func (uu *GlyphUsecase) ReadGlyph(ctx context.Context, id string) (*entity.Glyph
 
 }
 
-func (uu *GlyphUsecase)ReadGlyphsbyUserId(ctx context.Context, author_id string) (entity.Glyphs, error) {
+func (uu *GlyphUsecase) ReadGlyphsbyUserId(ctx context.Context, author_id string) (entity.Glyphs, error) {
 	if author_id == "" {
 		return nil, fmt.Errorf("author_id empty")
 	}
 	resglyphs, err := uu.repo.ReadGlyphsbyUserId(ctx, author_id)
 	return resglyphs, err
 }
-
 
 func (uu *GlyphUsecase) ReadAllGlyphs(ctx context.Context) (entity.Glyphs, error) {
 	resglyphs, err := uu.repo.ReadAllGlyphs(ctx)

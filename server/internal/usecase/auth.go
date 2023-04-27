@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
@@ -19,7 +18,6 @@ type Auth struct {
 	discordRepo repository.IDiscordRepository
 	userRepo    repository.IUserRepository
 }
-
 type IAuthUsecase interface {
 	GetAuthURL(ctx context.Context, redirectURL string) (url string, state string, err error)
 	Authorization(ctx context.Context, state, code string) (string, string, error)
@@ -31,26 +29,16 @@ type IAuthUsecase interface {
 }
 
 func NewAuthUsecase(ra repository.IAuthRepository, rg repository.IDiscordRepository, ur repository.IUserRepository) IAuthUsecase {
-	return &Auth{
-		repoAuth:    ra,
-		discordRepo: rg,
-		userRepo:    ur,
-	}
+	return &Auth{repoAuth: ra, discordRepo: rg, userRepo: ur}
 }
-
 func (uc *Auth) GetAuthURL(ctx context.Context, redirectURL string) (url string, resstate string, err error) {
 	state := utils.GetUlid()
-	st := &entity.AuthStates{
-		State:       state,
-		RedirectURL: redirectURL,
-	}
+	st := &entity.AuthStates{State: state, RedirectURL: redirectURL}
 	if err := uc.repoAuth.StoreState(ctx, st); err != nil {
 		return "", "", fmt.Errorf("storeState: %w", err)
 	}
-
 	return uc.discordRepo.GetAuthURL(state), state, nil
 }
-
 func (uc *Auth) Authorization(ctx context.Context, state, code string) (string, string, error) {
 	storedState, err := uc.repoAuth.FindStateByState(ctx, state)
 	if err != nil {
@@ -65,51 +53,35 @@ func (uc *Auth) Authorization(ctx context.Context, state, code string) (string, 
 	if err != nil {
 		return storedState.RedirectURL, "", fmt.Errorf("createUserIfNotExists: %w", err)
 	}
-	log.Println("6")
 	if err := uc.repoAuth.StoreORUpdateToken(ctx, userId, token); err != nil {
 		return storedState.RedirectURL, "", fmt.Errorf("storeORUpdateToken: %w", err)
 	}
-	log.Println("7")
 	sessionID := utils.GetUlid()
 	if err := uc.repoAuth.StoreSession(ctx, sessionID, userId); err != nil {
 		return storedState.RedirectURL, "", fmt.Errorf("storeSession: %w", err)
 	}
-	log.Println("8")
 	if err := uc.repoAuth.DeleteState(ctx, state); err != nil {
-		log.Println("DeleteState: %w", err)
 		return storedState.RedirectURL, sessionID, nil
 	}
-	log.Println("9")
 	return storedState.RedirectURL, sessionID, nil
 }
-
 func (uc *Auth) createUserIfNotExists(ctx context.Context) (string, error) {
 	user, err := uc.discordRepo.GetMe(ctx)
 	if err != nil {
 		return "", fmt.Errorf("getMe: %w", err)
 	}
-	log.Print("get user from discord   ")
-	log.Println(user)
-	log.Println("1")
 	_, err = uc.userRepo.GetUser(context.Background(), user.Id)
-	log.Println("1")
 	if err != nil && err == sql.ErrNoRows {
-		log.Println("2")
 		user, err = uc.userRepo.CreateUser(context.Background(), user)
-		log.Println("3")
 		if err != nil {
 			return "", err
 		}
-		log.Println("4")
 	}
-
 	if err != nil {
 		return "", err
 	}
-	log.Println("5")
 	return user.Id, err
 }
-
 func (uc *Auth) GetUserIdFromSession(ctx context.Context, sessionId string) (string, error) {
 	userId, err := uc.repoAuth.GetUserIdFromSession(ctx, sessionId)
 	if err != nil {
@@ -117,7 +89,6 @@ func (uc *Auth) GetUserIdFromSession(ctx context.Context, sessionId string) (str
 	}
 	return userId, nil
 }
-
 func (uc *Auth) GetTokenByUserId(ctx context.Context, userId string) (*oauth2.Token, error) {
 	token, err := uc.repoAuth.GetTokenByUserID(ctx, userId)
 	if err != nil {
@@ -125,7 +96,6 @@ func (uc *Auth) GetTokenByUserId(ctx context.Context, userId string) (*oauth2.To
 	}
 	return token, nil
 }
-
 func (uc *Auth) RefreshAccessToken(ctx context.Context, userId string, token *oauth2.Token) (*oauth2.Token, error) {
 	if token.Valid() {
 		return token, nil
@@ -139,7 +109,6 @@ func (uc *Auth) RefreshAccessToken(ctx context.Context, userId string, token *oa
 	}
 	return newToken, nil
 }
-
 func (uc *Auth) DeleteSession(ctx context.Context, sessionID string) error {
 	if sessionID == "" {
 		return fmt.Errorf("sessionid is empty")
@@ -147,20 +116,16 @@ func (uc *Auth) DeleteSession(ctx context.Context, sessionID string) error {
 	err := uc.repoAuth.DeleteSession(ctx, sessionID)
 	return err
 }
-
 func (uc *Auth) CheckSessionExpiry(ctx context.Context, sessionID string) (bool, error) {
 	if sessionID == "" {
 		return false, fmt.Errorf("sessionid is empty")
 	}
-
 	expiry, err := uc.repoAuth.GetExpiryFromSession(ctx, sessionID)
 	if err != nil {
 		return false, fmt.Errorf("GetExpiryFromSession: %w", err)
 	}
-
 	if expiry.Before(time.Now()) {
 		return false, nil
 	}
-
 	return true, nil
 }

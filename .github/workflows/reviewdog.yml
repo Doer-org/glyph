@@ -1,0 +1,13 @@
+on: pull_request
+
+jobs:
+  complexity:
+    runs-on: ubuntu-latest
+    name: logfind reviewdog
+    steps:
+    - uses: actions/checkout@v3
+    - name: logfind
+      uses: ./
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        workdir: /

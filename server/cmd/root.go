@@ -17,5 +17,7 @@ func Exec() {
 	r.InitHealthRouter()
 	r.InitUserRouter(conn)
 	r.InitAuthRouter(conn)
+	r.InitGlyphRouter(conn)
+	r.InitCommentRouter(conn)
 	r.Serve()
 }

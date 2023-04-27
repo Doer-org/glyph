@@ -1,10 +1,16 @@
+import { readAllGlyphs } from "@/api/glyph";
 import { StyledLinkTo } from "@/components/atoms/StyledLinkTo";
 import { Txt } from "@/components/atoms/Txt";
 import { Glyphs } from "@/components/organisms/glyphs";
 import { TGlyph } from "@/types/Glyph";
-import { NextPage } from "next";
 
-const GlyphsPage: NextPage = () => {
+const GlyphsPage = async () => {
+	// 環境変数が読み込めてなくてURLのパースに失敗するよって感じでビルドこける
+	// const glyphs = await readAllGlyphs();
+	// if (glyphs.type === "error") {
+	// 	throw new Error("Glyphを取得できませんでした");
+	// }
+
 	const glyphsMock: TGlyph[] = [
 		{
 			id: "1",

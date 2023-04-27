@@ -46,7 +46,7 @@ export default function GlyphCreateForm() {
       title: title,
       content: markdown,
       status: statusDefineder(),
-      isStudy: isStudy,
+      is_study: isStudy,
       prev_glyph: 'string',
       next_glyph: 'string',
     });

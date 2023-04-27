@@ -2,26 +2,28 @@ import { JTDDataType } from 'ajv/dist/core';
 
 const glyphStatus = ['Draft', 'Private', 'Public'] as const;
 
+const glyphResponseBaseSchema = {
+  type: 'object',
+  properties: {
+    author_id: { type: 'string' },
+    id: { type: 'string' },
+    title: { type: 'string' },
+    content: { type: 'string' },
+    status: { enum: glyphStatus },
+    prev_glyph: { type: 'string' },
+    next_glyph: { type: 'string' },
+    created_at: { type: 'string' },
+    updated_at: { type: 'string' },
+  },
+  optionalProperties: {
+    is_study: { type: 'boolean' },
+  },
+} as const;
+
 const glyphResponseSchema = {
   type: 'object',
   properties: {
-    data: {
-      type: 'object',
-      properties: {
-        author_id: { type: 'string' },
-        id: { type: 'string' },
-        title: { type: 'string' },
-        content: { type: 'string' },
-        status: { enum: glyphStatus },
-        prev_glyph: { type: 'string' },
-        next_glyph: { type: 'string' },
-        created_at: { type: 'string' },
-        updated_at: { type: 'string' },
-      },
-      optionalProperties: {
-        is_study: { type: 'boolean' },
-      },
-    },
+    data: glyphResponseBaseSchema,
   },
 } as const;
 
@@ -31,7 +33,7 @@ const glyphsResponseSchema = {
   type: 'object',
   properties: {
     data: {
-      elements: glyphResponseSchema,
+      elements: glyphResponseBaseSchema,
     },
   },
 } as const;

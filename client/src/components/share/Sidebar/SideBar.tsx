@@ -28,6 +28,7 @@ export const SideBar = () => {
 					>
 						Statistics
 					</SideBarListItem>
+					{/* TODO(mao):ユーザーページにいくLinkをSideBarListItemで作る */}
 				</SideBarList>
 			</div>
 		</div>

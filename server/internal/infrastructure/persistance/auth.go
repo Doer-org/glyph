@@ -27,6 +27,7 @@ func NewAuthRepository(conn *database.Conn) repository.IAuthRepository {
 
 func (repo *AuthRepository) StoreToken(ctx context.Context, userId string, token *oauth2.Token) error {
 	log.Println("test")
+	log.Println("test2")
 	dto := discordAuthDto{}
 	dto.UserID = userId
 	dto.AccessToken = token.AccessToken

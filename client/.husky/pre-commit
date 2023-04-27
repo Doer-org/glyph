@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 
 root_directory=$(git rev-parse --show-toplevel)
-
 frontend_files_staged=$(git diff --cached --name-only --diff-filter=d | grep "^client/")
 echo "${root_directory}"
 echo "${frontend_files_staged}"

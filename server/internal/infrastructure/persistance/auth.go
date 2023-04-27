@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
@@ -25,6 +26,7 @@ func NewAuthRepository(conn *database.Conn) repository.IAuthRepository {
 }
 
 func (repo *AuthRepository) StoreToken(ctx context.Context, userId string, token *oauth2.Token) error {
+	log.Println("test")
 	dto := discordAuthDto{}
 	dto.UserID = userId
 	dto.AccessToken = token.AccessToken

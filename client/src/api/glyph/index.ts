@@ -1,6 +1,6 @@
 import { apiClient } from '../core';
 
-import { GlyphResponse, GlyphCreate, GlyphEdit } from './types';
+import { GlyphResponse, GlyphCreate, GlyphEdit, GlyphsResponse } from './types';
 
 export const createGlyph = async (glyph: GlyphCreate) =>
   await apiClient.post<GlyphResponse>(
@@ -32,4 +32,9 @@ export const editGlyph = async (glyph: GlyphEdit) =>
 export const deleteGlyph = async (glyph_id: string) =>
   await apiClient.delete(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/glyphs/${glyph_id}`
+  );
+
+export const getGlyphsByAuthor = async (author_id: string) =>
+  await apiClient.get<GlyphsResponse>(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/glyphs/user/${author_id}`
   );

@@ -7,14 +7,16 @@ export type ResponseError = {
   message: string;
 };
 
+const ajv = new Ajv({
+  allErrors: false,
+  strict: false,
+});
+
 const resp2result = async <T extends AnySchema>(
   resp: Response
 ): Promise<Result<T, ResponseError>> => {
   const data = (await resp.json()) as T;
-  const validate = new Ajv({
-    allErrors: false,
-    strict: false,
-  }).compile<JTDDataType<T>>(data);
+  const validate = ajv.compile<JTDDataType<T>>(data);
   if (!resp.ok) {
     return {
       type: 'error',

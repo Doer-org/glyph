@@ -28,6 +28,8 @@ export const SideBar = () => {
 					>
 						Statistics
 					</SideBarListItem>
+					{/* TODO(mao):ユーザーページにいくLinkをSideBarListItemで作る */}
+					{/* https://react-icons.github.io/react-icons/search?q=graph でアイコンは作る */}
 				</SideBarList>
 			</div>
 		</div>

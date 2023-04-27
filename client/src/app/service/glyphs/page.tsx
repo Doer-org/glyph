@@ -5,10 +5,10 @@ import { Glyphs } from "@/components/organisms/glyphs";
 import { TGlyph } from "@/types/Glyph";
 
 const GlyphsPage = async () => {
-	const glyphs = await readAllGlyphs();
-	if (glyphs.type === "error") {
-		throw new Error("Glyphを取得できませんでした");
-	}
+	// const glyphs = await readAllGlyphs();
+	// if (glyphs.type === "error") {
+	// 	throw new Error("Glyphを取得できませんでした");
+	// }
 
 	const glyphsMock: TGlyph[] = [
 		{

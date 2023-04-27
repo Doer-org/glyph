@@ -27,7 +27,6 @@ func NewAuth(uc usecase.IAuthUsecase) IAuth {
 
 func (m *Auth) Authenticate() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		fmt.Println(1)
 		logger := log.New()
 		tokenString := c.Request.Header.Get("jwt")
 		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
@@ -36,7 +35,6 @@ func (m *Auth) Authenticate() gin.HandlerFunc {
 			}
 			return []byte(os.Getenv("rawPrivKey")), nil
 		})
-		fmt.Println(2)
 		if err != nil {
 			logger.Error("", map[string]string{"place": "auth middleware", "type": "auth err", "error": err.Error()})
 			c.JSON(
@@ -46,7 +44,6 @@ func (m *Auth) Authenticate() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		fmt.Println(3)
 		str := ""
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 			fmt.Println(3.5)
@@ -70,8 +67,6 @@ func (m *Auth) Authenticate() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		fmt.Println(str)
-		fmt.Println(4)
 		ok, err := m.uc.CheckSessionExpiry(c, str)
 		if err != nil {
 			logger.Error("", map[string]string{"place": "auth middleware", "type": "check session expiry", "error": err.Error()})

@@ -4,13 +4,13 @@
 	"private": true,
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
+		"prepare": "cd .. && husky install client/.husky",
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
 		"test": "vitest",
-		"formatter": "pnpm rome format ./src/ --write",
-		"prepare": "cd .. && husky install client/.husky"
+		"formatter": "pnpm rome format ./src/ --write"
 	},
 	"lint-staged": {
 		"./**/*.{ts,tsx}": "pnpm formatter"

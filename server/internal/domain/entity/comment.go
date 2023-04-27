@@ -11,13 +11,12 @@ type Comment struct {
 }
 
 type CommentByUserId struct {
-	Id		 string
-	Glyph_id   string
+	Id          string
+	Glyph_id    string
 	Glyph_title string
-	Created_at time.Time
+	Created_at  time.Time
 }
 
 type Comments []*Comment
 
 type CommentsByUserId []*CommentByUserId
-

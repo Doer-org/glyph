@@ -12,20 +12,18 @@ type CommentJson struct {
 	Glyph_id   string    `json:"glyph_id"`
 	Contents   string    `json:"contents"`
 	Created_at time.Time `json:"created_at"`
-
 }
 
 type CommentsJson []*CommentJson
 
 type CommentByUserIdJson struct {
-	Id         string    `json:"id"`
-	Glyph_id   string    `json:"glyph_id"`
+	Id          string    `json:"id"`
+	Glyph_id    string    `json:"glyph_id"`
 	Glyph_title string    `json:"glyph_title"`
-	Created_at time.Time `json:"created_at"`
+	Created_at  time.Time `json:"created_at"`
 }
 
 type CommentsByUserId []*CommentByUserIdJson
-
 
 func CommentEntityToJson(comment *entity.Comment) *CommentJson {
 	return &CommentJson{
@@ -46,10 +44,10 @@ func CommentsEntityToJson(comments entity.Comments) *CommentsJson {
 
 func CommentByUserIdEntityToJson(comment *entity.CommentByUserId) *CommentByUserIdJson {
 	return &CommentByUserIdJson{
-		Id:         comment.Id,
-		Glyph_id:   comment.Glyph_id,
+		Id:          comment.Id,
+		Glyph_id:    comment.Glyph_id,
 		Glyph_title: comment.Glyph_title,
-		Created_at: comment.Created_at,
+		Created_at:  comment.Created_at,
 	}
 }
 

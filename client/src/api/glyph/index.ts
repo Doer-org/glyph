@@ -14,12 +14,12 @@ export const readGlyph = async (glyph_id: string) =>
   );
 
 export const readAllGlyphs = async () =>
-  await apiClient.get<GlyphResponse[]>(
+  await apiClient.get<GlyphsResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/glyphs/list`
   );
 
 export const readRelativeAllGlyphs = async (glyph_id: string) =>
-  await apiClient.get<GlyphResponse[]>(
+  await apiClient.get<GlyphsResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/glyphs/list/${glyph_id}`
   );
 

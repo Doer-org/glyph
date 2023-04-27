@@ -21,6 +21,11 @@ func DSN() (string, error) {
 		dbHost := os.Getenv("DB_HOST")
 		dbPort := os.Getenv("DB_PORT")
 		dbDatabase := os.Getenv("DB_DATABASE")
+		log.Println(dbUser)
+		log.Println(dbPassword)
+		log.Println(dbHost)
+		log.Println(dbPort)
+		log.Println(dbDatabase)
 
 		if dbUser == "" || dbPassword == "" || dbHost == "" || dbPort == "" || dbDatabase == "" {
 			return "", fmt.Errorf("ERROR : required environment variable not found")

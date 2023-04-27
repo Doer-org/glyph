@@ -7,7 +7,7 @@ export type TGlyph = {
 	prev_glyph: string;
 	next_glyph: string;
 	status: TGlyphStatus;
-	isStudy: boolean;
-	created_at: Date;
-	updated_at: Date;
+	is_study: boolean;
+	created_at: string;
+	updated_at: string;
 };

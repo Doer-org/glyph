@@ -5,7 +5,7 @@ cd $GITHUB_WORKSPACE/server || exit 1
 REVIEWDOG_YML=$(cat << EOS
 runner:
   govet:
-    cmd: cd server && go vet -vettool=\$(which logfind) ./...
+    cmd: go vet -vettool=\$(which logfind) ./...
     errorformat:
       - "%f:%l:%c: %m"
 EOS

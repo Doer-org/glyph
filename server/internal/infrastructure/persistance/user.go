@@ -2,7 +2,6 @@ package persistance
 
 import (
 	"context"
-	"log"
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
@@ -22,21 +21,16 @@ func NewUserRepository(conn *database.Conn) repository.IUserRepository {
 }
 
 func (ur *UserRepository) CreateUser(ctx context.Context, user *entity.User) (*entity.User, error) {
-	log.Println("persistanse  1")
 	query := `
 	INSERT INTO users (id, name,img)
 	VALUES (:id,:name,:img)
 	`
-	log.Println(user)
 	dto := userEntityToDto(user)
-	log.Println("persistanse  2")
-	log.Println(dto)
+
 	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
-	log.Println("persistanse  2")
 	if err != nil {
 		return nil, err
 	}
-	log.Println("persistanse  3")
 	return userDtoToEntity(&dto), nil
 }
 

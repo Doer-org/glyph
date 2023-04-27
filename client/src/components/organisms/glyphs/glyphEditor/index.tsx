@@ -1,12 +1,12 @@
-"use client";
-import { FC } from "react";
-import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
+'use client';
+import { FC } from 'react';
+import SimpleMDE from 'react-simplemde-editor';
+import 'easymde/dist/easymde.min.css';
 import {
 	handleImageDrop,
 	handleMarkdownChange,
 	options,
-} from "../../_common/markdown/MarkdownUtils";
+} from '../../_common/markdown/MarkdownUtils';
 
 type TProps = {
 	markdown: string;

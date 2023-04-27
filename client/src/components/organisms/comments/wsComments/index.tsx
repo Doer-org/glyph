@@ -1,7 +1,7 @@
-"use client";
-import { FC, useEffect, useRef, useState } from "react";
-import { CommentBox } from "../commentBox";
-import { CommentInput } from "../commentInput";
+'use client';
+import { FC, useEffect, useRef, useState } from 'react';
+import { CommentBox } from '../commentBox';
+import { CommentInput } from '../commentInput';
 
 type TProps = {
 	glyphId: string;
@@ -11,8 +11,8 @@ export const WsComments: FC<TProps> = ({ glyphId }) => {
 	// TODO(aoki): ここで常にcommentを取得してくる
 	// メモ：ここでは一旦stateでコメントを表示しているけども別にしなくてもいいかも？（把握していないので任せた）
 	const [comments, setComments] = useState<string[]>([
-		"websocketのコメント1",
-		"websocketのコメント2",
+		'websocketのコメント1',
+		'websocketのコメント2',
 	]);
 	const scrollLastCommentRef = useRef<HTMLParagraphElement>(null);
 

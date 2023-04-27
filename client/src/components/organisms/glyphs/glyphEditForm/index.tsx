@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import "easymde/dist/easymde.min.css";
-import { useToggle } from "@/hooks/common/useToggle";
-import { ToggleButton } from "@/components/atoms/Toggle";
-import { Input } from "@/components/atoms/Input";
-import { Button } from "@/components/atoms/Button";
-import { GlyphPreviewer } from "../glyphPreviewer";
-import { GlyphEditor } from "../glyphEditor";
-import { createGlyph } from "@/api/glyph";
-import { TGlyph } from "@/types/Glyph";
-import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import 'easymde/dist/easymde.min.css';
+import { useToggle } from '@/hooks/common/useToggle';
+import { ToggleButton } from '@/components/atoms/Toggle';
+import { Input } from '@/components/atoms/Input';
+import { Button } from '@/components/atoms/Button';
+import { GlyphPreviewer } from '../glyphPreviewer';
+import { GlyphEditor } from '../glyphEditor';
+import { createGlyph } from '@/api/glyph';
+import { TGlyph } from '@/types/Glyph';
+import { useRouter } from 'next/navigation';
 type TProps = {
 	glyph: TGlyph;
 };
@@ -27,20 +27,20 @@ export default function GlyphCreateForm({ glyph }: TProps) {
 	} = useToggle();
 	const { bool: isDraft, toggle: toggleDraft, toFalse: notDraft } = useToggle();
 	const { bool: isStudy, toggle: toggleStudy } = useToggle(glyph.is_study);
-	const statusDefineder = (): TGlyph["status"] => {
+	const statusDefineder = (): TGlyph['status'] => {
 		if (isPublic && isDraft) {
-			return "Draft";
+			return 'Draft';
 		}
 		if (isPublic && !isDraft) {
-			return "Public";
+			return 'Public';
 		}
 		if (!isPublic && isDraft) {
-			return "Draft";
+			return 'Draft';
 		}
 		if (isPublic && !isDraft) {
-			return "Private";
+			return 'Private';
 		}
-		return "Draft";
+		return 'Draft';
 	};
 	const createGlyphHandler = () => {
 		createGlyph({
@@ -49,10 +49,10 @@ export default function GlyphCreateForm({ glyph }: TProps) {
 			content: markdown,
 			status: statusDefineder(),
 			is_study: isStudy,
-			prev_glyph: "string",
-			next_glyph: "string",
+			prev_glyph: 'string',
+			next_glyph: 'string',
 		});
-		router.push("/service/glyphs");
+		router.push('/service/glyphs');
 	};
 	return (
 		<>

@@ -1,9 +1,9 @@
-import { Txt } from "@/components/atoms/Txt";
-import { NextPage } from "next";
-import dynamic from "next/dynamic";
+import { Txt } from '@/components/atoms/Txt';
+import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 
 const GlyphCreateForm = dynamic(
-	() => import("@/components/organisms/glyphs/glyphCreateForm"),
+	() => import('@/components/organisms/glyphs/glyphCreateForm'),
 	{ ssr: false },
 );
 const GlyphNewPage: NextPage = () => {

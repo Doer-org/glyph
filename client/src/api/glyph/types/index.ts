@@ -1,28 +1,28 @@
-import { JTDDataType } from "ajv/dist/core";
+import { JTDDataType } from 'ajv/dist/core';
 
-const glyphStatus = ["Draft", "Private", "Public"] as const;
+const glyphStatus = ['Draft', 'Private', 'Public'] as const;
 
 const glyphResponseBaseSchema = {
-	type: "object",
+	type: 'object',
 	properties: {
-		author_id: { type: "string" },
-		id: { type: "string" },
-		title: { type: "string" },
-		content: { type: "string" },
+		author_id: { type: 'string' },
+		id: { type: 'string' },
+		title: { type: 'string' },
+		content: { type: 'string' },
 		status: { enum: glyphStatus },
-		prev_glyph: { type: "string" },
-		next_glyph: { type: "string" },
-		created_at: { type: "string" },
-		is_study: { type: "boolean" },
-		updated_at: { type: "string" },
+		prev_glyph: { type: 'string' },
+		next_glyph: { type: 'string' },
+		created_at: { type: 'string' },
+		is_study: { type: 'boolean' },
+		updated_at: { type: 'string' },
 	},
 	optionalProperties: {
-		is_study: { type: "boolean" },
+		is_study: { type: 'boolean' },
 	},
 } as const;
 
 const glyphResponseSchema = {
-	type: "object",
+	type: 'object',
 	properties: {
 		data: glyphResponseBaseSchema,
 	},
@@ -31,7 +31,7 @@ const glyphResponseSchema = {
 export type GlyphResponse = JTDDataType<typeof glyphResponseSchema>;
 
 const glyphsResponseSchema = {
-	type: "object",
+	type: 'object',
 	properties: {
 		data: {
 			elements: glyphResponseBaseSchema,
@@ -54,16 +54,16 @@ type GlyphBase = {
 	updated_at: string;
 };
 
-export type GlyphCreate = Omit<GlyphBase, "id" | "created_at" | "updated_at">;
+export type GlyphCreate = Omit<GlyphBase, 'id' | 'created_at' | 'updated_at'>;
 
 export type GlyphEdit = Omit<
 	GlyphBase,
-	"author_id" | "created_at" | "updated_at"
+	'author_id' | 'created_at' | 'updated_at'
 >;
 
 const glyphDeleteResponseSchema = {
 	properties: {
-		data: { type: "string" },
+		data: { type: 'string' },
 	},
 } as const;
 

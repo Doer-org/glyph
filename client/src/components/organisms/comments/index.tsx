@@ -1,7 +1,7 @@
-"use client";
-import { FC, useEffect, useRef, useState } from "react";
-import { CommentBox } from "./commentBox";
-import { CommentInput } from "./commentInput";
+'use client';
+import { FC, useEffect, useRef, useState } from 'react';
+import { CommentBox } from './commentBox';
+import { CommentInput } from './commentInput';
 type TProps = {
 	glyphId: string;
 };
@@ -10,8 +10,8 @@ export const Comments: FC<TProps> = ({ glyphId }) => {
 	// メモ：こっちはwebsocketを使わない方
 	// TODO(aoki): commentを取得してくる
 	const [comments, setComments] = useState<string[]>([
-		"普通のコメント1",
-		"普通のコメント2",
+		'普通のコメント1',
+		'普通のコメント2',
 	]);
 	const scrollLastCommentRef = useRef<HTMLParagraphElement>(null);
 

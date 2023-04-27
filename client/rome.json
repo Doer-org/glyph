@@ -13,7 +13,7 @@
 		}
 	},
 	"formatter": {
-		"lineWidth": 120,
+		"lineWidth": 80,
 		"enabled": true
 	},
 	"javascript": {

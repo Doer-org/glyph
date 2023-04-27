@@ -1,9 +1,9 @@
-import { Txt } from "@/components/atoms/Txt";
-import { TGlyph } from "@/types/Glyph";
-import { FC } from "react";
-import { format } from "date-fns";
-import { GrDocumentText } from "react-icons/gr";
-import { LinkTo } from "@/components/atoms/LinkTo";
+import { Txt } from '@/components/atoms/Txt';
+import { TGlyph } from '@/types/Glyph';
+import { FC } from 'react';
+import { format } from 'date-fns';
+import { GrDocumentText } from 'react-icons/gr';
+import { LinkTo } from '@/components/atoms/LinkTo';
 type TProps = {
 	glyph: TGlyph;
 };
@@ -28,7 +28,7 @@ export const Glyph: FC<TProps> = ({ glyph }) => {
 						- {glyph.content.length}文字
 					</Txt>
 					<Txt elm="p" size="text-sm">
-						- {format(new Date(glyph.updated_at), "yyyy/MM/dd")}
+						- {format(new Date(glyph.updated_at), 'yyyy/MM/dd')}
 					</Txt>
 				</div>
 			</div>

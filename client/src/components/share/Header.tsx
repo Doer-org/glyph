@@ -1,6 +1,6 @@
-import { SvgLogo } from "../atoms/svgs/SvgLogo";
-import { Title } from "../atoms/Title";
-import { Txt } from "../atoms/Txt";
+import { SvgLogo } from '../atoms/svgs/SvgLogo';
+import { Title } from '../atoms/Title';
+import { Txt } from '../atoms/Txt';
 
 export const Header = () => {
 	return (

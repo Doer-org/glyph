@@ -1,13 +1,13 @@
-"use client";
-import { Button } from "@/components/atoms/Button";
-import { Textarea } from "@/components/atoms/Textarea";
-import { FC, useState } from "react";
+'use client';
+import { Button } from '@/components/atoms/Button';
+import { Textarea } from '@/components/atoms/Textarea';
+import { FC, useState } from 'react';
 type TProps = {
 	comment: string[];
 	setComment: (comment: string[]) => void;
 };
 export const CommentInput: FC<TProps> = ({ comment, setComment }) => {
-	const [content, setContent] = useState("");
+	const [content, setContent] = useState('');
 	return (
 		<div className="flex items-start my-3 gap-3">
 			<Textarea
@@ -19,7 +19,7 @@ export const CommentInput: FC<TProps> = ({ comment, setComment }) => {
 				onClick={() => {
 					if (content.length !== 0) {
 						setComment([...comment, content]);
-						setContent("");
+						setContent('');
 					}
 				}}
 			>

@@ -1,13 +1,13 @@
-import { readAllGlyphs } from "@/api/glyph";
-import { StyledLinkTo } from "@/components/atoms/StyledLinkTo";
-import { Txt } from "@/components/atoms/Txt";
-import { Glyphs } from "@/components/organisms/glyphs";
+import { readAllGlyphs } from '@/api/glyph';
+import { StyledLinkTo } from '@/components/atoms/StyledLinkTo';
+import { Txt } from '@/components/atoms/Txt';
+import { Glyphs } from '@/components/organisms/glyphs';
 
 const GlyphsPage = async () => {
 	// 環境変数が読み込めてなくてURLのパースに失敗するよって感じでビルドこける
 	const glyphs = await readAllGlyphs();
-	if (glyphs.type === "error") {
-		return new Error("Glyphを取得できませんでした");
+	if (glyphs.type === 'error') {
+		return new Error('Glyphを取得できませんでした');
 	}
 
 	return (

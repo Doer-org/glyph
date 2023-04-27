@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export const useToggle = (initialValue: boolean = false) => {
 	const [bool, setBool] = useState(initialValue);

@@ -6,7 +6,7 @@ export const handleMarkdownChange = (
 	value: string,
 	setMarkdown: (markdown: string) => void,
 ) => {
-	const breakedText = value.replace(/\n/g, "  \n");
+	const breakedText = value.replace(/\n/g, '  \n');
 	setMarkdown(breakedText);
 };
 
@@ -24,9 +24,9 @@ export const handleImageDrop: TDrop = (instance, event) => {
 	const file = files[0];
 
 	if (
-		file.type === "image/png" ||
-		file.type === "image/jpeg" ||
-		file.type === "image/gif"
+		file.type === 'image/png' ||
+		file.type === 'image/jpeg' ||
+		file.type === 'image/gif'
 	) {
 		instance.replaceSelection(`![](${file.name})`);
 	}
@@ -34,16 +34,16 @@ export const handleImageDrop: TDrop = (instance, event) => {
 
 export const options = {
 	toolbar: [
-		"bold",
-		"italic",
-		"heading",
-		"|",
-		"quote",
-		"unordered-list",
-		"ordered-list",
-		"|",
-		"link",
-		"image",
+		'bold',
+		'italic',
+		'heading',
+		'|',
+		'quote',
+		'unordered-list',
+		'ordered-list',
+		'|',
+		'link',
+		'image',
 	],
 	renderingConfig: {
 		singleLineBreaks: true,

@@ -1,13 +1,13 @@
-import { Txt } from "@/components/atoms/Txt";
-import { TGlyph } from "@/types/Glyph";
-import dynamic from "next/dynamic";
+import { Txt } from '@/components/atoms/Txt';
+import { TGlyph } from '@/types/Glyph';
+import dynamic from 'next/dynamic';
 const GlyphEditForm = dynamic(
-	() => import("@/components/organisms/glyphs/glyphEditForm"),
+	() => import('@/components/organisms/glyphs/glyphEditForm'),
 	{ ssr: false },
 );
 
 export const metadata = {
-	title: "Glyph edit",
+	title: 'Glyph edit',
 };
 type TProps = {
 	params: { glyph_id: string };
@@ -16,13 +16,13 @@ type TProps = {
 export default function Edit({ params }: TProps) {
 	console.log(params.glyph_id);
 	const GlyphMock: TGlyph = {
-		id: "1",
-		author_id: "uu",
-		title: "F#勉強会",
-		content: "## aaa  \n- ggg",
-		prev_glyph: "1",
-		next_glyph: "2",
-		status: "Draft",
+		id: '1',
+		author_id: 'uu',
+		title: 'F#勉強会',
+		content: '## aaa  \n- ggg',
+		prev_glyph: '1',
+		next_glyph: '2',
+		status: 'Draft',
 		isStudy: false,
 		created_at: new Date(),
 		updated_at: new Date(),

@@ -1,4 +1,4 @@
-type TGlyphStatus = "Draft" | "Private" | "Public";
+type TGlyphStatus = 'Draft' | 'Private' | 'Public';
 export type TGlyph = {
 	id: string;
 	author_id: string;

@@ -1,4 +1,4 @@
-import { SideBar } from "@/components/share/Sidebar/SideBar";
+import { SideBar } from '@/components/share/Sidebar/SideBar';
 
 export default function ServiceLayout({
 	children,

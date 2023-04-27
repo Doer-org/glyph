@@ -1,7 +1,7 @@
-import { Title } from "@/components/atoms/Title";
-import { Txt } from "@/components/atoms/Txt";
-import { AnimatedSvgLogo } from "@/components/atoms/svgs/AnimatedSvgLogo";
-import { type NextPage } from "next";
+import { Title } from '@/components/atoms/Title';
+import { Txt } from '@/components/atoms/Txt';
+import { AnimatedSvgLogo } from '@/components/atoms/svgs/AnimatedSvgLogo';
+import { type NextPage } from 'next';
 
 const About: NextPage = () => {
 	return (

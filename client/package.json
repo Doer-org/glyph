@@ -9,7 +9,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"test": "vitest",
-		"formatter": "pnpm rome format ./src/"
+		"formatter": "pnpm rome format ./src/ --write"
 	},
 	"dependencies": {
 		"@types/node": "18.15.13",

@@ -1,6 +1,6 @@
-import { TGlyph } from "@/types/Glyph";
-import { FC } from "react";
-import { Glyph } from "./glyph";
+import { TGlyph } from '@/types/Glyph';
+import { FC } from 'react';
+import { Glyph } from './glyph';
 type TProps = {
 	glyphs: TGlyph[];
 };

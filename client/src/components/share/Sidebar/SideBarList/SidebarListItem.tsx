@@ -1,6 +1,6 @@
-import { LinkTo } from "@/components/atoms/LinkTo";
-import { Txt } from "@/components/atoms/Txt";
-import { FC, ReactNode } from "react";
+import { LinkTo } from '@/components/atoms/LinkTo';
+import { Txt } from '@/components/atoms/Txt';
+import { FC, ReactNode } from 'react';
 type TProps = {
 	children: ReactNode;
 	href: string;

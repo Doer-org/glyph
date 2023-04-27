@@ -1,5 +1,5 @@
 export const metadata = {
-	title: "Comment",
+	title: 'Comment',
 };
 export default function Comments() {
 	return (

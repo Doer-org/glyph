@@ -1,8 +1,8 @@
-import { TGlyph } from "@/types/Glyph";
-import { FC } from "react";
-import { GlyphPreviewer } from "../glyphPreviewer";
-import { Comments } from "../../comments";
-import { WsComments } from "../../comments/wsComments";
+import { TGlyph } from '@/types/Glyph';
+import { FC } from 'react';
+import { GlyphPreviewer } from '../glyphPreviewer';
+import { Comments } from '../../comments';
+import { WsComments } from '../../comments/wsComments';
 
 type TProps = {
 	glyph: TGlyph;

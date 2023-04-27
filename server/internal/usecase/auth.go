@@ -70,6 +70,13 @@ func (uc *Auth) createUserIfNotExists(ctx context.Context) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("getMe: %w", err)
 	}
+	ok, err := uc.discordRepo.GetServer(ctx)
+	if err != nil {
+		return "", fmt.Errorf("getServer: %w", err)
+	}
+	if !ok {
+		return "", fmt.Errorf("you are not member")
+	}
 	_, err = uc.userRepo.GetUser(context.Background(), user.Id)
 	if err != nil && err == sql.ErrNoRows {
 		user, err = uc.userRepo.CreateUser(context.Background(), user)

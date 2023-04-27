@@ -23,6 +23,8 @@ services:
       - Discord_ID=${Discord_ID}
       - Discord_SECRET=${Discord_SECRET}
       - DISCORD_GETME=${DISCORD_GETME}
+      - DISCORD_GETSERVER=${DISCORD_GETSERVER}
+      - SERVER_DISCORD_ID=${SERVER_DISCORD_ID}
       - rawPrivKey=${rawPrivKey}
       - rawPubKey=${rawPubKey}
       - PORT=${PORT}

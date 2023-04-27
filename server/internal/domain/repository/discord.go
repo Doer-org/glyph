@@ -12,4 +12,5 @@ type IDiscordRepository interface {
 	Exchange(ctx context.Context, code string) (*oauth2.Token, error)
 	Refresh(ctx context.Context, token *oauth2.Token) (*oauth2.Token, error)
 	GetMe(ctx context.Context) (*entity.User, error)
+	GetServer(ctx context.Context) (bool, error)
 }

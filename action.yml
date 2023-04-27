@@ -25,7 +25,7 @@ runs:
         echo "$HOME/bin" >> $GITHUB_PATH
         echo "$(go env GOPATH)/bin" >> $GITHUB_PATH # for Go projects
       shell: bash
-    - run: ${{ github.action_path }}/server/reviewdog/reviewdog.sh
+    - run: cd server && ${{ github.action_path }}/server/reviewdog/reviewdog.sh
       env:
         INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
         INPUT_WORKDIR: ${{ inputs.workdir }}

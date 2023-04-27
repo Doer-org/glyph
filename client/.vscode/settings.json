@@ -1,0 +1,8 @@
+{
+  "editor.defaultFormatter": "rome.rome",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.rome": true
+  },
+  "typescript.tsdk": "node_modules/.pnpm/typescript@5.0.4/node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}

@@ -16,5 +16,8 @@ func Exec() {
 	r := router.NewRouter()
 	r.InitHealthRouter()
 	r.InitUserRouter(conn)
+	r.InitAuthRouter(conn)
+	r.InitGlyphRouter(conn)
+	r.InitCommentRouter(conn)
 	r.Serve()
 }

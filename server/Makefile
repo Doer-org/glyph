@@ -7,7 +7,6 @@ ENV_LOCAL       = $(shell cat $(ENV_LOCAL_FILE))
 
 # go
 GO           := go run
-GO_MAIN_PATH := ./src
 
 # docker
 DOCKER_FILE_DIR                 := ./docker
@@ -19,7 +18,6 @@ GITHUB_REPOSITORY_NAME          := glyph
 DB_CONTAINER_NAME               := $(GITHUB_REPOSITORY_NAME)-database
 
 # dir
-SRC_DIR := ./src
 DATA_DIR := ./database/data
 
 # rm
@@ -60,7 +58,7 @@ attach-db: ## dockerのdbコンテナにアクセスする
 
 .PHONY: lint
 lint: ## goのコードを整形する
-	cd $(SRC_DIR) && gofmt -l -w .
+	gofmt -l -w .
 
 .PHONY: deploy
 deploy:

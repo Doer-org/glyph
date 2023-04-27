@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
+		"prepare": "cd .. && husky install client/.husky",
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",

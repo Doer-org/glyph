@@ -9,23 +9,49 @@ import { Button } from "@/components/atoms/Button";
 import { GlyphPreviewer } from "../glyphPreviewer";
 import { GlyphEditor } from "../glyphEditor";
 import { createGlyph } from "@/api/glyph";
+import { TGlyph } from "@/types/Glyph";
+import { useRouter } from "next/navigation";
 
 // dynamicでimportする際にアロー関数で定義すると読み込めなくなるのでここのみexport default
 export default function GlyphCreateForm() {
+	const router = useRouter();
 	const [markdown, setMarkdown] = useState<string>("");
 	const { bool: isPreview, toggle: togglePreview } = useToggle();
-	const { bool: isPublic, toggle: togglePublic } = useToggle();
+	const {
+		bool: isPublic,
+		toggle: togglePublic,
+		toFalse: notPublic,
+	} = useToggle();
+	const { bool: isDraft, toggle: toggleDraft, toFalse: notDraft } = useToggle();
+	const { bool: isStudy, toggle: toggleStudy } = useToggle();
 	const [title, setTitle] = useState<string>("");
-	const createGlyphHandler = () =>
+	const statusDefineder = (): TGlyph["status"] => {
+		if (isPublic && isDraft) {
+			return "Draft";
+		}
+		if (isPublic && !isDraft) {
+			return "Public";
+		}
+		if (!isPublic && isDraft) {
+			return "Draft";
+		}
+		if (isPublic && !isDraft) {
+			return "Private";
+		}
+		return "Draft";
+	};
+	const createGlyphHandler = () => {
 		createGlyph({
 			author_id: "tekitou",
 			title: title,
 			content: markdown,
-			status: "Public",
-			isStudy: false,
+			status: statusDefineder(),
+			isStudy: isStudy,
 			prev_glyph: "string",
 			next_glyph: "string",
 		});
+		router.push("/service/glyphs");
+	};
 	return (
 		<>
 			<div className="text-center mb-1 lg:flex items-end lg:justify-between justify-center py-3">
@@ -45,14 +71,37 @@ export default function GlyphCreateForm() {
 					</div>
 					<div>
 						<p>外部に公開</p>
-						<ToggleButton bool={isPublic} toggle={togglePublic} />
+						<ToggleButton
+							bool={isPublic}
+							toggle={() => {
+								togglePublic();
+								if (isDraft) {
+									notDraft();
+								}
+							}}
+						/>
+					</div>
+					<div>
+						<p>下書き</p>
+						<ToggleButton
+							bool={isDraft}
+							toggle={() => {
+								toggleDraft();
+								if (isPublic) {
+									notPublic();
+								}
+							}}
+						/>
+					</div>
+					<div>
+						<p>勉強会中</p>
+						<ToggleButton bool={isStudy} toggle={toggleStudy} />
 					</div>
 					<div className="mx-5">
 						<Button border onClick={createGlyphHandler}>
 							保存
 						</Button>
 					</div>
-					<Button border>下書き保存</Button>
 				</div>
 			</div>
 			{isPreview ? (

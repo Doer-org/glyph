@@ -16,7 +16,7 @@ export const GlyphDetail: FC<TProps> = ({ glyph }) => {
 			</div>
 			<div className="lg:w-1/3 lg:my-0 w-full my-10 ">
 				<div className="lg:ml-2 transition">
-					{glyph.isStudy ? (
+					{glyph.is_study ? (
 						// trueならwebsocketを扱うcommentsを返す
 						<WsComments glyphId={glyph.id} />
 					) : (

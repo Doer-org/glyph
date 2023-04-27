@@ -26,7 +26,7 @@ export default function GlyphCreateForm({ glyph }: TProps) {
 		toFalse: notPublic,
 	} = useToggle();
 	const { bool: isDraft, toggle: toggleDraft, toFalse: notDraft } = useToggle();
-	const { bool: isStudy, toggle: toggleStudy } = useToggle(glyph.isStudy);
+	const { bool: isStudy, toggle: toggleStudy } = useToggle(glyph.is_study);
 	const statusDefineder = (): TGlyph["status"] => {
 		if (isPublic && isDraft) {
 			return "Draft";

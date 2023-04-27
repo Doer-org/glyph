@@ -17,9 +17,9 @@ export default function Glyph({ params }: TProps) {
 		prev_glyph: "1",
 		next_glyph: "2",
 		status: "Draft",
-		isStudy: false,
-		created_at: new Date(),
-		updated_at: new Date(),
+		is_study: false,
+		created_at: new Date().toISOString(),
+		updated_at: new Date().toISOString(),
 	};
 
 	return (

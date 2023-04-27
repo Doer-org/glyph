@@ -5,6 +5,7 @@ import { Glyphs } from "@/components/organisms/glyphs";
 import { TGlyph } from "@/types/Glyph";
 
 const GlyphsPage = async () => {
+	// 環境変数が読み込めてなくてURLのパースに失敗するよって感じでビルドこける
 	// const glyphs = await readAllGlyphs();
 	// if (glyphs.type === "error") {
 	// 	throw new Error("Glyphを取得できませんでした");

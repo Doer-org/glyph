@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-cd $GITHUB_WORKSPACE/server || exit 1
+cd $GITHUB_WORKSPACE/$INPUT_WORKDIR || exit 1
 
 REVIEWDOG_YML=$(cat << EOS
 runner:

@@ -7,8 +7,9 @@ type TProps = {
 	glyphId: string;
 };
 export const WsComments: FC<TProps> = ({ glyphId }) => {
-	// glyphIdをもとにcommentをとってくる（動的）
-	// ここで常にcommentを取得してくる
+	// TODO(aoki): glyphIdをもとにcommentをとってくる（動的）
+	// TODO(aoki): ここで常にcommentを取得してくる
+	// メモ：ここでは一旦stateでコメントを表示しているけども別にしなくてもいいかも？（把握していないので任せた）
 	const [comments, setComments] = useState<string[]>([
 		"websocketのコメント1",
 		"websocketのコメント2",

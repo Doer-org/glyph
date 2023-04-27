@@ -9,8 +9,6 @@ type TProps = {
 };
 
 export const GlyphDetail: FC<TProps> = ({ glyph }) => {
-	// glyph.isStudyとかでとって来れるようにする
-	const isStudy = false;
 	return (
 		<div className="lg:flex block">
 			<div className="lg:w-2/3 w-full">
@@ -18,7 +16,7 @@ export const GlyphDetail: FC<TProps> = ({ glyph }) => {
 			</div>
 			<div className="lg:w-1/3 lg:my-0 w-full my-10 ">
 				<div className="lg:ml-2 transition">
-					{isStudy ? (
+					{glyph.isStudy ? (
 						// trueならwebsocketを扱うcommentsを返す
 						<WsComments glyphId={glyph.id} />
 					) : (

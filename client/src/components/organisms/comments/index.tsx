@@ -6,8 +6,9 @@ type TProps = {
 	glyphId: string;
 };
 export const Comments: FC<TProps> = ({ glyphId }) => {
-	// glyphIdをもとにcommentをとってくる（静的）
-	// ここで常にcommentを取得してくる
+	// TODO(aoki): glyphIdをもとにcommentをとってくる（静的）
+	// メモ：こっちはwebsocketを使わない方
+	// TODO(aoki): commentを取得してくる
 	const [comments, setComments] = useState<string[]>([
 		"普通のコメント1",
 		"普通のコメント2",

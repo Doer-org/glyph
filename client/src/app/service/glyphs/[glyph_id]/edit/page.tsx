@@ -23,6 +23,7 @@ export default function Edit({ params }: TProps) {
 		prev_glyph: "1",
 		next_glyph: "2",
 		status: "Draft",
+		isStudy: false,
 		created_at: new Date(),
 		updated_at: new Date(),
 	};

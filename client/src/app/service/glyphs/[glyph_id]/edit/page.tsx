@@ -1,10 +1,38 @@
+import { Txt } from "@/components/atoms/Txt";
+import { TGlyph } from "@/types/Glyph";
+import dynamic from "next/dynamic";
+const GlyphCreateForm = dynamic(
+	() => import("@/components/organisms/glyphs/glyphCreateForm"),
+	{ ssr: false },
+);
+
 export const metadata = {
 	title: "Glyph edit",
 };
-export default function Edit() {
+type TProps = {
+	params: { glyph_id: string };
+	searchParams: { id: string };
+};
+export default function Edit({ params }: TProps) {
+	console.log(params.glyph_id);
+	const GlyphMock: TGlyph = {
+		id: "1",
+		author_id: "uu",
+		title: "F#勉強会",
+		content: "## aaa  \n- ggg",
+		prev_glyph: "1",
+		next_glyph: "2",
+		status: "Draft",
+		isStudy: false,
+		created_at: new Date(),
+		updated_at: new Date(),
+	};
 	return (
-		<div>
-			<p>Glyphs edit</p>
-		</div>
+		<>
+			<Txt elm="h2" size="text-3xl" className="text-center pb-10">
+				{GlyphMock.title}(編集中)
+			</Txt>
+			<GlyphCreateForm />
+		</>
 	);
 }

@@ -89,8 +89,5 @@ test('Glyph: CreateUser => CreateGlyphs => GetGlyphs', async () => {
     });
   const _ = await Promise.all([create(), create(), create()]);
   const resp3 = await getGlyphsByAuthor(resp.value.data.id);
-  if (resp3.type === 'ok') {
-    console.log(resp3.value.data);
-  }
   expect(resp3.type).toBe('ok');
 });

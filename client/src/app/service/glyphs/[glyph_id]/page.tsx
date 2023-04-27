@@ -1,3 +1,4 @@
+import { StyledLinkTo } from "@/components/atoms/StyledLinkTo";
 import { Txt } from "@/components/atoms/Txt";
 import { GlyphDetail } from "@/components/organisms/glyphs/glyphDetail";
 import { TGlyph } from "@/types/Glyph";
@@ -26,6 +27,11 @@ export default function Glyph({ params }: TProps) {
 			<Txt elm="h2" size="text-3xl" className="text-center pb-10">
 				{GlyphMock.title}
 			</Txt>
+			<div className="text-center mb-10">
+				<StyledLinkTo href={`/service/glyphs/${GlyphMock.id}/edit`}>
+					編集
+				</StyledLinkTo>
+			</div>
 			<GlyphDetail glyph={GlyphMock} />
 		</>
 	);

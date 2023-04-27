@@ -1,8 +1,8 @@
 import { Txt } from "@/components/atoms/Txt";
 import { TGlyph } from "@/types/Glyph";
 import dynamic from "next/dynamic";
-const GlyphCreateForm = dynamic(
-	() => import("@/components/organisms/glyphs/glyphCreateForm"),
+const GlyphEditForm = dynamic(
+	() => import("@/components/organisms/glyphs/glyphEditForm"),
 	{ ssr: false },
 );
 
@@ -32,7 +32,7 @@ export default function Edit({ params }: TProps) {
 			<Txt elm="h2" size="text-3xl" className="text-center pb-10">
 				{GlyphMock.title}(編集中)
 			</Txt>
-			<GlyphCreateForm />
+			<GlyphEditForm glyph={GlyphMock} />
 		</>
 	);
 }

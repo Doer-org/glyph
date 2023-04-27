@@ -11,11 +11,14 @@ import { GlyphEditor } from "../glyphEditor";
 import { createGlyph } from "@/api/glyph";
 import { TGlyph } from "@/types/Glyph";
 import { useRouter } from "next/navigation";
-
+type TProps = {
+	glyph: TGlyph;
+};
 // dynamicでimportする際にアロー関数で定義すると読み込めなくなるのでここのみexport default
-export default function GlyphCreateForm() {
+export default function GlyphCreateForm({ glyph }: TProps) {
 	const router = useRouter();
-	const [markdown, setMarkdown] = useState<string>("");
+	const [markdown, setMarkdown] = useState<string>(glyph.content);
+	const [title, setTitle] = useState<string>(glyph.title);
 	const { bool: isPreview, toggle: togglePreview } = useToggle();
 	const {
 		bool: isPublic,
@@ -23,8 +26,7 @@ export default function GlyphCreateForm() {
 		toFalse: notPublic,
 	} = useToggle();
 	const { bool: isDraft, toggle: toggleDraft, toFalse: notDraft } = useToggle();
-	const { bool: isStudy, toggle: toggleStudy } = useToggle();
-	const [title, setTitle] = useState<string>("");
+	const { bool: isStudy, toggle: toggleStudy } = useToggle(glyph.isStudy);
 	const statusDefineder = (): TGlyph["status"] => {
 		if (isPublic && isDraft) {
 			return "Draft";
@@ -42,7 +44,7 @@ export default function GlyphCreateForm() {
 	};
 	const createGlyphHandler = () => {
 		createGlyph({
-			author_id: "tekitou",
+			author_id: glyph.author_id,
 			title: title,
 			content: markdown,
 			status: statusDefineder(),

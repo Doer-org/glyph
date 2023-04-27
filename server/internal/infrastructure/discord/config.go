@@ -20,7 +20,7 @@ func newDiscord(redirecturl string) *Discord {
 			ClientID:     os.Getenv("Discord_ID"),
 			ClientSecret: os.Getenv("Discord_SECRET"),
 			Endpoint:     endpoint,
-			Scopes:       []string{"openid", "email", "profile"},
+			Scopes:       []string{"guilds", "email", "identify"},
 			RedirectURL:  redirecturl,
 		},
 	}

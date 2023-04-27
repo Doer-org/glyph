@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
@@ -17,24 +18,26 @@ func (c *Client) GetMe(ctx context.Context) (*entity.User, error) {
 	}
 	// tokenを使用して、clientを返す
 	client := c.auth.Config.Client(ctx, token)
-	resp, err := client.Get(os.Getenv("DISCORD_CLIENT"))
+	log.Println("discord:    " + os.Getenv("DISCORD_GETME"))
+	resp, err := client.Get(os.Getenv("DISCORD_GETME"))
 	if err != nil {
-		return nil, fmt.Errorf("googleapis Get: %w", err)
+		return nil, fmt.Errorf("discordapis Get: %w", err)
 	}
 	defer resp.Body.Close()
-	var j googleUserJson
+	var j dicordUserJson
 	if err := json.NewDecoder(resp.Body).Decode(&j); err != nil {
 		return nil, fmt.Errorf("decode: %w", err)
 	}
 	user := &entity.User{
+		Id:   j.Id,
 		Name: j.Name,
+		Img:  j.Avator,
 	}
 	return user, nil
 }
 
-type googleUserJson struct {
-	Id      string `json:"id"`
-	Email   string `json:"email"`
-	Name    string `json:"name"`
-	Picture string `json:"picture"`
+type dicordUserJson struct {
+	Id     string `json:"id"`
+	Name   string `json:"username"`
+	Avator string `json:"avatar"`
 }

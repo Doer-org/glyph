@@ -17,6 +17,12 @@ services:
       - DB_DATABASE=${DB_DATABASE}
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
       - DB_PORT=${DB_PORT}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DISCORD_CALLBACK_API=${DISCORD_CALLBACK_API}
+      - Discord_ID=${Discord_ID}
+      - Discord_SECRET=${Discord_SECRET}
+      - DISCORD_GETME=${DISCORD_GETME}
+      - rawPrivKey=${rawPrivKey}
+      - rawPubKey=${rawPubKey}
       - PORT=${PORT}

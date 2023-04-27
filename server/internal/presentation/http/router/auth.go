@@ -10,7 +10,7 @@ import (
 	"github.com/Doer-org/glyph/internal/usecase"
 )
 
-func (r Router) InitAuthrRouter(conn *database.Conn) {
+func (r Router) InitAuthRouter(conn *database.Conn) {
 	repoauth := persistance.NewAuthRepository(conn)
 	repouser := persistance.NewUserRepository(conn)
 	repodiscord := discord.NewClient(os.Getenv("DISCORD_CALLBACK_API"))

@@ -65,19 +65,21 @@ func (uc *Auth) Authorization(ctx context.Context, state, code string) (string, 
 	if err != nil {
 		return storedState.RedirectURL, "", fmt.Errorf("createUserIfNotExists: %w", err)
 	}
+	log.Println("6")
 	if err := uc.repoAuth.StoreORUpdateToken(ctx, userId, token); err != nil {
 		return storedState.RedirectURL, "", fmt.Errorf("storeORUpdateToken: %w", err)
 	}
+	log.Println("7")
 	sessionID := utils.GetUlid()
 	if err := uc.repoAuth.StoreSession(ctx, sessionID, userId); err != nil {
 		return storedState.RedirectURL, "", fmt.Errorf("storeSession: %w", err)
 	}
-	// Stateを削除するのが失敗してもログインは成功しているので、エラーを返さない
-	// Stateの役割: https://qiita.com/naoya_matsuda/items/67a5a0fb4f50ac1e30c1
+	log.Println("8")
 	if err := uc.repoAuth.DeleteState(ctx, state); err != nil {
 		log.Println("DeleteState: %w", err)
 		return storedState.RedirectURL, sessionID, nil
 	}
+	log.Println("9")
 	return storedState.RedirectURL, sessionID, nil
 }
 
@@ -86,16 +88,25 @@ func (uc *Auth) createUserIfNotExists(ctx context.Context) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("getMe: %w", err)
 	}
-	user, err = uc.userRepo.GetUser(context.Background(), user.Id)
-	if err == sql.ErrNoRows {
+	log.Print("get user from discord   ")
+	log.Println(user)
+	log.Println("1")
+	_, err = uc.userRepo.GetUser(context.Background(), user.Id)
+	log.Println("1")
+	if err != nil && err == sql.ErrNoRows {
+		log.Println("2")
 		user, err = uc.userRepo.CreateUser(context.Background(), user)
+		log.Println("3")
 		if err != nil {
 			return "", err
 		}
+		log.Println("4")
 	}
+
 	if err != nil {
 		return "", err
 	}
+	log.Println("5")
 	return user.Id, err
 }
 

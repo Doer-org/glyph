@@ -3,11 +3,12 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/Doer-org/glyph/internal/usecase"
 	"github.com/Doer-org/glyph/log"
-	"github.com/Doer-org/glyph/utils/auth"
-	"github.com/Doer-org/glyph/utils/clock"
+	jwt "github.com/form3tech-oss/jwt-go"
 	"github.com/gin-gonic/gin"
 )
 
@@ -87,29 +88,16 @@ func (u *AuthHandler) Callback(ctx *gin.Context) {
 		)
 		return
 	}
-	clocker := clock.RealClocker{}
-	jwter, err := auth.NewJWTer(clocker)
-	if err != nil {
-		logger.Error("", map[string]string{"place": "callback", "type": "jwter generate err", "error": err.Error()})
-		ctx.JSON(
-			http.StatusBadRequest,
-			gin.H{"error": err.Error()},
-		)
-		return
-	}
-	jwt, err := jwter.GenerateToken(ctx, sessionID)
-	if err != nil {
-		logger.Error("", map[string]string{"place": "callback", "type": "jwt generate err", "error": err.Error()})
-		ctx.JSON(
-			http.StatusBadRequest,
-			gin.H{"error": err.Error()},
-		)
-		return
-	}
 
+	claims := jwt.MapClaims{
+		"session": sessionID,
+		"exp":     time.Now().Add(time.Hour * 72).Unix(), // 72時間が有効期限
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+	accessToken, _ := token.SignedString([]byte(os.Getenv("rawPrivKey")))
 	ctx.JSON(
 		http.StatusOK,
-		gin.H{"data": string(jwt)},
+		gin.H{"token": accessToken},
 	)
-
 }

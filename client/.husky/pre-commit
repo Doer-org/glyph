@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+root_directory=$(git rev-parse --show-toplevel)
+frontend_files_staged=$(git diff --cached --name-only --diff-filter=d | grep "^client/")
+if [ ! -z "${frontend_files_staged}" ]; then
+    echo "format!!"
+    cd "${root_directory}/client"
+    pnpm lint-staged
+    cd "${root_directory}"
+else
+    echo "no client commit"
+fi
+
+cd "${current_directory}"

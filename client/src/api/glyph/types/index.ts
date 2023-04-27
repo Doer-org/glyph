@@ -27,6 +27,17 @@ const glyphResponseSchema = {
 
 export type GlyphResponse = JTDDataType<typeof glyphResponseSchema>;
 
+const glyphsResponseSchema = {
+  type: 'object',
+  properties: {
+    data: {
+      elements: glyphResponseSchema,
+    },
+  },
+} as const;
+
+export type GlyphsResponse = JTDDataType<typeof glyphsResponseSchema>;
+
 type GlyphBase = {
   author_id: string;
   id: string;

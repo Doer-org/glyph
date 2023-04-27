@@ -6,10 +6,11 @@ import { TGlyph } from "@/types/Glyph";
 
 const GlyphsPage = async () => {
 	// 環境変数が読み込めてなくてURLのパースに失敗するよって感じでビルドこける
-	// const glyphs = await readAllGlyphs();
-	// if (glyphs.type === "error") {
-	// 	throw new Error("Glyphを取得できませんでした");
-	// }
+	const glyphs = await readAllGlyphs();
+	if (glyphs.type === "error") {
+		return new Error("Glyphを取得できませんでした");
+	}
+	console.log(glyphs.value.data);
 
 	const glyphsMock: TGlyph[] = [
 		{
@@ -47,7 +48,7 @@ const GlyphsPage = async () => {
 				<StyledLinkTo href="/service/glyphs/new">Glyph作成</StyledLinkTo>
 			</div>
 
-			<Glyphs glyphs={glyphsMock} />
+			<Glyphs glyphs={glyphs.value} />
 		</>
 	);
 };

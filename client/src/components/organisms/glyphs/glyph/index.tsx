@@ -28,7 +28,7 @@ export const Glyph: FC<TProps> = ({ glyph }) => {
 						- {glyph.content.length}文字
 					</Txt>
 					<Txt elm="p" size="text-sm">
-						- {format(glyph.updated_at, "yyyy/MM/dd")}
+						- {format(new Date(glyph.updated_at), "yyyy/MM/dd")}
 					</Txt>
 				</div>
 			</div>

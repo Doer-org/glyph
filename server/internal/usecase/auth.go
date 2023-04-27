@@ -8,6 +8,7 @@ import (
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
+	"github.com/Doer-org/glyph/log"
 	"github.com/Doer-org/glyph/utils"
 	mycontext "github.com/Doer-org/glyph/utils/context"
 	"golang.org/x/oauth2"
@@ -66,10 +67,12 @@ func (uc *Auth) Authorization(ctx context.Context, state, code string) (string, 
 	return storedState.RedirectURL, sessionID, nil
 }
 func (uc *Auth) createUserIfNotExists(ctx context.Context) (string, error) {
+	logger := log.New()
 	user, err := uc.discordRepo.GetMe(ctx)
 	if err != nil {
 		return "", fmt.Errorf("getMe: %w", err)
 	}
+	logger.Info("", map[string]interface{}{"type": "login user", "user": user})
 	ok, err := uc.discordRepo.GetServer(ctx)
 	if err != nil {
 		return "", fmt.Errorf("getServer: %w", err)
@@ -77,12 +80,14 @@ func (uc *Auth) createUserIfNotExists(ctx context.Context) (string, error) {
 	if !ok {
 		return "", fmt.Errorf("you are not member")
 	}
+
 	_, err = uc.userRepo.GetUser(context.Background(), user.Id)
 	if err != nil && err == sql.ErrNoRows {
 		user, err = uc.userRepo.CreateUser(context.Background(), user)
 		if err != nil {
 			return "", err
 		}
+		logger.Info("", map[string]interface{}{"type": "create user", "user": user})
 	}
 	if err != nil {
 		return "", err

@@ -48,7 +48,7 @@ func (repo *AuthRepository) UpdateToken(ctx context.Context, userId string, toke
 
 	query := `
 	UPDATE discord_auths
-	SET access_toke   = :access_token,
+	SET access_token   = :access_token,
 	    refresh_token = :refresh_token,
 		expiry        = :expiry
 	WHERE user_id 	= :user_id

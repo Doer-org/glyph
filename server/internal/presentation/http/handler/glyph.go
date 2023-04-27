@@ -39,6 +39,7 @@ func (u *GlyphHandler) CreateGlyph(ctx *gin.Context) {
 		)
 		return
 	}
+	logger.Info("", map[string]interface{}{"type": "create glyph", "glyph": glyph})
 	glyphjson := json.GlyphEntityToJson(glyph)
 	ctx.JSON(
 		http.StatusCreated,
@@ -134,7 +135,7 @@ func (u *GlyphHandler) EditGlyph(ctx *gin.Context) {
 		)
 		return
 	}
-	glyphjson, err := u.uc.EditGlyph(ctx, json.GlyphJsonToEntity(&j), id)
+	glyph, err := u.uc.EditGlyph(ctx, json.GlyphJsonToEntity(&j), id)
 	if err != nil {
 		logger.Error("", map[string]string{"error": err.Error()})
 		ctx.JSON(
@@ -142,6 +143,8 @@ func (u *GlyphHandler) EditGlyph(ctx *gin.Context) {
 			gin.H{"error": err.Error()},
 		)
 	}
+	logger.Info("", map[string]interface{}{"type": "edit glyph", "glyph": glyph})
+	glyphjson := json.GlyphEntityToJson(glyph)
 	ctx.JSON(
 		http.StatusOK,
 		gin.H{"data": glyphjson},

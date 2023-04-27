@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
@@ -18,7 +17,6 @@ func (c *Client) GetMe(ctx context.Context) (*entity.User, error) {
 	}
 	// tokenを使用して、clientを返す
 	client := c.auth.Config.Client(ctx, token)
-	log.Println("discord:    " + os.Getenv("DISCORD_GETME"))
 	resp, err := client.Get(os.Getenv("DISCORD_GETME"))
 	if err != nil {
 		return nil, fmt.Errorf("discordapis Get: %w", err)
@@ -57,7 +55,6 @@ func (c *Client) GetServer(ctx context.Context) (bool, error) {
 			return true, nil
 		}
 	}
-	log.Println(j)
 	return false, nil
 }
 

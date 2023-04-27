@@ -1,8 +1,12 @@
 import { Txt } from "@/components/atoms/Txt";
 import { GlyphDetail } from "@/components/organisms/glyphs/glyphDetail";
 import { TGlyph } from "@/types/Glyph";
-
-export default function Glyph() {
+type TProps = {
+	params: { glyph_id: string };
+	searchParams: { id: string };
+};
+export default function Glyph({ params }: TProps) {
+	console.log(params.glyph_id);
 	const GlyphMock: TGlyph = {
 		id: "1",
 		author_id: "uu",

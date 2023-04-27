@@ -13,7 +13,7 @@ const GlyphsPage = async () => {
 	return (
 		<>
 			<Txt elm="h2" size="text-3xl" className="text-center pb-10">
-				Glyph一覧aaaaaaaaaa
+				Glyph一覧aaaaaaaaaafff
 			</Txt>
 			<div className="text-center mb-10">
 				<StyledLinkTo href="/service/glyphs/new">Glyph作成</StyledLinkTo>

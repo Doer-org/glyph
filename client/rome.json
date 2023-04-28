@@ -16,11 +16,5 @@
 		"lineWidth": 80,
 		"enabled": true,
 		"indentSize": 2
-	},
-	"javascript": {
-		"formatter": {
-			"semicolons": "always",
-			"quoteStyle": "single"
-		}
 	}
 }

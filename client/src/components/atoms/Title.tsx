@@ -1,18 +1,18 @@
-import { FC } from "react";
+import { FC } from 'react';
 type TProps = {
-	stroke?: boolean;
+  stroke?: boolean;
 };
 
 export const Title: FC<TProps> = ({ stroke }) => {
-	return (
-		<>
-			<span
-				className="text-yellow-300"
-				style={{ WebkitTextStroke: `${stroke && "black 2px"}` }}
-			>
-				G
-			</span>
-			lyph
-		</>
-	);
+  return (
+    <>
+      <span
+        className="text-yellow-300"
+        style={{ WebkitTextStroke: `${stroke && 'black 2px'}` }}
+      >
+        G
+      </span>
+      lyph
+    </>
+  );
 };

@@ -16,6 +16,7 @@ type GlyphJson struct {
 	Status     string    `json:"status"`
 	Created_at time.Time `json:"created_at"`
 	Updated_at time.Time `json:"updated_at"`
+	Is_study   bool      `json:"is_study"`
 }
 
 type GlyphsJson []GlyphJson
@@ -31,6 +32,7 @@ func GlyphEntityToJson(c *entity.Glyph) *GlyphJson {
 		Status:     c.Status,
 		Created_at: c.Created_at,
 		Updated_at: c.Updated_at,
+		Is_study:   c.Is_study,
 	}
 }
 
@@ -54,5 +56,6 @@ func GlyphJsonToEntity(j *GlyphJson) *entity.Glyph {
 		Status:     j.Status,
 		Created_at: j.Created_at,
 		Updated_at: j.Updated_at,
+		Is_study:   j.Is_study,
 	}
 }

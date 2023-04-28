@@ -26,6 +26,7 @@ func (ur *UserRepository) CreateUser(ctx context.Context, user *entity.User) (*e
 	VALUES (:id,:name,:img)
 	`
 	dto := userEntityToDto(user)
+
 	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
 	if err != nil {
 		return nil, err

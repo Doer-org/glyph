@@ -1,6 +1,3 @@
-// TODO(mao):ここにユーザー情報、記事一覧、コメント一覧をとってくる処理を書いてもらえれば！（UI部分だけでも大丈夫です！）
-// memo: レイアウトは大体今書いてある感じでお願いします、確認してませんが
-
 import { UserAllGlyphs } from "@/components/organisms/user/user-allglyphs";
 import { UserComments } from "@/components/organisms/user/user-comments";
 import { UserInformation } from "@/components/organisms/user/user-information";

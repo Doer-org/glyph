@@ -15,6 +15,12 @@
 	"formatter": {
 		"lineWidth": 80,
 		"enabled": true,
-		"indentSize": 2
+		"indentSize": 1
+	},
+	"javascript": {
+		"formatter": {
+			"semicolons": "always",
+			"quoteStyle": "single"
+		}
 	}
 }

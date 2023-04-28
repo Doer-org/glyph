@@ -17,6 +17,15 @@ services:
       - DB_DATABASE=${DB_DATABASE}
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
       - DB_PORT=${DB_PORT}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DISCORD_CALLBACK_API=${DISCORD_CALLBACK_API}
+      - DISCORD_ID=${DISCORD_ID}
+      - DISCORD_SECRET=${DISCORD_SECRET}
+      - DISCORD_GETME=${DISCORD_GETME}
+      - DISCORD_GETSERVER=${DISCORD_GETSERVER}
+      - SERVER_DISCORD_ID=${SERVER_DISCORD_ID}
+      - rawPrivKey=${rawPrivKey}
+      - rawPubKey=${rawPubKey}
       - PORT=${PORT}
+      - DSN=${DSN}

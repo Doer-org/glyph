@@ -1,32 +1,32 @@
-import { Txt } from "@/components/atoms/Txt";
-import { GlyphDetail } from "@/components/organisms/glyphs/glyphDetail";
-import { TGlyph } from "@/types/Glyph";
-type TProps = {
-	params: { glyph_id: string };
-	searchParams: { id: string };
-};
-export default function Glyph({ params }: TProps) {
-	console.log(params.glyph_id);
-	// TODO(aoki): mockを置き換えて動作確認までできるとすごい！！！
-	const GlyphMock: TGlyph = {
-		id: "1",
-		author_id: "uu",
-		title: "F#勉強会",
-		content: "## aaa  \n- ggg",
-		prev_glyph: "1",
-		next_glyph: "2",
-		status: "Draft",
-		isStudy: false,
-		created_at: new Date(),
-		updated_at: new Date(),
-	};
+import { readGlyph } from '@/api/glyph';
+import { StyledLinkTo } from '@/components/atoms/StyledLinkTo';
+import { Txt } from '@/components/atoms/Txt';
+import { GlyphDetail } from '@/components/organisms/glyphs/glyphDetail';
 
-	return (
-		<>
-			<Txt elm="h2" size="text-3xl" className="text-center pb-10">
-				{GlyphMock.title}
-			</Txt>
-			<GlyphDetail glyph={GlyphMock} />
-		</>
-	);
-}
+type TProps = {
+  params: { glyph_id: string };
+  searchParams: { id: string };
+};
+
+const GlyphPage = async ({ params }: TProps) => {
+  console.log(params.glyph_id);
+  const glyph = await readGlyph(params.glyph_id);
+  if (glyph.type === 'error') {
+    return <p>Glyphが取得できない</p>;
+  }
+
+  return (
+    <>
+      <Txt elm="h2" size="text-3xl" className="text-center pb-10">
+        {glyph.value.data.title}
+      </Txt>
+      <div className="text-center mb-10">
+        <StyledLinkTo href={`/service/glyphs/${glyph.value.data.id}/edit`}>
+          編集
+        </StyledLinkTo>
+      </div>
+      <GlyphDetail glyph={glyph.value.data} />
+    </>
+  );
+};
+export default GlyphPage;

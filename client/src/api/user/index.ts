@@ -4,15 +4,15 @@ import { UserResponse, UserCreate } from './types';
 export const createUser = async (user: UserCreate) =>
   await apiClient.post<UserResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/user`,
-    user
+    user,
   );
 
 export const readUser = async (user_id: string) =>
   await apiClient.get<UserResponse>(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${user_id}`
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${user_id}`,
   );
 
 export const deleteUser = async (user_id: string) =>
   await apiClient.delete(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${user_id}`
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${user_id}`,
   );

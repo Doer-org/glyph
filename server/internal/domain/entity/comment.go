@@ -14,6 +14,7 @@ type CommentByUserId struct {
 	Id          string
 	Glyph_id    string
 	Glyph_title string
+	Contents    string
 	Created_at  time.Time
 }
 

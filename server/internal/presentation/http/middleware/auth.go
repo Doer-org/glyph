@@ -46,9 +46,7 @@ func (m *Auth) Authenticate() gin.HandlerFunc {
 		}
 		str := ""
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-			fmt.Println(3.5)
 			str, ok = claims["session"].(string)
-			fmt.Println(str)
 			if !ok {
 				logger.Error("", map[string]string{"place": "auth middleware", "type": "auth err", "error": "kata asa-sion"})
 				c.JSON(
@@ -83,11 +81,11 @@ func (m *Auth) Authenticate() gin.HandlerFunc {
 				logger.Error("", map[string]string{"place": "auth middleware", "type": "delete session err", "error": err.Error()})
 				c.JSON(
 					http.StatusBadRequest,
-					gin.H{"error": err},
+					gin.H{"error": err.Error()},
 				)
 				c.Abort()
 			}
-			logger.Error("", map[string]string{"place": "auth middleware", "type": "auth err", "error": "session expiry err"})
+			logger.Error("", map[string]string{"place": "auth middleware", "type": "auth err", "error": "session expiry time over"})
 			c.JSON(
 				http.StatusBadRequest,
 				gin.H{"error": "session expiry err"},
@@ -97,20 +95,20 @@ func (m *Auth) Authenticate() gin.HandlerFunc {
 		}
 		userId, err := m.uc.GetUserIdFromSession(c, str)
 		if err != nil {
-			logger.Error("", map[string]string{"place": "auth middleware", "type": "get userId from session", "error": "session expiry err"})
+			logger.Error("", map[string]string{"place": "auth middleware", "type": "get userId from session", "error": err.Error()})
 			c.JSON(
 				http.StatusBadRequest,
-				gin.H{"error": "session expiry err"},
+				gin.H{"error": err.Error()},
 			)
 			c.Abort()
 			return
 		}
 		storedtoken, err := m.uc.GetTokenByUserId(c, userId)
 		if err != nil {
-			logger.Error("", map[string]string{"place": "auth middleware", "type": "get token by userId", "error": "session expiry err"})
+			logger.Error("", map[string]string{"place": "auth middleware", "type": "get token by userId", "error": err.Error()})
 			c.JSON(
 				http.StatusBadRequest,
-				gin.H{"error": "session expiry err"},
+				gin.H{"error": err.Error()},
 			)
 			c.Abort()
 			return
@@ -118,12 +116,12 @@ func (m *Auth) Authenticate() gin.HandlerFunc {
 		// TODO 切れてたらrefresh
 		newToken, err := m.uc.RefreshAccessToken(c, userId, storedtoken)
 		if err != nil {
-			logger.Error("", map[string]string{"place": "auth middleware", "type": "refresh access token", "error": "session expiry err"})
+			logger.Error("", map[string]string{"place": "auth middleware", "type": "refresh access token", "error": err.Error()})
 			c.JSON(
 				http.StatusBadRequest,
-				gin.H{"error": "session expiry err"},
+				gin.H{"error": err.Error()},
 			)
-
+			c.Abort()
 			return
 		}
 

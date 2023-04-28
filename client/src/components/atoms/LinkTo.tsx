@@ -7,8 +7,8 @@ type TProps = {
 };
 export const LinkTo: FC<TProps> = ({ href, children, className }) => {
   return (
-    <Link href={href} className={className}>
+    <a href={href} className={className}>
       {children}
-    </Link>
+    </a>
   );
 };

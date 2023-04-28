@@ -7,7 +7,7 @@ import (
 )
 
 type Message struct {
-	JsonType string             `json:"entity"`
+	JsonType string             `json:"type"`
 	Data     entity.MessageData `json:"data"`
 }
 

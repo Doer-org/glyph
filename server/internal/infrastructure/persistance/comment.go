@@ -49,7 +49,10 @@ func (ur *CommentRepository) ReadCommentsByGlyphId(ctx context.Context, glyph_id
 
 func (ur *CommentRepository) ReadCommentsByUserId(ctx context.Context, user_id string) (entity.CommentsByUserId, error) {
 	query := `
-	SELECT comments.id, comments.glyph_id, comments.created_at, glyphs.title  FROM comments INNER JOIN glyphs on comments.glyph_id = glyphs.id WHERE comments.user_id = ?;
+	SELECT comments.id, comments.glyph_id, comments.contents, comments.created_at, glyphs.title 
+	FROM comments 
+	INNER JOIN glyphs on comments.glyph_id = glyphs.id 
+	WHERE comments.user_id = ?;
 	`
 	var dtos commentsByUserIdDto
 	err := ur.conn.DB.SelectContext(ctx, &dtos, query, user_id)
@@ -71,8 +74,9 @@ type commentDto struct {
 type commentByUserIdDto struct {
 	Id          string    `db:"id"`
 	Glyph_id    string    `db:"glyph_id"`
-	Created_at  time.Time `db:"created_at"`
 	Glyph_title string    `db:"title"`
+	Contents    string    `db:"contents"`
+	Created_at  time.Time `db:"created_at"`
 }
 
 type commentsDto []commentDto
@@ -112,8 +116,9 @@ func commentByUserIdDtoToEntity(dto *commentByUserIdDto) *entity.CommentByUserId
 	return &entity.CommentByUserId{
 		Id:          dto.Id,
 		Glyph_id:    dto.Glyph_id,
-		Created_at:  dto.Created_at,
 		Glyph_title: dto.Glyph_title,
+		Contents:    dto.Contents,
+		Created_at:  dto.Created_at,
 	}
 }
 

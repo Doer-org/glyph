@@ -96,7 +96,7 @@ func (u *AuthHandler) Callback(ctx *gin.Context) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	accessToken, _ := token.SignedString([]byte(os.Getenv("rawPrivKey")))
-	ctx.Header("token", accessToken)
+	ctx.SetCookie("token", accessToken, oneWeek, "/", "", false, true)
 	ctx.Redirect(http.StatusFound, redirectURL)
 }
 

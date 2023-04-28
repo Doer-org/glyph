@@ -9,7 +9,7 @@ const commentBaseSchema = {
     contents: { type: 'string' },
     created_at: { type: 'string' },
   },
-};
+} as const;
 
 const commentResponseSchema = {
   type: 'object',
@@ -25,7 +25,7 @@ const commentsResponseSchema = {
       elements: commentBaseSchema,
     },
   },
-};
+} as const;
 
 export type CommentResponse = JTDDataType<typeof commentResponseSchema>;
 

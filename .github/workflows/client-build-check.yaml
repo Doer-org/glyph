@@ -1,38 +1,38 @@
-name: pnpm build
+# name: pnpm build
 
-on:
-  push:
-    branches-ignore:
-      - main
-      - dev
+# on:
+#   push:
+#     branches-ignore:
+#       - main
+#       - dev
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        # with:
-        #   node-version: 18
-        #   cache: pnpm
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v3
+#         # with:
+#         #   node-version: 18
+#         #   cache: pnpm
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+#       - name: Install pnpm
+#         run: npm install -g pnpm
 
-      - name: Install dependencies
-        run: pnpm install
-        working-directory: client
+#       - name: Install dependencies
+#         run: pnpm install
+#         working-directory: client
 
-      - name: server setup
-        run: make up
-        working-directory: server
+#       - name: server setup
+#         run: make up
+#         working-directory: server
 
-      - name: Build
-        run: pnpm build
-        working-directory: client
-        env:
-          NEXT_PUBLIC_SERVER_URL: http://localhost:8080
+#       - name: Build
+#         run: pnpm build
+#         working-directory: client
+#         env:
+#           NEXT_PUBLIC_SERVER_URL: http://localhost:8080

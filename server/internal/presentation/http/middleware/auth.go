@@ -70,7 +70,7 @@ func (m *Auth) Authenticate() gin.HandlerFunc {
 			logger.Error("", map[string]string{"place": "auth middleware", "type": "check session expiry", "error": err.Error()})
 			c.JSON(
 				http.StatusBadRequest,
-				gin.H{"error": err},
+				gin.H{"error": err.Error()},
 			)
 			c.Abort()
 			return

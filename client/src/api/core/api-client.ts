@@ -7,14 +7,16 @@ export type ResponseError = {
   message: string;
 };
 
+const ajv = new Ajv({
+  allErrors: false,
+  strict: false,
+});
+
 const resp2result = async <T extends AnySchema>(
-  resp: Response
+  resp: Response,
 ): Promise<Result<T, ResponseError>> => {
   const data = (await resp.json()) as T;
-  const validate = new Ajv({
-    allErrors: false,
-    strict: false,
-  }).compile<JTDDataType<T>>(data);
+  const validate = ajv.compile<JTDDataType<T>>(data);
   if (!resp.ok) {
     return {
       type: 'error',
@@ -38,15 +40,17 @@ const resp2result = async <T extends AnySchema>(
 export const apiClient = {
   get: async <T extends AnySchema>(url: string) => {
     const data = await fetch(url, {
+      cache: 'no-store',
       method: 'GET',
     });
     return await resp2result<T>(data);
   },
   post: async <T extends AnySchema>(
     url: string,
-    body: Record<string, unknown> | Record<string, unknown>[]
+    body: Record<string, unknown> | Record<string, unknown>[],
   ) => {
     const data = await fetch(url, {
+      cache: 'no-store',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -57,9 +61,10 @@ export const apiClient = {
   },
   put: async <T extends AnySchema>(
     url: string,
-    body: Record<string, unknown> | Record<string, unknown>[]
+    body: Record<string, unknown> | Record<string, unknown>[],
   ) => {
     const data = await fetch(url, {
+      cache: 'no-store',
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -70,9 +75,10 @@ export const apiClient = {
   },
   delete: async <T extends AnySchema>(
     url: string,
-    body?: Record<string, unknown> | Record<string, unknown>[]
+    body?: Record<string, unknown> | Record<string, unknown>[],
   ) => {
     const data = await fetch(url, {
+      cache: 'no-store',
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

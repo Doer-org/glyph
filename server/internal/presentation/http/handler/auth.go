@@ -157,3 +157,81 @@ func (u *AuthHandler) Logout(ctx *gin.Context) {
 		gin.H{"logout": "success"},
 	)
 }
+
+func (u *AuthHandler) User(ctx *gin.Context) {
+	logger := log.New()
+	tokenString := ctx.Request.Header.Get("jwt")
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return []byte(os.Getenv("rawPrivKey")), nil
+	})
+	if err != nil {
+		logger.Error("", map[string]string{"place": "auth middleware", "type": "auth err", "error": err.Error()})
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
+	str := ""
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		str, ok = claims["session"].(string)
+		if !ok {
+			logger.Error("", map[string]string{"place": "logout", "type": "auth err", "error": "kata asa-sion"})
+			ctx.JSON(
+				http.StatusBadRequest,
+				gin.H{"error": fmt.Errorf("kata asa-sion")},
+			)
+			return
+		}
+	} else {
+		logger.Error("", map[string]string{"place": "logout", "type": "auth err ", "error": "token empty"})
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": fmt.Errorf("token empty")},
+		)
+		return
+	}
+
+	ok, err := u.authUC.CheckSessionExpiry(ctx, str)
+	if err != nil {
+		logger.Error("", map[string]string{"place": "auth middleware", "type": "check session expiry", "error": err.Error()})
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
+	if !ok {
+		err := u.authUC.DeleteSession(ctx, str)
+		if err != nil {
+			logger.Error("", map[string]string{"place": "auth middleware", "type": "delete session err", "error": err.Error()})
+			ctx.JSON(
+				http.StatusBadRequest,
+				gin.H{"error": err.Error()},
+			)
+		}
+		logger.Error("", map[string]string{"place": "auth middleware", "type": "auth err", "error": "session expiry time over"})
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": "session expiry err"},
+		)
+		return
+	}
+	userId, err := u.authUC.GetUserIdFromSession(ctx, str)
+	if err != nil {
+		logger.Error("", map[string]string{"place": "auth middleware", "type": "get userId from session", "error": err.Error()})
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
+	user, err := u.userUC.GetUser(ctx, userId)
+	ctx.JSON(
+		http.StatusOK,
+		gin.H{"user": user},
+	)
+}

@@ -9,7 +9,7 @@ inputs:
   workdir:
     description: 'working directory relative to the root directory'
     required: false
-    default: ./server
+    default: ./
 
 runs:
   using: 'composite'

@@ -6,14 +6,15 @@ import React, { useState, type FC, useEffect } from 'react';
 
 type UserInformaionProps = {
   id: string;
+  token?: string;
 };
 
-export const UserInformation: FC<UserInformaionProps> = ({ id }) => {
+export const UserInformation: FC<UserInformaionProps> = ({ id, ...props }) => {
   const [user, setUser] = useState<UserResponse | null>(null);
 
   useEffect(() => {
     const getUser = async (id: string) => {
-      const user = await readUser(id);
+      const user = await readUser(id, props.token);
       if (user.type === 'error') {
         console.log('Error:', user.error);
         return;

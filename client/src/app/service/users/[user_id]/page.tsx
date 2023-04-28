@@ -1,3 +1,4 @@
+import { getToken } from '@/api/utils/token';
 import { UserAllGlyphs } from '@/components/organisms/user/user-allglyphs';
 import { UserComments } from '@/components/organisms/user/user-comments';
 import { UserInformation } from '@/components/organisms/user/user-information';
@@ -8,7 +9,7 @@ export default function UserSetting() {
 
   return (
     <>
-      <UserInformation id={user_id} />
+      <UserInformation id={user_id} token={getToken()} />
       <div className="grid grid-cols-1 md:grid-cols-2 my-14">
         <UserAllGlyphs id={user_id} />
         <UserComments id={user_id} />

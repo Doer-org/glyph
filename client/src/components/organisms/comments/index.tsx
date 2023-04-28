@@ -20,6 +20,7 @@ type Comment = {
 type TProps = {
   glyphId: string;
   user_id: string;
+  token?: string;
 };
 
 export const Comments: FC<TProps> = (props: TProps) => {
@@ -30,7 +31,7 @@ export const Comments: FC<TProps> = (props: TProps) => {
       if (comments.type === 'error') return;
       const commentsAndUsers = await Promise.all(
         comments.value.data.map(async (comment) => {
-          const user = await API.readUser(comment.author_id);
+          const user = await API.readUser(comment.author_id, props.token);
           return {
             ...comment,
             user: (user.type === 'ok' && user.value.data) || undefined,

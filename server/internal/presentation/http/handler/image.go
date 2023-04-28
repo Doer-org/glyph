@@ -36,7 +36,7 @@ func (u *ImageHandler) CreateImage(ctx *gin.Context) {
 	source, _ := io.ReadAll(img)
 
 	image, err := u.uc.CreateImage(ctx, &entity.Image{
-		Id: utils.GetUlid(),
+		Id:  utils.GetUlid(),
 		Img: source,
 	})
 	if err != nil {

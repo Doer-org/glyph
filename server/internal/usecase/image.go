@@ -2,9 +2,10 @@ package usecase
 
 import (
 	"context"
+	"fmt"
 
-	"github.com/Doer-org/glyph/internal/domain/repository"
 	"github.com/Doer-org/glyph/internal/domain/entity"
+	"github.com/Doer-org/glyph/internal/domain/repository"
 )
 
 var _ IImageUsecase = &ImageUsecase{}
@@ -31,6 +32,9 @@ func (uc *ImageUsecase) CreateImage(ctx context.Context, image *entity.Image) (*
 }
 
 func (uc *ImageUsecase) GetImagebyId(ctx context.Context, id string) (*entity.Image, error) {
+	if id == "" {
+		return nil, fmt.Errorf("id is empty")
+	}
 	return uc.repo.GetImagebyId(ctx, id)
 }
 
@@ -39,5 +43,8 @@ func (uc *ImageUsecase) GetImageALL(ctx context.Context) (entity.Images, error) 
 }
 
 func (uc *ImageUsecase) DeleteImage(ctx context.Context, id string) error {
+	if id == "" {
+		return fmt.Errorf("id is empty")
+	}
 	return uc.repo.DeleteImage(ctx, id)
 }

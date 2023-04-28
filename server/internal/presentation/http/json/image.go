@@ -3,7 +3,7 @@ package json
 import "github.com/Doer-org/glyph/internal/domain/entity"
 
 type ImageJson struct {
-	Id string `json:"id"`
+	Id  string `json:"id"`
 	Img []byte `json:"img"`
 }
 
@@ -11,7 +11,7 @@ type ImagesJson []*ImageJson
 
 func ImageEntityToJson(image *entity.Image) *ImageJson {
 	return &ImageJson{
-		Id: image.Id,
+		Id:  image.Id,
 		Img: image.Img,
 	}
 }
@@ -26,7 +26,7 @@ func ImagesEntityToJson(images entity.Images) *ImagesJson {
 
 func ImageJsonToEntity(json *ImageJson) *entity.Image {
 	return &entity.Image{
-		Id: json.Id,
+		Id:  json.Id,
 		Img: json.Img,
 	}
 }

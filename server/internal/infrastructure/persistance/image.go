@@ -20,7 +20,6 @@ func NewImageRepositry(conn *database.Conn) repository.IIMageRepositry {
 	}
 }
 
-
 func (ur *ImageRepositry) CreateImage(ctx context.Context, image *entity.Image) (*entity.Image, error) {
 	query := `
 	INSERT INTO images(id, img)
@@ -71,7 +70,7 @@ func (ur *ImageRepositry) DeleteImage(ctx context.Context, id string) error {
 }
 
 type imageDto struct {
-	Id 	string `db:"id"`
+	Id  string `db:"id"`
 	Img []byte `db:"img"`
 }
 
@@ -79,7 +78,7 @@ type imageDtos []*imageDto
 
 func imageDtoToEntity(dto *imageDto) *entity.Image {
 	return &entity.Image{
-		Id: dto.Id,
+		Id:  dto.Id,
 		Img: dto.Img,
 	}
 }
@@ -94,7 +93,7 @@ func imageDtosToEntity(dtos imageDtos) entity.Images {
 
 func imageEntityToDto(img *entity.Image) imageDto {
 	return imageDto{
-		Id: img.Id,
+		Id:  img.Id,
 		Img: img.Img,
 	}
 }

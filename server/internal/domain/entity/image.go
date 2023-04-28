@@ -1,7 +1,7 @@
 package entity
 
 type Image struct {
-	Id string
+	Id  string
 	Img []byte
 }
 

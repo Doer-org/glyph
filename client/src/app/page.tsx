@@ -1,7 +1,7 @@
 import { Title } from '@/components/atoms/Title';
 import { Txt } from '@/components/atoms/Txt';
 import { AnimatedSvgLogo } from '@/components/atoms/svgs/AnimatedSvgLogo';
-import { UserLoginButton } from '@/components/organisms/home/userLoginButton';
+import { UserLoginButton } from '@/components/organisms/home/UserLoginButton';
 
 import { type NextPage } from 'next';
 

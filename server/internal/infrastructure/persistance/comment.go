@@ -2,6 +2,7 @@ package persistance
 
 import (
 	"context"
+	"log"
 	"time"
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
@@ -27,6 +28,7 @@ func (ur *CommentRepository) CreateComment(ctx context.Context, comment *entity.
 	VALUES (:id, :user_id, :glyph_id, :contents, :created_at)
 	`
 	dto := commentEntityToDto(comment)
+	log.Println(comment)
 	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
 	if err != nil {
 		return nil, err

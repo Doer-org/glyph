@@ -24,6 +24,7 @@ export const Comments: FC<TProps> = ({ glyphId }) => {
         {comments.map((comment, index) => {
           return (
             <div key={`${comment}-${index}`}>
+              {/* // TODO(aoki): この部分コンポーネント化してユーザー画像とかも見れるようにしてくれたらとても嬉しいかもしれない */}
               <p
                 className="border-2 p-2 rounded-md my-2 break-words"
                 ref={

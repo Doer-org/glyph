@@ -18,8 +18,11 @@ const GlyphsPage = async () => {
       <div className="text-center mb-10">
         <StyledLinkTo href="/service/glyphs/new">Glyph作成</StyledLinkTo>
       </div>
-
-      <Glyphs glyphs={glyphs.value.data} />
+      {glyphs.value.data === null ? (
+        <p>Glyphがありません</p>
+      ) : (
+        <Glyphs glyphs={glyphs.value.data} />
+      )}
     </>
   );
 };

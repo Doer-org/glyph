@@ -5,6 +5,7 @@ import {
   editGlyph,
   getGlyphsByAuthor,
   readGlyph,
+  readAllGlyphs
 } from '../';
 import { expect, test } from 'vitest';
 
@@ -33,6 +34,25 @@ test('Glyph：Create => Read', async () => {
   const resp2 = await readGlyph(resp.value.data.id);
   expect(resp2.type).toBe('ok');
 });
+
+test('Glyph：Create => ReadAll', async () => {
+  const create = async (title: string) => {
+    await createGlyph({
+      author_id: 'string',
+      title: title,
+      content: 'string',
+      status: 'Draft',
+      prev_glyph: 'string',
+      next_glyph: 'string',
+    });
+  }
+  const _ = await Promise.all([create('title1'), create('title2'), create('title3')]);
+  const resp = await readAllGlyphs();
+  if (resp.type === 'ok') 
+    console.log(resp.value.data) 
+  expect(resp.type).toBe('ok');
+});
+
 
 test('Glyph：Create => Edit', async () => {
   const resp = await createGlyph({

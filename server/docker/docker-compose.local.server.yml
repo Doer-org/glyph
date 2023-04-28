@@ -20,11 +20,12 @@ services:
       - DB_PORT=${DB_PORT}
       - DB_PASSWORD=${DB_PASSWORD}
       - DISCORD_CALLBACK_API=${DISCORD_CALLBACK_API}
-      - Discord_ID=${Discord_ID}
-      - Discord_SECRET=${Discord_SECRET}
+      - DISCORD_ID=${DISCORD_ID}
+      - DISCORD_SECRET=${DISCORD_SECRET}
       - DISCORD_GETME=${DISCORD_GETME}
       - DISCORD_GETSERVER=${DISCORD_GETSERVER}
       - SERVER_DISCORD_ID=${SERVER_DISCORD_ID}
       - rawPrivKey=${rawPrivKey}
       - rawPubKey=${rawPubKey}
       - PORT=${PORT}
+      - DSN=${DSN}

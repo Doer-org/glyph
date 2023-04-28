@@ -49,6 +49,7 @@ func (s *Subscription) readPump(h *Hub) {
 			break
 		}
 		if err := applyHandlers(msg, []func(input []byte) (err error){
+			HandleComment(h, s),
 			HandleMessage(h, s),
 			HandleJoinNewMember(h, s),
 		}); err != nil {

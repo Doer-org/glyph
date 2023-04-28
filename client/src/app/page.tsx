@@ -16,6 +16,11 @@ const About: NextPage = () => {
       <div className="m-auto">
         <AnimatedSvgLogo />
       </div>
+      <div>
+        <a href="http://localhost:8080/auth/login?redirect_url=http://localhost:3000/">
+          login
+        </a>
+      </div>
     </main>
   );
 };

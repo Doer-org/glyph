@@ -12,7 +12,7 @@ export default function UserSetting() {
   return (
     <>
       <UserInformation id={user_id} />
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 my-14">
         <UserAllGlyphs id={user_id} />
         <UserComments id={user_id} />
       </div>

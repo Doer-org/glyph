@@ -1,6 +1,7 @@
 "use client";
 import { readUser } from "@/api";
 import { UserResponse } from "@/api/user/types";
+import Image from "next/image";
 import React, { useState, type FC, useEffect } from "react";
 
 type UserInformaionProps = {
@@ -22,13 +23,30 @@ export const UserInformation: FC<UserInformaionProps> = ({ id }) => {
     getUser(id);
   }, [id]);
 
+  const testuser = {
+    data: { name: "test", img: "https://github.com/meow520.png" },
+  };
+
   return (
-    <div>
-      <div>UserInformation</div>
-      <div className="flex justify-start gap-3">
-        <div>{user?.data.img}</div>
-        <div className="text-3xl">{user?.data.name}</div>
+    <div className="flex justify-start gap-3 lg:gap-8">
+      {/* <Image
+            src={user?.data.img}
+            width={100}
+            height={100}
+            alt={"icon"}
+            className="rounded-full"
+          />
+        <div className="text-3xl">{user?.data.name}</div> */}
+      <div className="rounded-full">
+        <Image
+          src={testuser?.data.img}
+          width={150}
+          height={150}
+          alt={"icon"}
+          className="rounded-full"
+        />
       </div>
+      <div className="text-4xl my-auto font-bold">{testuser?.data.name}</div>
     </div>
   );
 };

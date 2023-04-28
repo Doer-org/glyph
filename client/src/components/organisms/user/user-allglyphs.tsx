@@ -16,11 +16,37 @@ export const UserAllGlyphs: FC<UserAllGlyphsProps> = ({ id }) => {
   useEffect(() => {
     const getGlyphs = async (id: string) => {};
   });
+  const testglyphs:TGlyph[] = [
+    {
+      id: "1",
+      author_id: "test",
+      title: "test",
+      content: "test",
+      status: "Draft",
+      isStudy: false,
+      prev_glyph:"",
+      next_glyph:"",
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: "2",
+      author_id: "test",
+      title: "test",
+      content: "test",
+      status: "Draft",
+      isStudy: false,
+      prev_glyph:"",
+      next_glyph:"",
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+  ];
   return (
     <div>
       <div className="text-2xl">Glyphs一覧</div>
-      {glyphs?.map((glyph: TGlyph, index: number) => (
-        <div key={index} className="border rounded-lg">
+      {testglyphs?.map((glyph: TGlyph, index: number) => (
+        <div key={index} className="">
           <LinkTo
             href={`service/glyphs/${glyph.id}`}
             className=" block  md:w-2/3 w-full"

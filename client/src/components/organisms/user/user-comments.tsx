@@ -2,6 +2,7 @@
 import { LinkTo } from "@/components/atoms/LinkTo";
 import { format } from "date-fns";
 import React, { FC, useState } from "react";
+import { FaRegCommentDots } from "react-icons/fa";
 
 interface Comment {
   id: string;
@@ -17,7 +18,14 @@ type UserCommentsProps = {
 
 export const UserComments: FC<UserCommentsProps> = () => {
   // const [comments, setComments] = useState<Comment[] | null>(null);
-  const comments = [
+  const comment = [
+    {
+      id: "1",
+      glyph_id: "1",
+      glyph_title: "test",
+      content: "test",
+      created_at: new Date(),
+    },
     {
       id: "1",
       glyph_id: "1",
@@ -29,12 +37,17 @@ export const UserComments: FC<UserCommentsProps> = () => {
   return (
     <div>
       <div className="text-2xl">Comments一覧</div>
-      {comments?.map((comment: Comment, index: number) => (
-        <div key={index} className="my-4">
+      {comment?.map((comment: Comment, index: number) => (
+        <div key={index} className="my-6">
           <LinkTo href={`service/glyphs/${comment.glyph_id}`}>
             <div>
-              <div>{comment.glyph_title}</div>
-              <div className="text-xl">- {comment.content}</div>
+              <div className="grid grid-cols-7">
+                <div className="flex justify-start gap-4  col-span-4">
+                  <FaRegCommentDots className="w-7 h-7" />
+                  <div className="text-2xl"> {comment.content}</div>
+                </div>
+                <div className="mt-auto mb-0">- {comment.glyph_title}</div>
+              </div>
             </div>
           </LinkTo>
         </div>

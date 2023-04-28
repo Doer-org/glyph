@@ -11,13 +11,15 @@ import { GlyphEditor } from '../glyphEditor';
 import { createGlyph, editGlyph } from '@/api/glyph';
 import { TGlyph } from '@/types/Glyph';
 import { useRouter } from 'next/navigation';
+import { AES, enc } from 'crypto-js';
 type TProps = {
   glyph: TGlyph;
 };
 // dynamicでimportする際にアロー関数で定義すると読み込めなくなるのでここのみexport default
 export default function GlyphCreateForm({ glyph }: TProps) {
   const router = useRouter();
-  const [markdown, setMarkdown] = useState<string>(glyph.content);
+  const decrypt = AES.decrypt(glyph.content, 'markdown').toString(enc.Utf8);
+  const [markdown, setMarkdown] = useState<string>(decrypt);
   const [title, setTitle] = useState<string>(glyph.title);
   const { bool: isPreview, toggle: togglePreview } = useToggle();
   const {

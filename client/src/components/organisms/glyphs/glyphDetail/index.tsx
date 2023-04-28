@@ -10,14 +10,11 @@ type TProps = {
 };
 
 export const GlyphDetail: FC<TProps> = ({ glyph }) => {
-  console.log(glyph.content);
-  console.log(AES.decrypt('markdown', glyph.content));
   const decrypt = AES.decrypt(glyph.content, 'markdown').toString(enc.Utf8);
-  console.log(decrypt);
   return (
     <div className="lg:flex block">
       <div className="lg:w-2/3 w-full">
-        <GlyphPreviewer markdown={glyph.content} />
+        <GlyphPreviewer markdown={decrypt} />
       </div>
       <div className="lg:w-1/3 lg:my-0 w-full my-10 ">
         <div className="lg:ml-2 transition">

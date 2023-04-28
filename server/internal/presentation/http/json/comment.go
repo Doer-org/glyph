@@ -20,6 +20,7 @@ type CommentByUserIdJson struct {
 	Id          string    `json:"id"`
 	Glyph_id    string    `json:"glyph_id"`
 	Glyph_title string    `json:"glyph_title"`
+	Contents    string    `json:"contents"`
 	Created_at  time.Time `json:"created_at"`
 }
 
@@ -47,6 +48,7 @@ func CommentByUserIdEntityToJson(comment *entity.CommentByUserId) *CommentByUser
 		Id:          comment.Id,
 		Glyph_id:    comment.Glyph_id,
 		Glyph_title: comment.Glyph_title,
+		Contents:    comment.Contents,
 		Created_at:  comment.Created_at,
 	}
 }

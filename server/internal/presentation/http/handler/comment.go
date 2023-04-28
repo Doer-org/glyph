@@ -67,8 +67,8 @@ func (u *CommentHandler) ReadCommentsByGlyphId(ctx *gin.Context) {
 
 func (u *CommentHandler) ReadCommentsByUserId(ctx *gin.Context) {
 	logger := log.New()
-	id := ctx.Param("id")
-	comments, err := u.uc.ReadCommentsByUserId(ctx, id)
+	user_id := ctx.Param("user_id")
+	comments, err := u.uc.ReadCommentsByUserId(ctx, user_id)
 	if err != nil {
 		logger.Error("", map[string]string{"error": err.Error()})
 		ctx.JSON(

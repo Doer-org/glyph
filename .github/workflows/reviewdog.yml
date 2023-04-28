@@ -10,4 +10,4 @@ jobs:
       uses: ./
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        workdir: /
+        workdir: server/

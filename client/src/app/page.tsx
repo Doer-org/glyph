@@ -13,7 +13,9 @@ const About = async () => {
       },
     },
   );
-  const isValid = resp.status === 200;
+  const isValid = resp.status !== 400;
+  // console.log(resp.status);
+  // console.log(await resp.json());
   return (
     <main className="text-center pt-40">
       <Txt elm="h1" size="text-6xl" weight="font-bold">
@@ -29,12 +31,13 @@ const About = async () => {
       <div>
         <a
           href={
-            !isValid
-              ? `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login?redirect_url=${process.env.NEXT_PUBLIC_FRONT_URL}/service/glyphs`
-              : `${process.env.NEXT_PUBLIC_FRONT_URL}/service/glyphs`
+            // isValid
+            //   ? `${process.env.NEXT_PUBLIC_FRONT_URL}/service/glyphs`
+            //   :
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login?redirect_url=${process.env.NEXT_PUBLIC_FRONT_URL}/service/glyphs`
           }
         >
-          log
+          login
         </a>
       </div>
     </main>

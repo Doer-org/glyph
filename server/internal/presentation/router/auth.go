@@ -25,4 +25,5 @@ func (r Router) InitAuthRouter(conn *database.Conn) {
 	g.GET("/login", h.Login)
 	g.GET("/callback", h.Callback)
 	g.GET("/validate", m.Authenticate(), h.Validate)
+	g.GET("/logout", m.Authenticate(), h.Logout)
 }

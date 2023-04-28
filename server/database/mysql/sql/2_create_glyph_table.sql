@@ -2,7 +2,7 @@ CREATE TABLE `glyphs` (
     `id`         VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
     `author_id`  VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
     `title`      VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
-    `content`    VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
+    `content`    TEXT COLLATE utf8mb4_bin NOT NULL,
     `prev_glyph` VARCHAR(255) COLLATE utf8mb4_bin,
     `next_glyph` VARCHAR(255) COLLATE utf8mb4_bin,
     `status`     VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,

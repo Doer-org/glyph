@@ -1,9 +1,19 @@
+import { getToken } from '@/api/utils/token';
 import { Title } from '@/components/atoms/Title';
 import { Txt } from '@/components/atoms/Txt';
 import { AnimatedSvgLogo } from '@/components/atoms/svgs/AnimatedSvgLogo';
-import { type NextPage } from 'next';
 
-const About: NextPage = () => {
+const About = async () => {
+  const resp = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/validate`,
+    {
+      method: 'GET',
+      headers: {
+        jwt: getToken(),
+      },
+    },
+  );
+  const isValid = resp.status === 200;
   return (
     <main className="text-center pt-40">
       <Txt elm="h1" size="text-6xl" weight="font-bold">
@@ -17,8 +27,14 @@ const About: NextPage = () => {
         <AnimatedSvgLogo />
       </div>
       <div>
-        <a href="http://localhost:8080/auth/login?redirect_url=http://localhost:3000/">
-          login
+        <a
+          href={
+            !isValid
+              ? `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login?redirect_url=${process.env.NEXT_PUBLIC_FRONT_URL}/service/glyphs`
+              : `${process.env.NEXT_PUBLIC_FRONT_URL}/service/glyphs`
+          }
+        >
+          log
         </a>
       </div>
     </main>

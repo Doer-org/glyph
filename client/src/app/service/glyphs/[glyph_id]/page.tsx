@@ -9,7 +9,6 @@ type TProps = {
 };
 
 const GlyphPage = async ({ params }: TProps) => {
-  console.log(params.glyph_id);
   const glyph = await readGlyph(params.glyph_id);
   if (glyph.type === 'error') {
     return <p>Glyphが取得できない</p>;

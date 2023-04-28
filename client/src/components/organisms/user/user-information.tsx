@@ -1,8 +1,8 @@
-"use client";
-import { readUser } from "@/api";
-import { UserResponse } from "@/api/user/types";
-import Image from "next/image";
-import React, { useState, type FC, useEffect } from "react";
+'use client';
+import { readUser } from '@/api';
+import { UserResponse } from '@/api/user/types';
+import Image from 'next/image';
+import React, { useState, type FC, useEffect } from 'react';
 
 type UserInformaionProps = {
   id: string;
@@ -14,8 +14,8 @@ export const UserInformation: FC<UserInformaionProps> = ({ id }) => {
   useEffect(() => {
     const getUser = async (id: string) => {
       const user = await readUser(id);
-      if (user.type === "error") {
-        console.log("Error:", user.error);
+      if (user.type === 'error') {
+        console.log('Error:', user.error);
         return;
       }
       setUser(user.value);
@@ -24,7 +24,7 @@ export const UserInformation: FC<UserInformaionProps> = ({ id }) => {
   }, [id]);
 
   const testuser = {
-    data: { name: "test", img: "https://github.com/meow520.png" },
+    data: { name: 'test', img: 'https://github.com/meow520.png' },
   };
 
   return (
@@ -42,7 +42,7 @@ export const UserInformation: FC<UserInformaionProps> = ({ id }) => {
           src={testuser?.data.img}
           width={150}
           height={150}
-          alt={"icon"}
+          alt={'icon'}
           className="rounded-full"
         />
       </div>

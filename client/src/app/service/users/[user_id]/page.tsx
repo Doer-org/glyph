@@ -1,10 +1,10 @@
-import { UserAllGlyphs } from "@/components/organisms/user/user-allglyphs";
-import { UserComments } from "@/components/organisms/user/user-comments";
-import { UserInformation } from "@/components/organisms/user/user-information";
+import { UserAllGlyphs } from '@/components/organisms/user/user-allglyphs';
+import { UserComments } from '@/components/organisms/user/user-comments';
+import { UserInformation } from '@/components/organisms/user/user-information';
 
 // memo: componentを作るならorganisms配下にuser/を作って適切な名前で作ってもらえれば！（userGlyphsとかでいいと思います）
 export default function UserSetting() {
-  const user_id = "01GZ17MVNM8KWQMA43M2TRZWYP";
+  const user_id = '01GZ17MVNM8KWQMA43M2TRZWYP';
 
   return (
     <>

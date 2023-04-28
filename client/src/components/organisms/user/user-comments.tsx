@@ -1,8 +1,8 @@
-"use client";
-import { LinkTo } from "@/components/atoms/LinkTo";
-import { format } from "date-fns";
-import React, { FC, useState } from "react";
-import { FaRegCommentDots } from "react-icons/fa";
+'use client';
+import { LinkTo } from '@/components/atoms/LinkTo';
+import { format } from 'date-fns';
+import React, { FC, useState } from 'react';
+import { FaRegCommentDots } from 'react-icons/fa';
 
 interface Comment {
   id: string;
@@ -20,17 +20,17 @@ export const UserComments: FC<UserCommentsProps> = () => {
   // const [comments, setComments] = useState<Comment[] | null>(null);
   const comment = [
     {
-      id: "1",
-      glyph_id: "1",
-      glyph_title: "test",
-      content: "test",
+      id: '1',
+      glyph_id: '1',
+      glyph_title: 'test',
+      content: 'test',
       created_at: new Date(),
     },
     {
-      id: "1",
-      glyph_id: "1",
-      glyph_title: "test",
-      content: "test",
+      id: '1',
+      glyph_id: '1',
+      glyph_title: 'test',
+      content: 'test',
       created_at: new Date(),
     },
   ];
@@ -38,7 +38,7 @@ export const UserComments: FC<UserCommentsProps> = () => {
     <div>
       <div className="text-2xl">Comments一覧</div>
       {comment?.map((comment: Comment, index: number) => (
-        <div key={index} className="my-6">
+        <div key={comment.id} className="my-6">
           <LinkTo href={`service/glyphs/${comment.glyph_id}`}>
             <div>
               <div className="grid grid-cols-4 xl:grid-cols-7">

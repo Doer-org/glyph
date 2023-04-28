@@ -1,11 +1,11 @@
-"use client";
-import { GlyphResponse } from "@/api/glyph/types";
-import { LinkTo } from "@/components/atoms/LinkTo";
-import { Txt } from "@/components/atoms/Txt";
-import { TGlyph } from "@/types/Glyph";
-import { format } from "date-fns";
-import React, { FC, useEffect, useState } from "react";
-import { GrDocumentText } from "react-icons/gr";
+'use client';
+import { GlyphResponse } from '@/api/glyph/types';
+import { LinkTo } from '@/components/atoms/LinkTo';
+import { Txt } from '@/components/atoms/Txt';
+import { TGlyph } from '@/types/Glyph';
+import { format } from 'date-fns';
+import React, { FC, useEffect, useState } from 'react';
+import { GrDocumentText } from 'react-icons/gr';
 
 type UserAllGlyphsProps = {
   id: string;
@@ -16,37 +16,37 @@ export const UserAllGlyphs: FC<UserAllGlyphsProps> = ({ id }) => {
   useEffect(() => {
     const getGlyphs = async (id: string) => {};
   });
-  const testglyphs:TGlyph[] = [
+  const testglyphs: TGlyph[] = [
     {
-      id: "1",
-      author_id: "test",
-      title: "test",
-      content: "test",
-      status: "Draft",
-      isStudy: false,
-      prev_glyph:"",
-      next_glyph:"",
-      created_at: new Date(),
-      updated_at: new Date(),
+      id: '1',
+      author_id: 'test',
+      title: 'test',
+      content: 'test',
+      status: 'Draft',
+      is_study: false,
+      prev_glyph: '',
+      next_glyph: '',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     },
     {
-      id: "2",
-      author_id: "test",
-      title: "test",
-      content: "test",
-      status: "Draft",
-      isStudy: false,
-      prev_glyph:"",
-      next_glyph:"",
-      created_at: new Date(),
-      updated_at: new Date(),
+      id: '2',
+      author_id: 'test',
+      title: 'test',
+      content: 'test',
+      status: 'Draft',
+      is_study: false,
+      prev_glyph: '',
+      next_glyph: '',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     },
   ];
   return (
     <div>
       <div className="text-2xl">Glyphs一覧</div>
       {testglyphs?.map((glyph: TGlyph, index: number) => (
-        <div key={index} className="">
+        <div key={glyph.id} className="">
           <LinkTo
             href={`service/glyphs/${glyph.id}`}
             className=" block  md:w-2/3 w-full"
@@ -65,7 +65,7 @@ export const UserAllGlyphs: FC<UserAllGlyphsProps> = ({ id }) => {
                   - {glyph.content.length}文字
                 </Txt>
                 <Txt elm="p" size="text-sm">
-                  - {format(glyph.updated_at, "yyyy/MM/dd")}
+                  - {format(new Date(glyph.updated_at), 'yyyy/MM/dd')}
                 </Txt>
               </div>
             </div>

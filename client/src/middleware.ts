@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { readAllGlyphs } from './api/glyph';
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   console.log('middleware');
+  // const glyphs = await readAllGlyphs();
+  // console.log(request.nextUrl.pathname.split("/"));
+  // console.log(glyphs);
 }
 
 export const config = {

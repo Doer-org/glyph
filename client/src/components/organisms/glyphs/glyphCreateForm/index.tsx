@@ -11,6 +11,7 @@ import { GlyphEditor } from '../glyphEditor';
 import { createGlyph } from '@/api/glyph';
 import { TGlyph } from '@/types/Glyph';
 import { useRouter } from 'next/navigation';
+import { AES } from 'crypto-js';
 
 // dynamicでimportする際にアロー関数で定義すると読み込めなくなるのでここのみexport default
 export default function GlyphCreateForm() {
@@ -44,7 +45,7 @@ export default function GlyphCreateForm() {
     createGlyph({
       author_id: 'tekitou',
       title: title,
-      content: markdown,
+      content: AES.encrypt(markdown, 'markdown').toString(),
       status: statusDefineder(),
       is_study: isStudy,
       prev_glyph: 'string',

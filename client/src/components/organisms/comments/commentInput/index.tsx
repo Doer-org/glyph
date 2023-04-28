@@ -3,10 +3,9 @@ import { Button } from '@/components/atoms/Button';
 import { Textarea } from '@/components/atoms/Textarea';
 import { FC, useState } from 'react';
 type TProps = {
-  comment: string[];
-  setComment: (comment: string[]) => void;
+  sendComment: (comment: string) => void;
 };
-export const CommentInput: FC<TProps> = ({ comment, setComment }) => {
+export const CommentInput: FC<TProps> = ({ sendComment }) => {
   const [content, setContent] = useState('');
   return (
     <div className="flex items-start my-3 gap-3">
@@ -18,7 +17,7 @@ export const CommentInput: FC<TProps> = ({ comment, setComment }) => {
       <Button
         onClick={() => {
           if (content.length !== 0) {
-            setComment([...comment, content]);
+            sendComment(content);
             setContent('');
           }
         }}

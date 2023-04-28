@@ -25,7 +25,16 @@ const GlyphPage = async ({ params }: TProps) => {
           編集
         </StyledLinkTo>
       </div>
-      <GlyphDetail glyph={glyph.value.data} />
+      {/* //TODO: ユーザー情報を取得 */}
+      <GlyphDetail
+        glyph={glyph.value.data}
+        user={{
+          user_id: 'string',
+          user_name: 'aoki',
+          user_img:
+            'https://pbs.twimg.com/profile_images/1354479643882004483/Btnfm47p_400x400.jpg',
+        }}
+      />
     </>
   );
 };

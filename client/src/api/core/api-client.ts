@@ -40,7 +40,7 @@ const resp2result = async <T extends AnySchema>(
 export const apiClient = {
   get: async <T extends AnySchema>(url: string) => {
     const data = await fetch(url, {
-      cache: "no-store",
+      cache: 'no-store',
       method: 'GET',
     });
     return await resp2result<T>(data);
@@ -50,7 +50,7 @@ export const apiClient = {
     body: Record<string, unknown> | Record<string, unknown>[],
   ) => {
     const data = await fetch(url, {
-      cache: "no-store",
+      cache: 'no-store',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export const apiClient = {
     body: Record<string, unknown> | Record<string, unknown>[],
   ) => {
     const data = await fetch(url, {
-      cache: "no-store",
+      cache: 'no-store',
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ export const apiClient = {
     body?: Record<string, unknown> | Record<string, unknown>[],
   ) => {
     const data = await fetch(url, {
-      cache: "no-store",
+      cache: 'no-store',
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

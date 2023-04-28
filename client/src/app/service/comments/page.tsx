@@ -1,10 +1,10 @@
 export const metadata = {
-	title: 'Comment',
+  title: 'Comment',
 };
 export default function Comments() {
-	return (
-		<div>
-			<p>Comment</p>
-		</div>
-	);
+  return (
+    <div>
+      <p>Comment</p>
+    </div>
+  );
 }

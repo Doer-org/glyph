@@ -5,25 +5,25 @@ import { Comments } from '../../comments';
 import { WsComments } from '../../comments/wsComments';
 
 type TProps = {
-	glyph: TGlyph;
+  glyph: TGlyph;
 };
 
 export const GlyphDetail: FC<TProps> = ({ glyph }) => {
-	return (
-		<div className="lg:flex block">
-			<div className="lg:w-2/3 w-full">
-				<GlyphPreviewer markdown={glyph.content} />
-			</div>
-			<div className="lg:w-1/3 lg:my-0 w-full my-10 ">
-				<div className="lg:ml-2 transition">
-					{glyph.is_study ? (
-						// trueならwebsocketを扱うcommentsを返す
-						<WsComments glyphId={glyph.id} />
-					) : (
-						<Comments glyphId={glyph.id} />
-					)}
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div className="lg:flex block">
+      <div className="lg:w-2/3 w-full">
+        <GlyphPreviewer markdown={glyph.content} />
+      </div>
+      <div className="lg:w-1/3 lg:my-0 w-full my-10 ">
+        <div className="lg:ml-2 transition">
+          {glyph.is_study ? (
+            // trueならwebsocketを扱うcommentsを返す
+            <WsComments glyphId={glyph.id} />
+          ) : (
+            <Comments glyphId={glyph.id} />
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };

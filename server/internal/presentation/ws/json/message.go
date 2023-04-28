@@ -2,7 +2,8 @@ package json
 
 import (
 	"encoding/json"
-	"github.com/Doer-org/glyph/internal/presentation/ws/entity"
+
+	"github.com/Doer-org/glyph/internal/domain/entity"
 )
 
 type Message struct {

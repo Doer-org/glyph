@@ -3,7 +3,8 @@ package ws
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Doer-org/glyph/internal/presentation/ws/entity"
+
+	"github.com/Doer-org/glyph/internal/domain/entity"
 	wsJson "github.com/Doer-org/glyph/internal/presentation/ws/json"
 )
 

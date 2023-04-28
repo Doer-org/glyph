@@ -1,9 +1,10 @@
 package cmd
 
 import (
-	"github.com/Doer-org/glyph/internal/infrastructure/database"
-	"github.com/Doer-org/glyph/internal/presentation/http/router"
 	"log"
+
+	"github.com/Doer-org/glyph/internal/infrastructure/database"
+	"github.com/Doer-org/glyph/internal/presentation/router"
 )
 
 func Exec() {
@@ -17,8 +18,6 @@ func Exec() {
 	r.InitUserRouter(conn)
 	r.InitGlyphRouter(conn)
 	r.InitCommentRouter(conn)
+	r.InitWsRouter(conn)
 	r.Serve()
-
-	//wsR := wsRouter.NewWsRouter()
-	//wsR.Serve()
 }

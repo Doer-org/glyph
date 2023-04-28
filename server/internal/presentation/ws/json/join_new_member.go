@@ -1,6 +1,6 @@
 package json
 
-import "github.com/Doer-org/glyph/internal/presentation/ws/entity"
+import "github.com/Doer-org/glyph/internal/domain/entity"
 
 // JoinNewMember
 // https://infraya.work/posts/go_json_parse_aws/

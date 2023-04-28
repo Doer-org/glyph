@@ -2,11 +2,12 @@ package ws
 
 import (
 	"fmt"
-	"github.com/Doer-org/glyph/internal/presentation/ws/config"
-	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/Doer-org/glyph/internal/config"
+	"github.com/gorilla/websocket"
 )
 
 func applyHandlers(input []byte, fs []func(input []byte) (err error)) (err error) {

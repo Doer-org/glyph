@@ -6,7 +6,6 @@ import (
 	"github.com/Doer-org/glyph/internal/config"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
 	"github.com/Doer-org/glyph/internal/presentation/router"
-	"github.com/Doer-org/glyph/internal/presentation/http/router"
 	logdis "github.com/Doer-org/glyph/log"
 )
 

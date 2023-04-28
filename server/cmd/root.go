@@ -5,7 +5,7 @@ import (
 
 	"github.com/Doer-org/glyph/internal/config"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
-	"github.com/Doer-org/glyph/internal/presentation/http/router"
+	"github.com/Doer-org/glyph/internal/presentation/router"
 	logdis "github.com/Doer-org/glyph/log"
 )
 
@@ -27,5 +27,6 @@ func Exec() {
 	r.InitAuthRouter(conn)
 	r.InitGlyphRouter(conn)
 	r.InitCommentRouter(conn)
+	r.InitWsRouter(conn)
 	r.Serve()
 }

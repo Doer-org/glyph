@@ -13,6 +13,7 @@ const glyphResponseBaseSchema = {
     prev_glyph: { type: 'string' },
     next_glyph: { type: 'string' },
     created_at: { type: 'string' },
+    is_study: { type: 'boolean' },
     updated_at: { type: 'string' },
   },
   optionalProperties: {
@@ -45,7 +46,7 @@ type GlyphBase = {
   id: string;
   title: string;
   content: string;
-  status: (typeof glyphStatus)[number];
+  status: typeof glyphStatus[number];
   prev_glyph: string;
   next_glyph: string;
   is_study?: boolean;

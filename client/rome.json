@@ -13,8 +13,9 @@
 		}
 	},
 	"formatter": {
-		"lineWidth": 120,
-		"enabled": true
+		"lineWidth": 80,
+		"enabled": true,
+		"indentStyle": "space"
 	},
 	"javascript": {
 		"formatter": {

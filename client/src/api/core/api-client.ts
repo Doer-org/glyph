@@ -13,7 +13,7 @@ const ajv = new Ajv({
 });
 
 const resp2result = async <T extends AnySchema>(
-  resp: Response
+  resp: Response,
 ): Promise<Result<T, ResponseError>> => {
   const data = (await resp.json()) as T;
   const validate = ajv.compile<JTDDataType<T>>(data);
@@ -46,7 +46,7 @@ export const apiClient = {
   },
   post: async <T extends AnySchema>(
     url: string,
-    body: Record<string, unknown> | Record<string, unknown>[]
+    body: Record<string, unknown> | Record<string, unknown>[],
   ) => {
     const data = await fetch(url, {
       method: 'POST',
@@ -59,7 +59,7 @@ export const apiClient = {
   },
   put: async <T extends AnySchema>(
     url: string,
-    body: Record<string, unknown> | Record<string, unknown>[]
+    body: Record<string, unknown> | Record<string, unknown>[],
   ) => {
     const data = await fetch(url, {
       method: 'PUT',
@@ -72,7 +72,7 @@ export const apiClient = {
   },
   delete: async <T extends AnySchema>(
     url: string,
-    body?: Record<string, unknown> | Record<string, unknown>[]
+    body?: Record<string, unknown> | Record<string, unknown>[],
   ) => {
     const data = await fetch(url, {
       method: 'DELETE',

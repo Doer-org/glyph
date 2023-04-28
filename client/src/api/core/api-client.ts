@@ -38,22 +38,27 @@ const resp2result = async <T extends AnySchema>(
 };
 
 export const apiClient = {
-  get: async <T extends AnySchema>(url: string) => {
+  get: async <T extends AnySchema>(url: string, token?: string) => {
     const data = await fetch(url, {
       cache: 'no-store',
       method: 'GET',
+      headers: {
+        jwt: token || '',
+      },
     });
     return await resp2result<T>(data);
   },
   post: async <T extends AnySchema>(
     url: string,
     body: Record<string, unknown> | Record<string, unknown>[],
+    token?: string,
   ) => {
     const data = await fetch(url, {
       cache: 'no-store',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        jwt: token || '',
       },
       body: JSON.stringify(body),
     });
@@ -62,12 +67,14 @@ export const apiClient = {
   put: async <T extends AnySchema>(
     url: string,
     body: Record<string, unknown> | Record<string, unknown>[],
+    token?: string,
   ) => {
     const data = await fetch(url, {
       cache: 'no-store',
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        jwt: token || '',
       },
       body: JSON.stringify(body),
     });
@@ -76,12 +83,14 @@ export const apiClient = {
   delete: async <T extends AnySchema>(
     url: string,
     body?: Record<string, unknown> | Record<string, unknown>[],
+    token?: string,
   ) => {
     const data = await fetch(url, {
       cache: 'no-store',
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        jwt: token || '',
       },
       body: JSON.stringify(body),
     });

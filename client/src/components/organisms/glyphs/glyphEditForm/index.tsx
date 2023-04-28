@@ -8,7 +8,7 @@ import { Input } from '@/components/atoms/Input';
 import { Button } from '@/components/atoms/Button';
 import { GlyphPreviewer } from '../glyphPreviewer';
 import { GlyphEditor } from '../glyphEditor';
-import { createGlyph } from '@/api/glyph';
+import { createGlyph, editGlyph } from '@/api/glyph';
 import { TGlyph } from '@/types/Glyph';
 import { useRouter } from 'next/navigation';
 type TProps = {
@@ -42,9 +42,10 @@ export default function GlyphCreateForm({ glyph }: TProps) {
     }
     return 'Draft';
   };
+
   const createGlyphHandler = () => {
-    createGlyph({
-      author_id: glyph.author_id,
+    editGlyph({
+      id: glyph.id,
       title: title,
       content: markdown,
       status: statusDefineder(),
@@ -101,7 +102,7 @@ export default function GlyphCreateForm({ glyph }: TProps) {
           </div>
           <div className="mx-5">
             <Button border onClick={createGlyphHandler}>
-              保存
+              編集完了
             </Button>
           </div>
         </div>

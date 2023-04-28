@@ -9,6 +9,7 @@ const GlyphsPage = async () => {
   if (glyphs.type === 'error') {
     return new Error('Glyphを取得できませんでした');
   }
+  console.log(glyphs.value.data);
 
   return (
     <>

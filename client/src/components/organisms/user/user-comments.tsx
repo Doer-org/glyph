@@ -41,8 +41,8 @@ export const UserComments: FC<UserCommentsProps> = () => {
         <div key={index} className="my-6">
           <LinkTo href={`service/glyphs/${comment.glyph_id}`}>
             <div>
-              <div className="grid grid-cols-7">
-                <div className="flex justify-start gap-4  col-span-4">
+              <div className="grid grid-cols-4 xl:grid-cols-7">
+                <div className="flex justify-start gap-4  xl:col-span-4 col-span-2">
                   <FaRegCommentDots className="w-7 h-7" />
                   <div className="text-2xl"> {comment.content}</div>
                 </div>

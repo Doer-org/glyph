@@ -3,6 +3,8 @@ package config
 import (
 	"fmt"
 	"os"
+
+	"github.com/Doer-org/glyph/log"
 )
 
 func EnvCheck() error {
@@ -16,5 +18,9 @@ func EnvCheck() error {
 		return fmt.Errorf("ERROR : discord env empty , callback : %s, id : %s,discordSecret : %s,discordGetme : %s,discordGetserver : %s,serverDiscordId : %s",
 			discordCallback, discordId, discordSecret, discordGetme, discordGetserver, serverDiscordId)
 	}
+	logger := log.New()
+	logger.Info("", fmt.Sprintf("INFO : discord env , callback : %s, id : %s,discordSecret : %s,discordGetme : %s,discordGetserver : %s,serverDiscordId : %s",
+		discordCallback, discordId, discordSecret, discordGetme, discordGetserver, serverDiscordId))
+
 	return nil
 }

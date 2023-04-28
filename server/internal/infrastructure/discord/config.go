@@ -3,6 +3,7 @@ package discord
 import (
 	"os"
 
+	"github.com/Doer-org/glyph/log"
 	"golang.org/x/oauth2"
 )
 
@@ -15,6 +16,7 @@ func NewDiscord(redirecturl string) *Discord {
 }
 
 func newDiscord(redirecturl string) *Discord {
+	logger := log.New()
 	discord := &Discord{
 		Config: &oauth2.Config{
 			ClientID:     os.Getenv("Discord_ID"),
@@ -24,6 +26,7 @@ func newDiscord(redirecturl string) *Discord {
 			RedirectURL:  redirecturl,
 		},
 	}
+	logger.Info("", map[string]interface{}{"ID": os.Getenv("Discord_ID"), "SECRET": os.Getenv("Discord_SECRET")})
 	return discord
 }
 

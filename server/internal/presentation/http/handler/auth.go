@@ -101,3 +101,10 @@ func (u *AuthHandler) Callback(ctx *gin.Context) {
 		gin.H{"token": accessToken},
 	)
 }
+
+func (u *AuthHandler) Validate(ctx *gin.Context) {
+	ctx.JSON(
+		http.StatusOK,
+		gin.H{"validate": "success"},
+	)
+}

@@ -30,6 +30,36 @@ export const Glyph: FC<TProps> = ({ glyph }) => {
           <Txt elm="p" size="text-sm">
             - {format(new Date(glyph.updated_at), 'yyyy/MM/dd')}
           </Txt>
+          <div className="mt-5 flex gap-5">
+            {glyph.is_study && (
+              <p>
+                <span className="bg-red-300 py-1 px-2 rounded-md">
+                  勉強会中
+                </span>
+              </p>
+            )}
+            {glyph.status === 'Public' && (
+              <p>
+                <span className=" bg-lime-300 py-1 px-2 rounded-md">
+                  公開中
+                </span>
+              </p>
+            )}
+            {glyph.status === 'Private' && (
+              <p>
+                <span className=" bg-orange-200 py-1 px-2 rounded-md">
+                  非公開
+                </span>
+              </p>
+            )}
+            {glyph.status === 'Draft' && (
+              <p>
+                <span className=" bg-orange-200 py-1 px-2 rounded-md">
+                  下書き
+                </span>
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </LinkTo>

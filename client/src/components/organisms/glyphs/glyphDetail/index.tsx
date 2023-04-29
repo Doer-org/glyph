@@ -15,6 +15,7 @@ type TProps = {
 };
 
 export const GlyphDetail: FC<TProps> = (props: TProps) => {
+  console.log(getToken());
   return (
     <div className="lg:flex block">
       <div className="lg:w-2/3 w-full">

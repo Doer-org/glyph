@@ -17,14 +17,9 @@ export const WsComments: FC<TProps> = (props: TProps) => {
     props.glyphId,
     props.user,
   );
-  console.log('websocket');
-  const scrollLastCommentRef = useRef<HTMLParagraphElement>(null);
 
-  useEffect(() => {
-    scrollLastCommentRef?.current?.scrollIntoView();
-  }, [wsComments]);
   return (
-    <>
+    <div className=" fixed">
       <CommentBox>
         {wsComments.map((comment, index) => {
           return (
@@ -38,18 +33,8 @@ export const WsComments: FC<TProps> = (props: TProps) => {
                 columnGap: '0.5rem',
               }}
             >
-              <img
-                src={comment.data.user_img}
-                style={{ width: '2.5rem', height: '2.5rem' }}
-              />
-              <p
-                className="border-2 p-2 rounded-md my-2 break-words"
-                ref={
-                  index === wsComments.length - 1
-                    ? scrollLastCommentRef
-                    : undefined
-                }
-              >
+              <img src={comment.data.user_img} alt="image" className=" w-10" />
+              <p className="border-2 p-2 rounded-md my-2 break-words">
                 {comment.data.user_name}: {comment.data.comment}
               </p>
             </div>
@@ -57,6 +42,6 @@ export const WsComments: FC<TProps> = (props: TProps) => {
         })}
       </CommentBox>
       <CommentInput sendComment={sendComment} />
-    </>
+    </div>
   );
 };

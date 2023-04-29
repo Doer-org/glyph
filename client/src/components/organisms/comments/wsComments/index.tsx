@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { CommentBox } from '../commentBox';
 import { CommentInput } from '../commentInput';
 import { useWebSocketComments } from './hooks/useWebSocketComments';
+import { SvgLogo } from '@/components/atoms/svgs/SvgLogo';
 
 type TProps = {
   glyphId: string;
@@ -33,7 +34,7 @@ export const WsComments: FC<TProps> = (props: TProps) => {
                 columnGap: '0.5rem',
               }}
             >
-              <img src={comment.data.user_img} alt="image" className=" w-10" />
+              <SvgLogo />
               <p className="border-2 p-2 rounded-md my-2 break-words">
                 {comment.data.user_name}: {comment.data.comment}
               </p>

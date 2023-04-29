@@ -34,7 +34,7 @@ const About = async () => {
             // isValid
             //   ? `${process.env.NEXT_PUBLIC_FRONT_URL}/service/glyphs`
             //   :
-            `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login?redirect_url=${process.env.NEXT_PUBLIC_FRONT_URL}service/glyphs`
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login?redirect_url=${process.env.NEXT_PUBLIC_FRONT_URL}service/glyphs`
           }
           className=" py-2 px-3 bg-blue-600 rounded-md text-white hover:opacity-90"
         >

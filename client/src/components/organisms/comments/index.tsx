@@ -36,9 +36,6 @@ export const Comments: FC<TProps> = (props: TProps) => {
       }
       const commentsAndUsers = await Promise.all(
         comments.value.data.map(async (comment) => {
-          // ここがundefined
-          console.log('author_id');
-          console.log(comment.author_id, props.token);
           const user = await API.readUser(comment.author_id, props.token);
           return {
             ...comment,

@@ -53,7 +53,6 @@ func (uu *GlyphUsecase) CreateGlyph(ctx context.Context, glyph *entity.Glyph) (*
 	glyph.Created_at = now
 	glyph.Updated_at = now
 	glyph.Id = utils.GetUlid()
-	glyph.Is_study = false
 
 	resglyph, err := uu.repo.CreateGlyph(ctx, glyph)
 	return resglyph, err

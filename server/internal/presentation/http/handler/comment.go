@@ -83,3 +83,21 @@ func (u *CommentHandler) ReadCommentsByUserId(ctx *gin.Context) {
 		gin.H{"data": commentsjson},
 	)
 }
+
+func (u *CommentHandler) GetCommentAll(ctx *gin.Context) {
+	logger := log.New()
+	comments, err := u.uc.GetCommentAll(ctx)
+	if err != nil {
+		logger.Error("", map[string]string{"error": err.Error()})
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
+	commentsjson := json.CommentsEntityToJson(comments)
+	ctx.JSON(
+		http.StatusOK,
+		gin.H{"data": commentsjson},
+	)
+}

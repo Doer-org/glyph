@@ -16,5 +16,5 @@ func (r Router) InitCommentRouter(conn *database.Conn) {
 	g.POST("/", h.CreateComment)
 	g.GET("/glyphs/:id", h.ReadCommentsByGlyphId)
 	g.GET("/users/:user_id", h.ReadCommentsByUserId)
-
+	g.GET("/all", h.GetCommentAll)
 }

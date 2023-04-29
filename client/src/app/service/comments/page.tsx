@@ -45,7 +45,11 @@ export default async function Comments() {
         Comments一覧
       </Txt>
       <div className="m-auto">
-        <CommentsAll comments={CommentMock} />
+        {CommentMock === null ? (
+          <p>commentはありません</p>
+        ) : (
+          <CommentsAll comments={CommentMock} />
+        )}
       </div>
     </>
   );

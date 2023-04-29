@@ -43,7 +43,7 @@ export const apiClient = {
       cache: 'no-store',
       method: 'GET',
       headers: {
-        jwt: token || '',
+        ...(token && { jwt: token }),
       },
     });
     return await resp2result<T>(data);
@@ -58,7 +58,7 @@ export const apiClient = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        jwt: token || '',
+        ...(token && { jwt: token }),
       },
       body: JSON.stringify(body),
     });
@@ -74,7 +74,7 @@ export const apiClient = {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        jwt: token || '',
+        ...(token && { jwt: token }),
       },
       body: JSON.stringify(body),
     });
@@ -90,7 +90,7 @@ export const apiClient = {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        jwt: token || '',
+        ...(token && { jwt: token }),
       },
       body: JSON.stringify(body),
     });

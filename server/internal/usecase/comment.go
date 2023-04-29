@@ -20,6 +20,7 @@ type ICommentUsecase interface {
 	CreateComment(ctx context.Context, comment *entity.Comment) (*entity.Comment, error)
 	ReadCommentsByGlyphId(ctx context.Context, id string) (entity.Comments, error)
 	ReadCommentsByUserId(ctx context.Context, id string) (entity.CommentsByUserId, error)
+	GetCommentAll(ctx context.Context) (entity.Comments, error)
 }
 
 func NewCommentUsecase(repo repository.ICommentRepository) ICommentUsecase {
@@ -56,4 +57,8 @@ func (uc *CommentUsecase) ReadCommentsByUserId(ctx context.Context, id string) (
 		return nil, fmt.Errorf("user id empty")
 	}
 	return uc.repo.ReadCommentsByUserId(ctx, id)
+}
+
+func (uc *CommentUsecase) GetCommentAll(ctx context.Context) (entity.Comments, error) {
+	return uc.repo.GetCommentAll(ctx)
 }

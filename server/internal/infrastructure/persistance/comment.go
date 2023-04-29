@@ -64,6 +64,18 @@ func (ur *CommentRepository) ReadCommentsByUserId(ctx context.Context, user_id s
 	return rescomments, nil
 }
 
+func (ur *CommentRepository) GetCommentAll(ctx context.Context) (entity.Comments, error) {
+	query := `
+	SELECT * FROM comments;
+	`
+	var dtos commentsDto
+	err := ur.conn.DB.SelectContext(ctx, &dtos, query)
+	if err != nil {
+		return nil, err
+	}
+	return commentDtosToEntity(dtos), nil
+}
+
 type commentDto struct {
 	Id         string    `db:"id"`
 	User_id    string    `db:"user_id"`

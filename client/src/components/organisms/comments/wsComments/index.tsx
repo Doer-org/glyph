@@ -1,5 +1,5 @@
 'use client';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC } from 'react';
 import { CommentBox } from '../commentBox';
 import { CommentInput } from '../commentInput';
 import { useWebSocketComments } from './hooks/useWebSocketComments';

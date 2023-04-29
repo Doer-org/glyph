@@ -3,7 +3,6 @@ import { SideBarList } from './SideBarList/SideBarList';
 import { SideBarListItem } from './SideBarList/SidebarListItem';
 import { GrDocumentText } from 'react-icons/gr';
 import { MdOutlineComment } from 'react-icons/md';
-import { GoGraph } from 'react-icons/go';
 import { FiSettings } from 'react-icons/fi';
 export const SideBar = () => {
   return (
@@ -23,12 +22,6 @@ export const SideBar = () => {
             Comment
           </SideBarListItem>
 
-          <SideBarListItem
-            href="/service/statistics"
-            logo={<GoGraph size={25} />}
-          >
-            Statistics
-          </SideBarListItem>
           <SideBarListItem
             href="/service/users/test"
             logo={<FiSettings size={25} />}

@@ -11,7 +11,7 @@ type TProps = {
 export const Glyph: FC<TProps> = ({ glyph }) => {
   return (
     <LinkTo
-      href={`service/glyphs/${glyph.id}`}
+      href={`/service/glyphs/${glyph.id}`}
       className=" block  md:w-2/3 w-full"
     >
       <div className="border rounded-md border-black m-2 grid grid-cols-6 p-2 hover:bg-yellow-100 hover:cursor-pointer">

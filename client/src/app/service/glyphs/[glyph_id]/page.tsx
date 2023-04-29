@@ -1,4 +1,6 @@
 import { readGlyph } from '@/api/glyph';
+import { readUser } from '@/api/user';
+import { getToken } from '@/api/utils/token';
 import { StyledLinkTo } from '@/components/atoms/StyledLinkTo';
 import { Txt } from '@/components/atoms/Txt';
 import { GlyphDetail } from '@/components/organisms/glyphs/glyphDetail';
@@ -9,12 +11,26 @@ type TProps = {
 };
 
 const GlyphPage = async ({ params }: TProps) => {
-  console.log(params.glyph_id);
+  const token = getToken();
+  const user = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/user`, {
+    method: 'GET',
+    headers: {
+      jwt: token,
+    },
+  });
+  const info = await user.json();
+  const userInfo = await readUser(info.user.Id, getToken());
+  const u = {
+    user_id: userInfo.type === 'ok' ? userInfo.value.data.id : 'string',
+    user_name: userInfo.type === 'ok' ? userInfo.value.data.name : '名無し',
+    user_img:
+      'https://pbs.twimg.com/profile_images/1354479643882004483/Btnfm47p_400x400.jpg',
+  };
   const glyph = await readGlyph(params.glyph_id);
   if (glyph.type === 'error') {
     return <p>Glyphが取得できない</p>;
   }
-
+  console.log(glyph);
   return (
     <>
       <Txt elm="h2" size="text-3xl" className="text-center pb-10">
@@ -29,10 +45,9 @@ const GlyphPage = async ({ params }: TProps) => {
       <GlyphDetail
         glyph={glyph.value.data}
         user={{
-          user_id: 'string',
-          user_name: 'aoki',
-          user_img:
-            'https://pbs.twimg.com/profile_images/1354479643882004483/Btnfm47p_400x400.jpg',
+          user_id: u.user_id,
+          user_name: u.user_name,
+          user_img: u.user_img,
         }}
       />
     </>

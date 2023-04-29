@@ -64,11 +64,7 @@ func (u *ImageHandler) GetImagebyId(ctx *gin.Context) {
 			gin.H{"error": err.Error()},
 		)
 	}
-	imagejson := json.ImageEntityToJson(image)
-	ctx.JSON(
-		http.StatusOK,
-		gin.H{"data": imagejson},
-	)
+	ctx.Data(http.StatusOK, "image/jpeg", image.Img)
 }
 
 func (u *ImageHandler) GetImageAll(ctx *gin.Context) {
@@ -82,11 +78,9 @@ func (u *ImageHandler) GetImageAll(ctx *gin.Context) {
 		)
 		return
 	}
-	imagesjson := json.ImagesEntityToJson(images)
-	ctx.JSON(
-		http.StatusOK,
-		gin.H{"data": imagesjson},
-	)
+	for _, image := range images {
+		ctx.Data(http.StatusOK, "image/jpeg", image.Img)
+	}
 }
 
 func (u *ImageHandler) DeleteImage(ctx *gin.Context) {

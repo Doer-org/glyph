@@ -7,9 +7,10 @@ export const createUser = async (user: UserCreate) =>
     user,
   );
 
-export const readUser = async (user_id: string) =>
+export const readUser = async (user_id: string, token?: string) =>
   await apiClient.get<UserResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${user_id}`,
+    token,
   );
 
 export const deleteUser = async (user_id: string) =>

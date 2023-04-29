@@ -7,7 +7,7 @@ type TProps = {
 };
 export const LinkTo: FC<TProps> = ({ href, children, className }) => {
   return (
-    <Link href={href} className={className}>
+    <Link href={href} className={className} prefetch={false}>
       {children}
     </Link>
   );

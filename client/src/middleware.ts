@@ -1,14 +1,23 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { readAllGlyphs } from './api/glyph';
-
-export async function middleware(request: NextRequest) {
-  console.log('middleware');
-  // const glyphs = await readAllGlyphs();
-  // console.log(request.nextUrl.pathname.split("/"));
-  // console.log(glyphs);
-}
+import { NextRequest } from 'next/server';
 
 export const config = {
-  matcher: `${/^\/service(\/.*)?$/}`,
+  matcher: ['/service(.)*'],
+};
+
+export const middleware = async (request: NextRequest) => {
+  const cookie = request.headers.get('cookie') ?? '';
+  const resp = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/validate`,
+    {
+      method: 'GET',
+      headers: {
+        jwt: cookie.split('=')[1],
+      },
+    },
+  );
+  if (resp.status === 400) {
+    return NextResponse.redirect(`${request.nextUrl.origin}/`);
+  }
+  return NextResponse.next();
 };

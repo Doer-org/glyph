@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { GlyphPreviewer } from '../glyphPreviewer';
 import { Comments } from '../../comments';
 import { WsComments } from '../../comments/wsComments';
-import { TableRowProps } from 'react-markdown/lib/ast-to-react';
+import { getToken } from '@/api/utils/token';
 
 type TProps = {
   glyph: TGlyph;
@@ -26,7 +26,11 @@ export const GlyphDetail: FC<TProps> = (props: TProps) => {
             // trueならwebsocketを扱うcommentsを返す
             <WsComments glyphId={props.glyph.id} user={props.user} />
           ) : (
-            <Comments glyphId={props.glyph.id} user_id={props.user.user_id} />
+            <Comments
+              glyphId={props.glyph.id}
+              user_id={props.user.user_id}
+              token={getToken()}
+            />
           )}
         </div>
       </div>

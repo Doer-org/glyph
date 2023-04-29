@@ -3,7 +3,6 @@ import { SideBarList } from './SideBarList/SideBarList';
 import { SideBarListItem } from './SideBarList/SidebarListItem';
 import { GrDocumentText } from 'react-icons/gr';
 import { MdOutlineComment } from 'react-icons/md';
-import { GoGraph } from 'react-icons/go';
 import { FiSettings } from 'react-icons/fi';
 export const SideBar = () => {
   return (

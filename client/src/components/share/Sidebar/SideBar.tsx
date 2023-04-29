@@ -24,12 +24,6 @@ export const SideBar = () => {
           </SideBarListItem>
 
           <SideBarListItem
-            href="/service/statistics"
-            logo={<GoGraph size={25} />}
-          >
-            Statistics
-          </SideBarListItem>
-          <SideBarListItem
             href="/service/users/test"
             logo={<FiSettings size={25} />}
           >

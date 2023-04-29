@@ -6,7 +6,7 @@ import * as API from '@/api';
 
 type Comment = {
   id: string;
-  author_id: string;
+  user_id: string;
   glyph_id: string;
   contents: string;
   created_at: string;
@@ -36,10 +36,7 @@ export const Comments: FC<TProps> = (props: TProps) => {
       }
       const commentsAndUsers = await Promise.all(
         comments.value.data.map(async (comment) => {
-          // ここがundefined
-          console.log('author_id');
-          console.log(comment.author_id, props.token);
-          const user = await API.readUser(comment.author_id, props.token);
+          const user = await API.readUser(comment.user_id, props.token);
           return {
             ...comment,
             user: (user.type === 'ok' && user.value.data) || undefined,

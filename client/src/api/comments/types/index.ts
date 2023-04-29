@@ -4,7 +4,7 @@ const commentBaseSchema = {
   type: 'object',
   properties: {
     id: { type: 'string' },
-    author_id: { type: 'string' },
+    user_id: { type: 'string' },
     glyph_id: { type: 'string' },
     contents: { type: 'string' },
     created_at: { type: 'string' },

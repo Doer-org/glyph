@@ -1,5 +1,3 @@
-import { WsComments } from '@/components/organisms/comments/wsComments';
-import { Comments as CommentComponent } from '@/components/organisms/comments';
 import { getToken } from '@/api/utils/token';
 import { readUser } from '@/api';
 import { Txt } from '@/components/atoms/Txt';

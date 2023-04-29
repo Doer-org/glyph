@@ -34,7 +34,7 @@ const About = async () => {
             // isValid
             //   ? `${process.env.NEXT_PUBLIC_FRONT_URL}/service/glyphs`
             //   :
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login?redirect_url=${process.env.NEXT_PUBLIC_FRONT_URL}/service/glyphs`
+            `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login?redirect_url=${process.env.NEXT_PUBLIC_FRONT_URL}service/glyphs`
           }
         >
           login

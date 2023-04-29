@@ -2,6 +2,9 @@ import { WsComments } from '@/components/organisms/comments/wsComments';
 import { Comments as CommentComponent } from '@/components/organisms/comments';
 import { getToken } from '@/api/utils/token';
 import { readUser } from '@/api';
+import { Txt } from '@/components/atoms/Txt';
+import { TComment } from '@/types/Comment';
+import { CommentsAll } from '@/components/organisms/comments/comment';
 export const metadata = {
   title: 'Comment',
 };
@@ -22,10 +25,30 @@ export default async function Comments() {
       'https://pbs.twimg.com/profile_images/1354479643882004483/Btnfm47p_400x400.jpg',
   };
   const glyph_id = 'aa'; // TODO: Glyph ID
+  const CommentMock: TComment[] = [
+    {
+      id: '1',
+      author_id: '1',
+      glyph_id: '1',
+      contents: 'コメント1',
+      created_at: '1',
+    },
+    {
+      id: '1',
+      author_id: '1',
+      glyph_id: '1',
+      contents: 'コメント2',
+      created_at: '1',
+    },
+  ];
   return (
-    <div>
-      <WsComments glyphId={glyph_id} user={u} />
-      <CommentComponent glyphId={glyph_id} user_id={u.user_id} />
-    </div>
+    <>
+      <Txt elm="h2" size="text-3xl" className="text-center pb-10">
+        Comments一覧
+      </Txt>
+      <div className="m-auto">
+        <CommentsAll comments={CommentMock} />
+      </div>
+    </>
   );
 }

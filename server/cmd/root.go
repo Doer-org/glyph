@@ -27,6 +27,7 @@ func Exec() {
 	r.InitAuthRouter(conn)
 	r.InitGlyphRouter(conn)
 	r.InitCommentRouter(conn)
+	r.InitImageRouter(conn)
 	r.InitWsRouter(conn)
 	r.Serve()
 }

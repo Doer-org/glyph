@@ -17,7 +17,7 @@ export const WsComments: FC<TProps> = (props: TProps) => {
     props.glyphId,
     props.user,
   );
-
+  console.log('websocket');
   const scrollLastCommentRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {

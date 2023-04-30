@@ -3,6 +3,7 @@ name: pnpm build
 on:
   push:
     paths:
+      - 'ghost.md'
     branches-ignore:
       - main
       - dev

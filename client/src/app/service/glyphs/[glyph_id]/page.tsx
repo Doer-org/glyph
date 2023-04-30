@@ -1,6 +1,7 @@
+import { getLoggedInUser } from '@/api';
 import { readGlyph } from '@/api/glyph';
 import { readUser } from '@/api/user';
-import { getToken } from '@/api/utils/token';
+import { getToken } from '@/features/auth';
 import { StyledLinkTo } from '@/components/atoms/StyledLinkTo';
 import { Txt } from '@/components/atoms/Txt';
 import { GlyphDetail } from '@/components/organisms/glyphs/glyphDetail';
@@ -12,17 +13,13 @@ type TProps = {
 
 const GlyphPage = async ({ params }: TProps) => {
   const token = getToken();
-  const user = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/user`, {
-    method: 'GET',
-    headers: {
-      jwt: token,
-    },
-  });
-  const info = await user.json();
-  const userInfo = await readUser(info.user.Id, getToken());
+  const userResp = await getLoggedInUser(token || '');
+  if (userResp.type === 'error') throw new Error('ログインしてください');
+  const loggedInUser = userResp.value.user;
+  const userInfo = await readUser(loggedInUser.Id, getToken());
   const u = {
-    user_id: userInfo.type === 'ok' ? userInfo.value.data.id : 'string',
-    user_name: userInfo.type === 'ok' ? userInfo.value.data.name : '名無し',
+    user_id: loggedInUser.Id,
+    user_name: loggedInUser.Name,
     user_img:
       'https://pbs.twimg.com/profile_images/1354479643882004483/Btnfm47p_400x400.jpg',
   };
@@ -42,14 +39,7 @@ const GlyphPage = async ({ params }: TProps) => {
         </StyledLinkTo>
       </div>
       {/* //TODO: ユーザー情報を取得 */}
-      <GlyphDetail
-        glyph={glyph.value.data}
-        user={{
-          user_id: u.user_id,
-          user_name: u.user_name,
-          user_img: u.user_img,
-        }}
-      />
+      <GlyphDetail glyph={glyph.value.data} user={u} />
     </>
   );
 };

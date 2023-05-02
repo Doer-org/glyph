@@ -6,10 +6,12 @@ name: Go
 on:
   push:
     paths:
+     - .github/**
      - server/**
     branches: [ "dev","main" ]
   pull_request:
     paths:
+     - .github/**
      - server/**
     branches: [ "dev","main" ]
 

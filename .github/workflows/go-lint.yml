@@ -19,6 +19,6 @@ jobs:
       - name: cd
         run: cd server
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: cd server && golangci/golangci-lint-action@v3
         with:
           version: latest

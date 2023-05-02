@@ -6,6 +6,7 @@ import (
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
+	"github.com/Doer-org/glyph/internal/infrastructure/dto"
 )
 
 var _ repository.IUserRepository = &UserRepository{}
@@ -25,13 +26,13 @@ func (ur *UserRepository) CreateUser(ctx context.Context, user *entity.User) (*e
 	INSERT INTO users (id, name,img)
 	VALUES (:id,:name,:img)
 	`
-	dto := userEntityToDto(user)
+	userdto := dto.UserEntityToDto(user)
 
-	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
+	_, err := ur.conn.DB.NamedExecContext(ctx, query, &userdto)
 	if err != nil {
 		return nil, err
 	}
-	return userDtoToEntity(&dto), nil
+	return dto.UserDtoToEntity(&userdto), nil
 }
 
 func (ur *UserRepository) DeleteUser(ctx context.Context, id string) error {
@@ -54,32 +55,11 @@ func (ur *UserRepository) GetUser(ctx context.Context, id string) (*entity.User,
 	FROM users
 	WHERE id = ?
 	`
-	var dto userDto
-	err := ur.conn.DB.GetContext(ctx, &dto, query, id)
+	var userdto dto.UserDto
+	err := ur.conn.DB.GetContext(ctx, &userdto, query, id)
 	if err != nil {
 		return nil, err
 	}
-	return userDtoToEntity(&dto), nil
+	return dto.UserDtoToEntity(&userdto), nil
 }
 
-type userDto struct {
-	Id   string `db:"id"`
-	Name string `db:"name"`
-	Img  string `db:"img"`
-}
-
-func userDtoToEntity(dto *userDto) *entity.User {
-	return &entity.User{
-		Id:   dto.Id,
-		Name: dto.Name,
-		Img:  dto.Img,
-	}
-}
-
-func userEntityToDto(u *entity.User) userDto {
-	return userDto{
-		Id:   u.Id,
-		Name: u.Name,
-		Img:  u.Img,
-	}
-}

@@ -21,8 +21,8 @@ type CommentByUserIdDto struct {
 	Created_at  time.Time `db:"created_at"`
 }
 
-type CommentsDto []CommentDto
-type CommentsByUserIdDto []CommentByUserIdDto
+type CommentDtos []CommentDto
+type CommentByUserIdDtos []CommentByUserIdDto
 
 func CommentEntityToDto(comment *entity.Comment) CommentDto {
 	return CommentDto{
@@ -45,7 +45,7 @@ func CommentDtoToEntity(dto *CommentDto) *entity.Comment {
 	}
 }
 
-func CommentDtosToEntity(dtos CommentsDto) entity.Comments {
+func CommentDtosToEntity(dtos CommentDtos) entity.Comments {
 	var comments entity.Comments
 	for _, dto := range dtos {
 		comments = append(comments, CommentDtoToEntity(&dto))
@@ -64,7 +64,7 @@ func CommentByUserIdDtoToEntity(dto *CommentByUserIdDto) *entity.CommentByUserId
 	}
 }
 
-func CommentByUserIdDtosToEntity(dtos CommentsByUserIdDto) entity.CommentsByUserId {
+func CommentByUserIdDtosToEntity(dtos CommentByUserIdDtos) entity.CommentsByUserId {
 	var comments entity.CommentsByUserId
 	for _, dto := range dtos {
 		comments = append(comments, CommentByUserIdDtoToEntity(&dto))

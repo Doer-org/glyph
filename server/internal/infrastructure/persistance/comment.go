@@ -40,7 +40,7 @@ func (ur *CommentRepository) ReadCommentsByGlyphId(ctx context.Context, glyph_id
 	FROM comments 
 	WHERE glyph_id = ?;
 	`
-	var commentdtos dto.CommentsDto
+	var commentdtos dto.CommentDtos
 	err := ur.conn.DB.SelectContext(ctx, &commentdtos, query, glyph_id)
 	rescomments := dto.CommentDtosToEntity(commentdtos)
 	if err != nil {
@@ -56,7 +56,7 @@ func (ur *CommentRepository) ReadCommentsByUserId(ctx context.Context, user_id s
 	INNER JOIN glyphs on comments.glyph_id = glyphs.id 
 	WHERE comments.user_id = ?;
 	`
-	var commentdtos dto.CommentsByUserIdDto
+	var commentdtos dto.CommentByUserIdDtos
 	err := ur.conn.DB.SelectContext(ctx, &commentdtos, query, user_id)
 	if err != nil {
 		return nil, err
@@ -70,7 +70,7 @@ func (ur *CommentRepository) GetCommentAll(ctx context.Context) (entity.Comments
 	query := `
 	SELECT * FROM comments;
 	`
-	var commentdtos dto.CommentsDto
+	var commentdtos dto.CommentDtos
 	err := ur.conn.DB.SelectContext(ctx, &commentdtos, query)
 	if err != nil {
 		return nil, err

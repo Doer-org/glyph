@@ -1,14 +1,12 @@
 package ws
 
 import (
-	"github.com/Doer-org/glyph/internal/presentation/ws/json"
 	"github.com/gorilla/websocket"
 )
 
 type connection struct {
-	ws                *websocket.Conn
-	send              chan []byte
-	sendJoinNewMember chan json.JoinNewMember
+	ws   *websocket.Conn
+	send chan []byte
 }
 
 type roomId = string

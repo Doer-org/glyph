@@ -6,7 +6,7 @@ import (
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
-	"github.com/Doer-org/glyph/internal/infrastructure/dto"
+	d "github.com/Doer-org/glyph/internal/infrastructure/dto"
 )
 
 var _ repository.IGlyphRepository = &GlyphRepository{}
@@ -26,22 +26,22 @@ func (ur *GlyphRepository) CreateGlyph(ctx context.Context, glyph *entity.Glyph)
 	INSERT INTO glyphs (id, author_id, title, content, prev_glyph, next_glyph, status, created_at, updated_at, is_study)
 	VALUES (:id, :author_id, :title, :content, :prev_glyph, :next_glyph, :status, :created_at, :updated_at, :is_study)
 	`
-	glyphdto := dto.GlyphEntityToDto(glyph)
-	_, err := ur.conn.DB.NamedExecContext(ctx, query, &glyphdto)
+	dto := d.GlyphEntityToDto(glyph)
+	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
 	if err != nil {
 		return nil, err
 	}
-	if glyphdto.Prev_glyph != "" {
+	if dto.Prev_glyph != "" {
 		query := `UPDATE glyphs 
 		SET next_glyph=:id 
 		WHERE id=:prev_glyph;
 		`
-		_, err := ur.conn.DB.NamedExecContext(ctx, query, &glyphdto)
+		_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
 		if err != nil {
 			return nil, err
 		}
 	}
-	return dto.GlyphDtoToEntity(&glyphdto), nil
+	return d.GlyphDtoToEntity(&dto), nil
 }
 
 func (ur *GlyphRepository) ReadGlyph(ctx context.Context, id string) (*entity.Glyph, error) {
@@ -50,9 +50,9 @@ func (ur *GlyphRepository) ReadGlyph(ctx context.Context, id string) (*entity.Gl
 	FROM glyphs 
 	WHERE id = ?;
 	`
-	var glyphdto dto.GlyphDto
-	err := ur.conn.DB.GetContext(ctx, &glyphdto, query, id)
-	resglyph := dto.GlyphDtoToEntity(&glyphdto)
+	var dto d.GlyphDto
+	err := ur.conn.DB.GetContext(ctx, &dto, query, id)
+	resglyph := d.GlyphDtoToEntity(&dto)
 	if err != nil {
 		return nil, err
 	}
@@ -65,9 +65,9 @@ func (ur *GlyphRepository) ReadGlyphsbyUserId(ctx context.Context, author_id str
 	FROM glyphs 
 	WHERE author_id = ?;
 	`
-	var glyphdtos dto.GlyphDtos
-	err := ur.conn.DB.SelectContext(ctx, &glyphdtos, query, author_id)
-	glyphs := dto.GlyphsDtosToEntity(glyphdtos)
+	var dtos d.GlyphDtos
+	err := ur.conn.DB.SelectContext(ctx, &dtos, query, author_id)
+	glyphs := d.GlyphsDtosToEntity(dtos)
 	if err != nil {
 		return nil, err
 	}
@@ -79,9 +79,9 @@ func (ur *GlyphRepository) ReadAllGlyphs(ctx context.Context) (entity.Glyphs, er
 	SELECT * 
 	FROM glyphs;
 	`
-	var glyphdtos dto.GlyphDtos
-	err := ur.conn.DB.SelectContext(ctx, &glyphdtos, query)
-	glyphs := dto.GlyphsDtosToEntity(glyphdtos)
+	var dtos d.GlyphDtos
+	err := ur.conn.DB.SelectContext(ctx, &dtos, query)
+	glyphs := d.GlyphsDtosToEntity(dtos)
 	if err != nil {
 		return nil, err
 	}
@@ -115,13 +115,13 @@ func (ur *GlyphRepository) EditGlyph(ctx context.Context, glyph *entity.Glyph, i
 		is_study=:is_study
 	WHERE id=:id;
 	`
-	glyphdto := dto.GlyphEntityToDto(glyph)
-	glyphdto.Id = id
-	_, err := ur.conn.DB.NamedExecContext(ctx, query, &glyphdto)
+	dto := d.GlyphEntityToDto(glyph)
+	dto.Id = id
+	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
 	if err != nil {
 		return nil, err
 	}
-	return dto.GlyphDtoToEntity(&glyphdto), nil
+	return d.GlyphDtoToEntity(&dto), nil
 }
 
 func (ur *GlyphRepository) DeleteGlyph(ctx context.Context, id string) error {
@@ -144,9 +144,9 @@ func (ur *GlyphRepository) getNextRelativeGlyph(ctx context.Context, id string) 
 	`
 	var glyphs entity.Glyphs
 	for {
-		var glyphdto dto.GlyphDto
-		err := ur.conn.DB.GetContext(ctx, &glyphdto, query, id)
-		glyph := dto.GlyphDtoToEntity(&glyphdto)
+		var dto d.GlyphDto
+		err := ur.conn.DB.GetContext(ctx, &dto, query, id)
+		glyph := d.GlyphDtoToEntity(&dto)
 		next_id := glyph.Next_glyph
 		if err != nil {
 			return nil, err
@@ -168,9 +168,9 @@ func (ur *GlyphRepository) getPrevRelativeGlyph(ctx context.Context, id string) 
 	`
 	var glyphs entity.Glyphs
 	for {
-		var glyphdto dto.GlyphDto
-		err := ur.conn.DB.GetContext(ctx, &glyphdto, query, id)
-		glyph := dto.GlyphDtoToEntity(&glyphdto)
+		var dto d.GlyphDto
+		err := ur.conn.DB.GetContext(ctx, &dto, query, id)
+		glyph := d.GlyphDtoToEntity(&dto)
 		prev_id := glyph.Prev_glyph
 		if err != nil {
 			return nil, err

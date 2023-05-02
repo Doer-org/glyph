@@ -6,7 +6,7 @@ import (
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
-	"github.com/Doer-org/glyph/internal/infrastructure/dto"
+	d "github.com/Doer-org/glyph/internal/infrastructure/dto"
 )
 
 var _ repository.IIMageRepositry = &ImageRepositry{}
@@ -26,12 +26,12 @@ func (ur *ImageRepositry) CreateImage(ctx context.Context, image *entity.Image) 
 	INSERT INTO images(id, img)
 	VALUES (:id, :img)
 	`
-	imagedto := dto.ImageEntityToDto(image)
-	_, err := ur.conn.DB.NamedExecContext(ctx, query, &imagedto)
+	dto := d.ImageEntityToDto(image)
+	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
 	if err != nil {
 		return nil, err
 	}
-	return dto.ImageDtoToEntity(&imagedto), nil
+	return d.ImageDtoToEntity(&dto), nil
 }
 
 func (ur *ImageRepositry) GetImagebyId(ctx context.Context, id string) (*entity.Image, error) {
@@ -40,12 +40,12 @@ func (ur *ImageRepositry) GetImagebyId(ctx context.Context, id string) (*entity.
 	FROM images 
 	WHERE id = ?
 	`
-	var imagedto dto.ImageDto
-	err := ur.conn.DB.GetContext(ctx, &imagedto, query, id)
+	var dto d.ImageDto
+	err := ur.conn.DB.GetContext(ctx, &dto, query, id)
 	if err != nil {
 		return nil, err
 	}
-	return dto.ImageDtoToEntity(&imagedto), nil
+	return d.ImageDtoToEntity(&dto), nil
 }
 
 func (ur *ImageRepositry) GetImageALL(ctx context.Context) (entity.Images, error) {
@@ -53,12 +53,12 @@ func (ur *ImageRepositry) GetImageALL(ctx context.Context) (entity.Images, error
 	SELECT *
 	FROM images
 	`
-	var imagedtos dto.ImageDtos
-	err := ur.conn.DB.SelectContext(ctx, &imagedtos, query)
+	var dtos d.ImageDtos
+	err := ur.conn.DB.SelectContext(ctx, &dtos, query)
 	if err != nil {
 		return nil, err
 	}
-	return dto.ImageDtosToEntity(imagedtos), nil
+	return d.ImageDtosToEntity(dtos), nil
 }
 
 func (ur *ImageRepositry) DeleteImage(ctx context.Context, id string) error {

@@ -6,7 +6,7 @@ import (
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
-	"github.com/Doer-org/glyph/internal/infrastructure/dto"
+	d "github.com/Doer-org/glyph/internal/infrastructure/dto"
 )
 
 var _ repository.ICommentRepository = &CommentRepository{}
@@ -26,12 +26,12 @@ func (ur *CommentRepository) CreateComment(ctx context.Context, comment *entity.
 	INSERT INTO comments (id, user_id, glyph_id, contents, created_at)
 	VALUES (:id, :user_id, :glyph_id, :contents, :created_at)
 	`
-	commentdto := dto.CommentEntityToDto(comment)
-	_, err := ur.conn.DB.NamedExecContext(ctx, query, &commentdto)
+	dto := d.CommentEntityToDto(comment)
+	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
 	if err != nil {
 		return nil, err
 	}
-	return dto.CommentDtoToEntity(&commentdto), nil
+	return d.CommentDtoToEntity(&dto), nil
 }
 
 func (ur *CommentRepository) ReadCommentsByGlyphId(ctx context.Context, glyph_id string) (entity.Comments, error) {
@@ -40,9 +40,9 @@ func (ur *CommentRepository) ReadCommentsByGlyphId(ctx context.Context, glyph_id
 	FROM comments 
 	WHERE glyph_id = ?;
 	`
-	var commentdtos dto.CommentDtos
-	err := ur.conn.DB.SelectContext(ctx, &commentdtos, query, glyph_id)
-	rescomments := dto.CommentDtosToEntity(commentdtos)
+	var dtos d.CommentDtos
+	err := ur.conn.DB.SelectContext(ctx, &dtos, query, glyph_id)
+	rescomments := d.CommentDtosToEntity(dtos)
 	if err != nil {
 		return nil, err
 	}
@@ -56,12 +56,12 @@ func (ur *CommentRepository) ReadCommentsByUserId(ctx context.Context, user_id s
 	INNER JOIN glyphs on comments.glyph_id = glyphs.id 
 	WHERE comments.user_id = ?;
 	`
-	var commentdtos dto.CommentByUserIdDtos
-	err := ur.conn.DB.SelectContext(ctx, &commentdtos, query, user_id)
+	var dtos d.CommentByUserIdDtos
+	err := ur.conn.DB.SelectContext(ctx, &dtos, query, user_id)
 	if err != nil {
 		return nil, err
 	}
-	rescomments := dto.CommentByUserIdDtosToEntity(commentdtos)
+	rescomments := d.CommentByUserIdDtosToEntity(dtos)
 
 	return rescomments, nil
 }
@@ -70,10 +70,10 @@ func (ur *CommentRepository) GetCommentAll(ctx context.Context) (entity.Comments
 	query := `
 	SELECT * FROM comments;
 	`
-	var commentdtos dto.CommentDtos
-	err := ur.conn.DB.SelectContext(ctx, &commentdtos, query)
+	var dtos d.CommentDtos
+	err := ur.conn.DB.SelectContext(ctx, &dtos, query)
 	if err != nil {
 		return nil, err
 	}
-	return dto.CommentDtosToEntity(commentdtos), nil
+	return d.CommentDtosToEntity(dtos), nil
 }

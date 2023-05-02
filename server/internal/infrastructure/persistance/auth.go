@@ -9,7 +9,7 @@ import (
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
-	"github.com/Doer-org/glyph/internal/infrastructure/dto"
+	d "github.com/Doer-org/glyph/internal/infrastructure/dto"
 	"golang.org/x/oauth2"
 )
 
@@ -26,26 +26,26 @@ func NewAuthRepository(conn *database.Conn) repository.IAuthRepository {
 }
 
 func (repo *AuthRepository) StoreToken(ctx context.Context, userId string, token *oauth2.Token) error {
-	discorddto := dto.DiscordAuthDto{}
-	discorddto.UserID = userId
-	discorddto.AccessToken = token.AccessToken
-	discorddto.RefreshToken = token.RefreshToken
-	discorddto.Expiry = token.Expiry
+	dto := d.DiscordAuthDto{}
+	dto.UserID = userId
+	dto.AccessToken = token.AccessToken
+	dto.RefreshToken = token.RefreshToken
+	dto.Expiry = token.Expiry
 
 	query := `
 	INSERT INTO discord_auths (user_id, access_token, refresh_token, expiry)
 	VALUES (:user_id,:access_token,:refresh_token,:expiry)
 	`
-	_, err := repo.conn.DB.NamedExecContext(ctx, query, &discorddto)
+	_, err := repo.conn.DB.NamedExecContext(ctx, query, &dto)
 	return err
 }
 
 func (repo *AuthRepository) UpdateToken(ctx context.Context, userId string, token *oauth2.Token) error {
-	discorddto := dto.DiscordAuthDto{}
-	discorddto.UserID = userId
-	discorddto.AccessToken = token.AccessToken
-	discorddto.RefreshToken = token.RefreshToken
-	discorddto.Expiry = token.Expiry
+	dto := d.DiscordAuthDto{}
+	dto.UserID = userId
+	dto.AccessToken = token.AccessToken
+	dto.RefreshToken = token.RefreshToken
+	dto.Expiry = token.Expiry
 
 	query := `
 	UPDATE discord_auths
@@ -54,7 +54,7 @@ func (repo *AuthRepository) UpdateToken(ctx context.Context, userId string, toke
 			expiry        = :expiry
 	WHERE user_id 	= :user_id
 	`
-	_, err := repo.conn.DB.NamedExecContext(ctx, query, &discorddto)
+	_, err := repo.conn.DB.NamedExecContext(ctx, query, &dto)
 	return err
 }
 
@@ -78,7 +78,7 @@ func (repo *AuthRepository) StoreORUpdateToken(ctx context.Context, userId strin
 }
 
 func (repo *AuthRepository) GetTokenByUserID(ctx context.Context, userId string) (*oauth2.Token, error) {
-	var discorddto dto.DiscordAuthDto
+	var dto d.DiscordAuthDto
 
 	query := `
 	SELECT *
@@ -86,28 +86,28 @@ func (repo *AuthRepository) GetTokenByUserID(ctx context.Context, userId string)
 	WHERE user_id = ?
 	LIMIT 1
 	`
-	err := repo.conn.DB.GetContext(ctx, &discorddto, query, userId)
+	err := repo.conn.DB.GetContext(ctx, &dto, query, userId)
 	if err != nil {
 		return nil, err
 	}
 	return &oauth2.Token{
-		AccessToken:  discorddto.AccessToken,
-		RefreshToken: discorddto.RefreshToken,
-		Expiry:       discorddto.Expiry,
+		AccessToken:  dto.AccessToken,
+		RefreshToken: dto.RefreshToken,
+		Expiry:       dto.Expiry,
 	}, nil
 }
 
 func (repo *AuthRepository) StoreSession(ctx context.Context, sessionID string, userId string) error {
-	logindto := &dto.LoginSessionsDto{}
-	logindto.Id = sessionID
-	logindto.UserID = userId
-	logindto.Expiry = time.Now().Add(time.Hour * 24 * 1)
+	dto := &d.LoginSessionsDto{}
+	dto.Id = sessionID
+	dto.UserID = userId
+	dto.Expiry = time.Now().Add(time.Hour * 24 * 1)
 
 	query := `
 	INSERT INTO login_sessions (id, user_id, expiry)
 	VALUES (:id, :user_id, :expiry)
 	`
-	_, err := repo.conn.DB.NamedExecContext(ctx, query, &logindto)
+	_, err := repo.conn.DB.NamedExecContext(ctx, query, &dto)
 	return err
 }
 
@@ -121,7 +121,7 @@ func (repo *AuthRepository) DeleteSession(ctx context.Context, sessionID string)
 }
 
 func (repo *AuthRepository) GetUserIdFromSession(ctx context.Context, sessionId string) (string, error) {
-	var logindto dto.LoginSessionsDto
+	var dto d.LoginSessionsDto
 
 	query := `
 	SELECT *
@@ -129,15 +129,15 @@ func (repo *AuthRepository) GetUserIdFromSession(ctx context.Context, sessionId 
 	WHERE id = ?
 	LIMIT 1
 	`
-	err := repo.conn.DB.GetContext(ctx, &logindto, query, sessionId)
+	err := repo.conn.DB.GetContext(ctx, &dto, query, sessionId)
 	if err != nil {
 		return "", err
 	}
-	return logindto.UserID, nil
+	return dto.UserID, nil
 }
 
 func (repo *AuthRepository) GetExpiryFromSession(ctx context.Context, sessionId string) (time.Time, error) {
-	var logindto dto.LoginSessionsDto
+	var dto d.LoginSessionsDto
 
 	query := `
 	SELECT *
@@ -145,26 +145,26 @@ func (repo *AuthRepository) GetExpiryFromSession(ctx context.Context, sessionId 
 	WHERE id = ?
 	LIMIT 1
 	`
-	err := repo.conn.DB.GetContext(ctx, &logindto, query, sessionId)
+	err := repo.conn.DB.GetContext(ctx, &dto, query, sessionId)
 	if err != nil {
 		return time.Time{}, err
 	}
-	return logindto.Expiry, nil
+	return dto.Expiry, nil
 }
 
 func (repo *AuthRepository) StoreState(ctx context.Context, authState *entity.AuthStates) error {
-	authdto := dto.AuthStatesEntityToDto(authState)
+	dto := d.AuthStatesEntityToDto(authState)
 	query := `
 	INSERT INTO auth_states (state, redirect_url)
 	VALUES (:state, :redirect_url)
 	`
 
-	_, err := repo.conn.DB.NamedExecContext(ctx, query, &authdto)
+	_, err := repo.conn.DB.NamedExecContext(ctx, query, &dto)
 	return err
 }
 
 func (repo *AuthRepository) FindStateByState(ctx context.Context, state string) (*entity.AuthStates, error) {
-	var authdto dto.AuthStatesDto
+	var dto d.AuthStatesDto
 	query := `
 	SELECT *
 	FROM auth_states
@@ -172,11 +172,11 @@ func (repo *AuthRepository) FindStateByState(ctx context.Context, state string) 
 	LIMIT 1
 	`
 
-	err := repo.conn.DB.GetContext(ctx, &authdto, query, state)
+	err := repo.conn.DB.GetContext(ctx, &dto, query, state)
 	if err != nil {
 		return nil, err
 	}
-	return dto.AuthStatesDtoToEntity(&authdto), nil
+	return d.AuthStatesDtoToEntity(&dto), nil
 }
 
 func (repo *AuthRepository) DeleteState(ctx context.Context, state string) error {

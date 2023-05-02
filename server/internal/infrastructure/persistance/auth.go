@@ -9,7 +9,7 @@ import (
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
-	d "github.com/Doer-org/glyph/internal/infrastructure/dto"
+	d "github.com/Doer-org/glyph/internal/infrastructure/persistance/dto"
 	"golang.org/x/oauth2"
 )
 
@@ -26,6 +26,7 @@ func NewAuthRepository(conn *database.Conn) repository.IAuthRepository {
 }
 
 func (repo *AuthRepository) StoreToken(ctx context.Context, userId string, token *oauth2.Token) error {
+	
 	dto := d.DiscordAuthDto{}
 	dto.UserID = userId
 	dto.AccessToken = token.AccessToken

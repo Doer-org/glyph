@@ -9,6 +9,7 @@ import (
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
+	d "github.com/Doer-org/glyph/internal/infrastructure/persistance/dto"
 	"golang.org/x/oauth2"
 )
 
@@ -25,7 +26,8 @@ func NewAuthRepository(conn *database.Conn) repository.IAuthRepository {
 }
 
 func (repo *AuthRepository) StoreToken(ctx context.Context, userId string, token *oauth2.Token) error {
-	dto := discordAuthDto{}
+	
+	dto := d.DiscordAuthDto{}
 	dto.UserID = userId
 	dto.AccessToken = token.AccessToken
 	dto.RefreshToken = token.RefreshToken
@@ -40,7 +42,7 @@ func (repo *AuthRepository) StoreToken(ctx context.Context, userId string, token
 }
 
 func (repo *AuthRepository) UpdateToken(ctx context.Context, userId string, token *oauth2.Token) error {
-	dto := discordAuthDto{}
+	dto := d.DiscordAuthDto{}
 	dto.UserID = userId
 	dto.AccessToken = token.AccessToken
 	dto.RefreshToken = token.RefreshToken
@@ -49,8 +51,8 @@ func (repo *AuthRepository) UpdateToken(ctx context.Context, userId string, toke
 	query := `
 	UPDATE discord_auths
 	SET access_token   = :access_token,
-	    refresh_token = :refresh_token,
-		expiry        = :expiry
+			refresh_token = :refresh_token,
+			expiry        = :expiry
 	WHERE user_id 	= :user_id
 	`
 	_, err := repo.conn.DB.NamedExecContext(ctx, query, &dto)
@@ -77,7 +79,7 @@ func (repo *AuthRepository) StoreORUpdateToken(ctx context.Context, userId strin
 }
 
 func (repo *AuthRepository) GetTokenByUserID(ctx context.Context, userId string) (*oauth2.Token, error) {
-	var dto discordAuthDto
+	var dto d.DiscordAuthDto
 
 	query := `
 	SELECT *
@@ -97,7 +99,7 @@ func (repo *AuthRepository) GetTokenByUserID(ctx context.Context, userId string)
 }
 
 func (repo *AuthRepository) StoreSession(ctx context.Context, sessionID string, userId string) error {
-	dto := &loginSessionsDto{}
+	dto := &d.LoginSessionsDto{}
 	dto.Id = sessionID
 	dto.UserID = userId
 	dto.Expiry = time.Now().Add(time.Hour * 24 * 1)
@@ -120,7 +122,7 @@ func (repo *AuthRepository) DeleteSession(ctx context.Context, sessionID string)
 }
 
 func (repo *AuthRepository) GetUserIdFromSession(ctx context.Context, sessionId string) (string, error) {
-	var dto loginSessionsDto
+	var dto d.LoginSessionsDto
 
 	query := `
 	SELECT *
@@ -136,7 +138,7 @@ func (repo *AuthRepository) GetUserIdFromSession(ctx context.Context, sessionId 
 }
 
 func (repo *AuthRepository) GetExpiryFromSession(ctx context.Context, sessionId string) (time.Time, error) {
-	var dto loginSessionsDto
+	var dto d.LoginSessionsDto
 
 	query := `
 	SELECT *
@@ -152,7 +154,7 @@ func (repo *AuthRepository) GetExpiryFromSession(ctx context.Context, sessionId 
 }
 
 func (repo *AuthRepository) StoreState(ctx context.Context, authState *entity.AuthStates) error {
-	dto := authStatesEntityToDto(authState)
+	dto := d.AuthStatesEntityToDto(authState)
 	query := `
 	INSERT INTO auth_states (state, redirect_url)
 	VALUES (:state, :redirect_url)
@@ -163,7 +165,7 @@ func (repo *AuthRepository) StoreState(ctx context.Context, authState *entity.Au
 }
 
 func (repo *AuthRepository) FindStateByState(ctx context.Context, state string) (*entity.AuthStates, error) {
-	var dto authStatesDto
+	var dto d.AuthStatesDto
 	query := `
 	SELECT *
 	FROM auth_states
@@ -175,8 +177,9 @@ func (repo *AuthRepository) FindStateByState(ctx context.Context, state string) 
 	if err != nil {
 		return nil, err
 	}
-	return authStatesDtoToEntity(&dto), nil
+	return d.AuthStatesDtoToEntity(&dto), nil
 }
+
 func (repo *AuthRepository) DeleteState(ctx context.Context, state string) error {
 	query := `
 	DELETE FROM auth_states
@@ -186,50 +189,3 @@ func (repo *AuthRepository) DeleteState(ctx context.Context, state string) error
 	return err
 }
 
-type loginSessionsDto struct {
-	Id     string    `db:"id"`
-	UserID string    `db:"user_id"`
-	Expiry time.Time `db:"expiry"`
-}
-
-type authStatesDto struct {
-	State       string `db:"state"`
-	RedirectURL string `db:"redirect_url"`
-}
-
-type discordAuthDto struct {
-	UserID       string    `db:"user_id"`
-	AccessToken  string    `db:"access_token"`
-	RefreshToken string    `db:"refresh_token"`
-	Expiry       time.Time `db:"expiry"`
-}
-
-func loginSessionDtoToEntity(dto *loginSessionsDto) *entity.LoginSessions {
-	return &entity.LoginSessions{
-		ID:     dto.Id,
-		UserID: dto.UserID,
-		Expiry: dto.Expiry,
-	}
-}
-
-func loginSessionEntityToDto(u *entity.LoginSessions) loginSessionsDto {
-	return loginSessionsDto{
-		Id:     u.ID,
-		UserID: u.UserID,
-		Expiry: u.Expiry,
-	}
-}
-
-func authStatesEntityToDto(u *entity.AuthStates) authStatesDto {
-	return authStatesDto{
-		State:       u.State,
-		RedirectURL: u.RedirectURL,
-	}
-}
-
-func authStatesDtoToEntity(dto *authStatesDto) *entity.AuthStates {
-	return &entity.AuthStates{
-		State:       dto.State,
-		RedirectURL: dto.RedirectURL,
-	}
-}

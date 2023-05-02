@@ -230,6 +230,14 @@ func (u *AuthHandler) User(ctx *gin.Context) {
 		return
 	}
 	user, err := u.userUC.GetUser(ctx, userId)
+	if err != nil {
+		logger.Error("", map[string]string{"place": "auth middleware", "type": "get user err", "error": err.Error()})
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
 	ctx.JSON(
 		http.StatusOK,
 		gin.H{"user": user},

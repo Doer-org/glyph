@@ -2,9 +2,10 @@ package ws
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"time"
+
+	"github.com/Doer-org/glyph/log"
 
 	"github.com/Doer-org/glyph/internal/config"
 	"github.com/gorilla/websocket"
@@ -20,6 +21,7 @@ func applyHandlers(input []byte, fs []func(input []byte) (err error)) (err error
 }
 
 func (s *Subscription) readPump(h *Hub) {
+	logger := log.New()
 	c := *s.conn
 	defer func() {
 		h.unregister <- *s
@@ -44,7 +46,7 @@ func (s *Subscription) readPump(h *Hub) {
 		_, msg, err := c.ws.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
-				log.Printf("error: %v", err)
+				logger.Error("", map[string]interface{}{"place": "websocket", "err": err.Error()})
 			}
 			break
 		}
@@ -99,9 +101,10 @@ func (s *Subscription) writePump() {
 }
 
 func (h *Hub) ServeWs(w http.ResponseWriter, r *http.Request, roomId string) {
+	logger := log.New()
 	ws, err := config.Upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Printf(err.Error())
+		logger.Error("", map[string]interface{}{"place": "websocket", "err": err.Error()})
 		return
 	}
 	c := &connection{send: make(chan []byte, 256), ws: ws}

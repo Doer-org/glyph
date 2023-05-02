@@ -10,9 +10,8 @@ import (
 type ContextKey string
 
 var (
-	userIdKey    ContextKey = "userIdKey"
-	creatorIdKey ContextKey = "creatorIdKey"
-	tokenKey     ContextKey = "tokenKey"
+	userIdKey ContextKey = "userIdKey"
+	tokenKey  ContextKey = "tokenKey"
 )
 
 func SetToken(ctx context.Context, token *oauth2.Token) context.Context {

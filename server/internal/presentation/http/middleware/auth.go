@@ -128,7 +128,7 @@ func (m *Auth) Authenticate() gin.HandlerFunc {
 		ctx := c.Request.Context()
 		ctx = mycontext.SetUserId(ctx, userId)
 		ctx = mycontext.SetToken(ctx, newToken)
-		c.Request.WithContext(ctx)
+		_ = c.Request.WithContext(ctx)
 		c.Next()
 	}
 }

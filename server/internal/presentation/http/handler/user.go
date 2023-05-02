@@ -95,8 +95,6 @@ type userJson struct {
 	Img  string `json:"img"`
 }
 
-type usersJson []userJson
-
 func userEntityToJson(c *entity.User) userJson {
 	return userJson{
 		Id:   c.Id,

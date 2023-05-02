@@ -28,7 +28,10 @@ func NewRouter() *Router {
 
 // Serveはhttpサーバーを起動します
 func (r *Router) Serve() {
-	r.Engine.Run(fmt.Sprintf(":%s", config.Port()))
+	err := r.Engine.Run(fmt.Sprintf(":%s", config.Port()))
+	if err != nil {
+		panic(err)
+	}
 }
 
 func (r *Router) setMiddleware() {

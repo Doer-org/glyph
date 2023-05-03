@@ -1,6 +1,8 @@
+// https://storybook.js.org/addons/storycap
 import type { Preview } from '@storybook/react';
+import { withScreenshot } from 'storycap';
 
-const preview: Preview = {
+export const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -9,7 +11,13 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    // Global parameter is optional.
+    screenshot: {
+      // Put global screenshot parameters(e.g. viewport)
+    },
   },
 };
 
-export default preview;
+export const decorators = [
+  withScreenshot, // Registration the decorator is required
+];

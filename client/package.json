@@ -12,7 +12,8 @@
     "test": "vitest",
     "formatter": "pnpm rome format ./src/ --write",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "storycap": "storycap --serverCmd \"npx http-server storybook-static -p 9001\" http://localhost:9001 --serverTimeout 100000 --captureTimeout 30000"
   },
   "lint-staged": {
     "./**/*.{ts,tsx}": "pnpm formatter"
@@ -58,9 +59,12 @@
     "eslint-plugin-storybook": "^0.6.12",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.2",
+    "puppeteer": "^20.0.0",
     "react-simplemde-editor": "^5.2.0",
+    "reg-suit": "^0.12.1",
     "rome": "12.0.0",
     "storybook": "7.0.8",
+    "storycap": "^4.1.1",
     "vitest": "^0.30.1"
   }
 }

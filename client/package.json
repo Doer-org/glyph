@@ -13,7 +13,7 @@
     "formatter": "pnpm rome format ./src/ --write",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "storycap": "storycap --serverCmd \"npx http-server storybook-static -p 9001\" http://localhost:9001 --serverTimeout 100000 --captureTimeout 30000"
+    "storycap": "storycap --serverCmd \"storybook dev --ci -p 9001\" http://localhost:9001 --serverTimeout 100000 --captureTimeout 30000"
   },
   "lint-staged": {
     "./**/*.{ts,tsx}": "pnpm formatter"

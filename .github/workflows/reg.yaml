@@ -42,17 +42,17 @@ jobs:
 
       # https://azujuuuuuun.hatenablog.com/entry/2022/09/03/225811
       # https://cloud.google.com/blog/ja/products/identity-security/enabling-keyless-authentication-from-github-actions
-      # - id: 'auth'
-      #   name: 'Authenticate to Google Cloud'
-      #   uses: 'google-github-actions/auth@v0.4.0'
-      #   with:
-      #     credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0.4.0'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
 
-      - name: Authenticate to Google Cloud
-        env: 
-          GOOGLE_APPLICATION_CREDENTIALS: credentials_json.json
-        run: |
-          echo -n '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' > credentials_json.json
+      # - name: Authenticate to Google Cloud
+      #   env: 
+      #     GOOGLE_APPLICATION_CREDENTIALS: credentials_json.json
+      #   run: |
+      #     echo -n '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' > credentials_json.json
 
       - name: workaround for detached HEAD
         run: |

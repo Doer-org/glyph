@@ -51,14 +51,6 @@ jobs:
         with:
           credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
 
-      # - run: |
-      #     echo '2' ${{ github.ref }}
-      #     echo '3' ${{ github.ref_name }}
-      #     echo '4' ${{ github.head_ref }}
-      #     echo '5' ${{ github.base_ref }}
-      #     echo '5' ${GITHUB_REF#refs/heads/}
-      #     echo '5' ${{GITHUB_REF#refs/heads/}}
-
       - name: workaround for detached HEAD
         run: |
           git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull

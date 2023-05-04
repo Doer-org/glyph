@@ -1,12 +1,12 @@
 # https://github.com/reg-viz/reg-suit
 name: Visual Regression Test
 
-on:
-  push:
-    paths:
-      - .github/**
-      - client/**
-    branches: ['dev', 'main']
+on: [push]
+  # push:
+  #   paths:
+  #     - .github/**
+  #     - client/**
+  #   branches: ['dev', 'main']
   # pull_request:
   #   paths:
   #     - .github/**

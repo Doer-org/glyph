@@ -1,0 +1,63 @@
+# https://github.com/reg-viz/reg-suit
+name: Visual Regression Test
+
+on:
+  push:
+    paths:
+      - .github/**
+      - client/**
+    branches: ['dev', 'main']
+  pull_request:
+    paths:
+      - .github/**
+      - client/**
+    branches: ['dev', 'main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: client
+
+    steps: 
+      - uses: 'actions/checkout@v3' # Must come first!
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js v28
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      # https://azujuuuuuun.hatenablog.com/entry/2022/09/03/225811
+      # https://cloud.google.com/blog/ja/products/identity-security/enabling-keyless-authentication-from-github-actions
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: `google-github-actions/auth@v0.4.0'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+
+      
+      - name: workaround for detached HEAD
+        run: |
+          git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull
+    
+      # - name: run storybook generate
+      #   run: pnpm build-storybook
+
+      - name: run storycap
+        run: pnpm storycap
+
+      - name: run reg-suit
+        run: |
+          pnpm vrt

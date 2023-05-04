@@ -52,7 +52,7 @@ jobs:
         env: 
           GOOGLE_APPLICATION_CREDENTIALS: credentials_json.json
         run: |
-          echo -n '${{ secrets.TEST }}' > credentials_json.json
+          echo -n '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' > credentials_json.json
 
       - name: workaround for detached HEAD
         run: |

@@ -6,12 +6,9 @@ on:
     paths:
       - .github/**
       - client/**
-  #   branches: ['dev', 'main']
-  # pull_request:
-  #   paths:
-  #     - .github/**
-  #     - client/**
-  #   branches: ['dev', 'main']
+
+env:
+  REG_NOTICE_CLIENT_ID: ${{ secrets.REG_NOTICE_CLIENT_ID }}
 
 jobs:
   build:

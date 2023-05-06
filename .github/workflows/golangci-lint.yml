@@ -30,3 +30,4 @@ jobs:
         with:
           working-directory: ./server
           version: v1.38.0
+          skip-go-installation: true

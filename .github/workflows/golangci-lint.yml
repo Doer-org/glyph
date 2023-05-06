@@ -28,4 +28,4 @@ jobs:
       - name: golangci-lint
         uses: reviewdog/action-golangci-lint@v2
         with:
-          working-directory: ./server
+          workdir: ./server

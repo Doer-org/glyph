@@ -1,23 +1,29 @@
-name: Reviewdog-ci-lint
-
+name: lint
 on:
+  push:
+    paths:
+     - .github/**
+     - server/**
+    branches: [ "dev","main" ]
   pull_request:
-    types: [opened, synchronize]
-
+    paths:
+     - .github/**
+     - server/**
+    branches: [ "dev","main" ]
+permissions:
+  contents: read
+  # Optional: allow read access to pull request. Use with `only-new-issues` option.
+  # pull-requests: read
 jobs:
-  golangci-lint:
-    name: golangci-lint
+  golangci:
+    name: lint
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./server
+
     steps:
-      - name: Check out code into the Go module directory
-        uses: actions/checkout@v2
-      - name: golangci-lint
-        uses: reviewdog/action-golangci-lint@v1
+      - uses: actions/setup-go@v4
         with:
-          github_token: ${{ github.token }}
-          level: warning
-          filter_mode: nofilter
-          reporter: github-pr-review
+          go-version: '1.19'
+          cache: false
+      - uses: actions/checkout@v3
+      - name: golangci-lint
+        run: cd server && golangci-lint run

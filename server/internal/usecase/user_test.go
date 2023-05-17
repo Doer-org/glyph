@@ -16,6 +16,7 @@ func Test_CreateUser(t *testing.T) {
 		user            *entity.User
 		prepareMockUser func(m *mock_repository.MockIUserRepository)
 		err             bool
+		errMess         string
 	}{
 		{
 			name: "正常に動作した場合",
@@ -33,7 +34,8 @@ func Test_CreateUser(t *testing.T) {
 					Img:  "http://test.png",
 				}, nil)
 			},
-			err: false,
+			err:     false,
+			errMess: "",
 		},
 		{
 			name: "nameがないとerr",
@@ -43,6 +45,7 @@ func Test_CreateUser(t *testing.T) {
 			},
 			err:             true,
 			prepareMockUser: func(m *mock_repository.MockIUserRepository) {},
+			errMess:         "user name empty",
 		},
 		{
 			name: "imgがないとerr",
@@ -52,6 +55,7 @@ func Test_CreateUser(t *testing.T) {
 			},
 			err:             true,
 			prepareMockUser: func(m *mock_repository.MockIUserRepository) {},
+			errMess:         "img name empty",
 		},
 	}
 	for _, tt := range tests {
@@ -63,6 +67,10 @@ func Test_CreateUser(t *testing.T) {
 
 			userusecase := NewUserUsecase(mock)
 			user, err := userusecase.CreateUser(context.Background(), tt.user)
+			if err != nil {
+				assert.EqualError(t, err, tt.errMess)
+			}
+
 			if !tt.err != (err == nil) {
 				t.Errorf("this case want no err but : %s", err)
 			}

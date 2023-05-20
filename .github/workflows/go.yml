@@ -35,5 +35,6 @@ jobs:
 
     - name: Test
       run: |
+       chmod 777 /home/runner/work/glyph/glyph/server/database/data/#innodb_redo
        cd server && go test -v ./...
   

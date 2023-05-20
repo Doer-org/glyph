@@ -53,7 +53,7 @@ re:fclean up ## 完全に初期化した状態でdocker環境を立ち上げる
 run-db: 
 	$(ENV_SAMPLE) docker-compose \
 	-f $(DOCKER_COMPOSE_CI) \
-	-f $(DOCKER_COMPOSE_LOCAL_DATABASE) up
+	-f $(DOCKER_COMPOSE_LOCAL_DATABASE) up -d
 
 
 .PHONY: del-volumes

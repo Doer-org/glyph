@@ -5,11 +5,16 @@
 ENV_LOCAL_FILE := .env.local
 ENV_LOCAL       = $(shell cat $(ENV_LOCAL_FILE))
 
+ENV_SAMPLE_FILE = .env.db.sample
+ENV_SAMPLE       = $(shell cat $(ENV_SAMPLE_FILE))
+
+
 # go
 GO           := go run
 
 # docker
 DOCKER_FILE_DIR                 := ./docker
+DOCKER_COMPOSE_CI 				:= $(DOCKER_FILE_DIR)/docker-compose.ci.yml
 DOCKER_COMPOSE_LOCAL            := $(DOCKER_FILE_DIR)/docker-compose.local.yml
 DOCKER_COMPOSE_LOCAL_DATABASE   := $(DOCKER_FILE_DIR)/docker-compose.local.database.yml
 DOCKER_COMPOSE_LOCAL_SERVER     := $(DOCKER_FILE_DIR)/docker-compose.local.server.yml
@@ -43,6 +48,13 @@ fclean:down del-volumes ## マウントしたデータを削除、またdocker�
 
 .PHONY: re
 re:fclean up ## 完全に初期化した状態でdocker環境を立ち上げる
+
+.PHONY: run-db
+run-db: 
+	$(ENV_SAMPLE) docker-compose \
+	-f $(DOCKER_COMPOSE_CI) \
+	-f $(DOCKER_COMPOSE_LOCAL_DATABASE) up
+
 
 .PHONY: del-volumes
 del-volumes:del-data

@@ -17,6 +17,7 @@ DOCKER_FILE_DIR                 := ./docker
 DOCKER_COMPOSE_CI 				:= $(DOCKER_FILE_DIR)/docker-compose.ci.yml
 DOCKER_COMPOSE_LOCAL            := $(DOCKER_FILE_DIR)/docker-compose.local.yml
 DOCKER_COMPOSE_LOCAL_DATABASE   := $(DOCKER_FILE_DIR)/docker-compose.local.database.yml
+DOCKER_COMPOSE_CI_DATABASE   	:= $(DOCKER_FILE_DIR)/docker-compose.ci.database.yml
 DOCKER_COMPOSE_LOCAL_SERVER     := $(DOCKER_FILE_DIR)/docker-compose.local.server.yml
 DOCKER_EXEC                     := docker exec -it
 GITHUB_REPOSITORY_NAME          := glyph
@@ -53,7 +54,7 @@ re:fclean up ## 完全に初期化した状態でdocker環境を立ち上げる
 run-db: 
 	$(ENV_SAMPLE) docker-compose \
 	-f $(DOCKER_COMPOSE_CI) \
-	-f $(DOCKER_COMPOSE_LOCAL_DATABASE) -p local up -d
+	-f $(DOCKER_COMPOSE_CI_DATABASE) -p local up -d
 
 
 .PHONY: del-volumes

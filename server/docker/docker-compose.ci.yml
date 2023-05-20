@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  database:
+    container_name: glyph-database
+    restart: always
+    tty: true

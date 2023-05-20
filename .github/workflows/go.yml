@@ -35,6 +35,6 @@ jobs:
 
     - name: Test
       run: |
-       ls
+       chmod 777 server/database/data
        cd server && go test -v ./...
   

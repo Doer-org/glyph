@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"log"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
@@ -19,6 +20,7 @@ func NewConn() (*Conn, error) {
 	if err != nil {
 		return nil, err
 	}
+	log.Println(dbDSN)
 
 	db, err := sqlx.Connect("mysql", dbDSN)
 	if err != nil {

@@ -1,0 +1,5 @@
+development:
+  dialect: mysql
+  datasource: hoge:hoge@tcp(glyph-database:3306)/hoge?parseTime=true&collation=utf8mb4_bin
+  dir: migrations
+  table: migrations

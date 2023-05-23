@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/Doer-org/glyph/log"
+	_ "github.com/go-sql-driver/mysql"
 	migrate "github.com/rubenv/sql-migrate"
 
 	"github.com/Doer-org/glyph/internal/config"

@@ -15,6 +15,7 @@ RUN go build -o /docker-gs-ping server/cmd/migrate/main.go
 FROM gcr.io/distroless/base-debian10
 
 COPY --from=build /docker-gs-ping /docker-gs-ping
+COPY --from=builder /go/src/github.com/Doer-org/glyph/glyph ./
 COPY --from=build /go/src/github.com/Doer-org/glyph/migrations ./migrations
 
 ENTRYPOINT ["/docker-gs-ping"]

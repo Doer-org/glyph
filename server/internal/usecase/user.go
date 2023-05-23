@@ -7,7 +7,6 @@ import (
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
-	"github.com/Doer-org/glyph/utils"
 )
 
 var _ IUserUsecase = &UserUsecase{}
@@ -35,8 +34,6 @@ func (uu *UserUsecase) CreateUser(ctx context.Context, user *entity.User) (*enti
 	if user.Img == "" {
 		return nil, fmt.Errorf("img name empty")
 	}
-	id := utils.GetUlid()
-	user.Id = id
 
 	resuser, err := uu.repo.CreateUser(ctx, user)
 	return resuser, err

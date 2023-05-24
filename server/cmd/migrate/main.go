@@ -46,6 +46,7 @@ func New() *logdis.Logger {
 
 func main() {
 	logger := New()
+	logger.Info("", map[string]string{"place": "migrate", "info": "migration start"})
 	dsn, err := DSN()
 	if err != nil {
 		logger.Error("", map[string]string{"place": "migrate", "err": err.Error()})
@@ -60,10 +61,11 @@ func main() {
 	}
 
 	migrations := &migrate.FileMigrationSource{
-		Dir: "migrations",
+		Dir: "../../migrations",
 	}
 	n, err := migrate.Exec(db, "mysql", migrations, migrate.Up)
 	if err != nil {
+		logger.Error("", map[string]string{"place": "migrate", "err": err.Error()})
 		fmt.Println(err.Error())
 		return
 	}

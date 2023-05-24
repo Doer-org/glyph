@@ -3,15 +3,14 @@ FROM golang:1.19-buster AS build
 
 WORKDIR /go/src/github.com/Doer-org/glyph
 
-RUN go mod init docker-gs-ping
+COPY go.mod ./
+COPY go.sum ./
 
-RUN go get github.com/rubenv/sql-migrate/...
-RUN go get github.com/go-sql-driver/mysql/...
-RUN go get github.com/seipan/logdis
+RUN go mod download
 
 COPY . .
 
-RUN go build -o /docker-gs-ping
+RUN go build -o /docker-gs-ping ./cmd/migrate/main.go
 
 ## Deploy
 FROM gcr.io/distroless/base-debian10

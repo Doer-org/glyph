@@ -3,17 +3,50 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
-	"github.com/Doer-org/glyph/log"
 	_ "github.com/go-sql-driver/mysql"
 	migrate "github.com/rubenv/sql-migrate"
-
-	"github.com/Doer-org/glyph/internal/config"
+	"github.com/seipan/logdis"
 )
 
+func DSN() (string, error) {
+	if os.Getenv("ENVIRONMENT") == "prd" {
+		dbDSN := os.Getenv("DSN")
+		return dbDSN, nil
+	}
+
+	if os.Getenv("ENVIRONMENT") == "dev" {
+		dbUser := os.Getenv("DB_USER")
+		dbPassword := os.Getenv("DB_PASSWORD")
+		dbHost := os.Getenv("DB_HOST")
+		dbPort := os.Getenv("DB_PORT")
+		dbDatabase := os.Getenv("DB_DATABASE")
+
+		if dbUser == "" || dbPassword == "" || dbHost == "" || dbPort == "" || dbDatabase == "" {
+			return "", fmt.Errorf("ERROR : required environment variable not found")
+		}
+		return fmt.Sprintf(
+			"%s:%s@tcp(%s:%s)/%s?",
+			dbUser,
+			dbPassword,
+			dbHost,
+			dbPort,
+			dbDatabase,
+		) + "parseTime=true&collation=utf8mb4_bin", nil
+	}
+
+	return "", fmt.Errorf("Error : not match enviroment prd or dev , currently used %s", os.Getenv("ENVIRONMENT"))
+}
+
+func New() *logdis.Logger {
+	logger := logdis.NewLogger(os.Getenv("WEBHOOKURL"), os.Getenv("LOGIMG"), os.Getenv("LOGNAME"))
+	return logger
+}
+
 func main() {
-	logger := log.New()
-	dsn, err := config.DSN()
+	logger := New()
+	dsn, err := DSN()
 	if err != nil {
 		logger.Error("", map[string]string{"place": "migrate", "err": err.Error()})
 		fmt.Println(err.Error())

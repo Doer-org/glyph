@@ -26,7 +26,6 @@ jobs:
         description: "migration started"
         nofail: false
         nodetail: false
-        color: 0x0000ff
         username: migration-notice
 
     - name: Set up Go
@@ -50,7 +49,6 @@ jobs:
         description: "migration complete"
         nofail: false
         nodetail: false
-        color: 0x0000ff
         username: migration-notice
 
   

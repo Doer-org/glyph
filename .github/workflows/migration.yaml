@@ -6,7 +6,7 @@ name: Migrate
 on:
   push:
     paths:
-     - server/migrations/**
+     - server/**
     branches: [ "dev","main" ]
 
 jobs:

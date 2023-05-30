@@ -1,0 +1,33 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Migrate
+
+on:
+  push:
+    paths:
+     - server/**
+    branches: [ "dev","main" ]
+  pull_request:
+    paths:
+     - server/migrations/**
+    branches: [ "dev","main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: 1.19
+    
+    - name: Install golang-migrate
+      run: go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+    
+    - name: do migration
+      run: migrate -path server/migrations -database='${{ secrets.DSN }}' up
+  

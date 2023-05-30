@@ -1,11 +1,11 @@
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id`        varchar(255) COLLATE utf8mb4_bin NOT NULL ,
   `name`      varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `img`       varchar(255) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `glyphs` (
+CREATE TABLE  IF NOT EXISTS `glyphs` (
     `id`         VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
     `author_id`  VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
     `title`      VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE `glyphs` (
     PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin;
 
-CREATE TABLE `comments` (
+CREATE TABLE IF NOT EXISTS `comments` (
     `id`         VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
     `user_id`  VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
     `glyph_id`      VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE `comments` (
     PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin;
 
-CREATE TABLE `discord_auths` (
+CREATE TABLE IF NOT EXISTS `discord_auths` (
   `user_id` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT 'ユーザID',
   `access_token` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT 'OAuth2のアクセストークン',
   `refresh_token` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT 'OAuth2のリフレッシュトークン',
@@ -36,20 +36,20 @@ CREATE TABLE `discord_auths` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `login_sessions` (
+CREATE TABLE IF NOT EXISTS `login_sessions` (
   `id` VARCHAR(255) NOT NULL,
   `user_id` VARCHAR(255) NOT NULL,
   `expiry` datetime NOT NULL COMMENT 'sessionの有効期限',
   PRIMARY KEY (`id`)
 )ENGINE = InnoDB;
 
-CREATE TABLE `auth_states` (
+CREATE TABLE IF NOT EXISTS `auth_states` (
   `state` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT 'state',
   `redirect_url` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT 'OAuthが成功したときにリダイレクトするURL',
   UNIQUE KEY `state_state_uindex` (`state`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='OAuthに使う一時的なstate';
 
-CREATE TABLE `images` (
+CREATE TABLE IF NOT EXISTS `images` (
   `id` VARCHAR(255) COLLATE utf8mb4_bin NOT NULL,
   `img`           LONGBLOB     NOT NULL,
   PRIMARY KEY (`id`)

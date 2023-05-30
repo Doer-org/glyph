@@ -20,6 +20,20 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: discord notice
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORD_MIGRATE_WEBHOOK }}
+        status: ${{ job.status }}
+        title: "migration"
+        description: "migration started"
+        nofail: false
+        nodetail: false
+        color: 0x0000ff
+        username: GitHub Actions
+        avatar_url: "https://raw.githubusercontent.com/egonelbre/gophers/63b1f5a9f334f9e23735c6e09ac003479ffe5df5/vector/friends/stovepipe-hat.svg"
+
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
@@ -30,4 +44,19 @@ jobs:
     
     - name: do migration
       run: migrate -path server/migrations -database='${{ secrets.DSN }}' up
+
+    - name: discord notice
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORD_MIGRATE_WEBHOOK }}
+        status: ${{ job.status }}
+        title: "migration"
+        description: "migration started"
+        nofail: false
+        nodetail: false
+        color: 0x0000ff
+        username: GitHub Actions
+        avatar_url: "https://raw.githubusercontent.com/egonelbre/gophers/63b1f5a9f334f9e23735c6e09ac003479ffe5df5/vector/friends/stovepipe-hat.svg"
+
   

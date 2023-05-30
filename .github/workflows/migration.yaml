@@ -8,6 +8,10 @@ on:
     paths:
      - server/**
     branches: [ "dev","main" ]
+  pull_request:
+    paths:
+     - server/**
+    branches: [ "dev","main" ]
 
 jobs:
 

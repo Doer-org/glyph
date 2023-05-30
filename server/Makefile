@@ -64,6 +64,10 @@ del-volumes:del-data
 del-data:
 	$(RM) $(DATA_DIR)
 
+.PHONY: migrate
+migrate: ## dbのマイグレーションを行う
+	migrate -path migrations -database='mysql://hoge:hoge@tcp(127.0.0.1:3306)/hoge?parseTime=true&collation=utf8mb4_bin' --verbose up
+
 
 .PHONY: attach-db
 attach-db: ## dockerのdbコンテナにアクセスする

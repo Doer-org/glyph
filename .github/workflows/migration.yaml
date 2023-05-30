@@ -6,10 +6,6 @@ name: Migrate
 on:
   push:
     paths:
-     - server/**
-    branches: [ "dev","main" ]
-  pull_request:
-    paths:
      - server/migrations/**
     branches: [ "dev","main" ]
 

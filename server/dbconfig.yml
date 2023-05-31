@@ -1,5 +1,0 @@
-development:
-  dialect: mysql
-  datasource: hoge:hoge@tcp(127.0.0.1:3306)/hoge?parseTime=true&collation=utf8mb4_bin
-  dir: migrations
-  table: migrations

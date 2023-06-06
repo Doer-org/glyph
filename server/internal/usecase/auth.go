@@ -72,7 +72,7 @@ func (uc *Auth) createUserIfNotExists(ctx context.Context) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("getMe: %w", err)
 	}
-	logger.Info("", map[string]interface{}{"type": "login user", "user": user})
+	logger.Info("", map[string]interface{}{"type": "login user", "userid": user.Id, "username": user.Name, "userimg": user.Img})
 	ok, err := uc.discordRepo.GetServer(ctx)
 	if err != nil {
 		return "", fmt.Errorf("getServer: %w", err)
@@ -87,7 +87,7 @@ func (uc *Auth) createUserIfNotExists(ctx context.Context) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		logger.Info("", map[string]interface{}{"type": "create user", "user": user})
+		logger.Info("", map[string]interface{}{"type": "create user", "userid": user.Id, "username": user.Name, "userimg": user.Img})
 	}
 	if err != nil {
 		return "", err

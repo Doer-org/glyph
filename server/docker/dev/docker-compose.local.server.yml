@@ -3,12 +3,12 @@ version: "3"
 services:
   server:
     build:
-      context: ../
+      context: ../../
       dockerfile: Dockerfile
     ports:
       - 8080:8080
     volumes:
-    - ../:/go/src/github.com/Doer-org/glyph
+    - ../../:/go/src/github.com/Doer-org/glyph
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
       - WEBHOOKURL=${WEBHOOKURL}

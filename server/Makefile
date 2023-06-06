@@ -13,11 +13,12 @@ ENV_SAMPLE       = $(shell cat $(ENV_SAMPLE_FILE))
 GO           := go run
 
 # docker
-DOCKER_FILE_DIR                 := ./docker
-DOCKER_COMPOSE_CI 				:= $(DOCKER_FILE_DIR)/docker-compose.ci.yml
+DOCKER_FILE_DIR                 := ./docker/dev
+DOCKER_FILE_CI_DIR              := ./docker/ci
+DOCKER_COMPOSE_CI 				:= $(DOCKER_FILE_CI_DIR)/docker-compose.ci.yml
 DOCKER_COMPOSE_LOCAL            := $(DOCKER_FILE_DIR)/docker-compose.local.yml
 DOCKER_COMPOSE_LOCAL_DATABASE   := $(DOCKER_FILE_DIR)/docker-compose.local.database.yml
-DOCKER_COMPOSE_CI_DATABASE   	:= $(DOCKER_FILE_DIR)/docker-compose.ci.database.yml
+DOCKER_COMPOSE_CI_DATABASE   	:= $(DOCKER_FILE_CI_DIR)/docker-compose.ci.database.yml
 DOCKER_COMPOSE_LOCAL_SERVER     := $(DOCKER_FILE_DIR)/docker-compose.local.server.yml
 DOCKER_EXEC                     := docker exec -it
 GITHUB_REPOSITORY_NAME          := glyph
@@ -34,7 +35,7 @@ up: ## docker環境を立ち上げる
 	$(ENV_LOCAL) docker-compose \
 	-f $(DOCKER_COMPOSE_LOCAL) \
 	-f $(DOCKER_COMPOSE_LOCAL_DATABASE) \
-	-f $(DOCKER_COMPOSE_LOCAL_SERVER) up
+	-f $(DOCKER_COMPOSE_LOCAL_SERVER) up -d
 
 .PHONY: down
 down: ## dockerイメージを削除し、docker環境を閉じる
@@ -48,7 +49,7 @@ down: ## dockerイメージを削除し、docker環境を閉じる
 fclean:down del-volumes ## マウントしたデータを削除、またdockerイメージも削除する
 
 .PHONY: re
-re:fclean up ## 完全に初期化した状態でdocker環境を立ち上げる
+re:fclean up sleep migrate## 完全に初期化した状態でdocker環境を立ち上げる
 
 .PHONY: run-db
 run-db: 
@@ -85,3 +86,6 @@ deploy:
 help: ## コマンドの一覧を標示する
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
+
+sleep:
+	sleep 30

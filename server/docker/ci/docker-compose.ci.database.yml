@@ -3,12 +3,12 @@ version: "3"
 services:
   database:
     build:
-      context: ../database
+      context: ../../database
       dockerfile: Dockerfile
     volumes:
       - glyph-data:/var/lib/mysql
-      - ../database/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ../database/mysql/sql:/docker-entrypoint-initdb.d
+      - ../../database/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ../../database/mysql/sql:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
     environment:

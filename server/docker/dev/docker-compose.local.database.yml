@@ -3,11 +3,11 @@ version: "3"
 services:
   database:
     build:
-      context: ../database
+      context: ../../database
       dockerfile: Dockerfile
     volumes:
-      - ../database/data:/var/lib/mysql
-      - ../database/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ../../database/data:/var/lib/mysql
+      - ../../database/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - 3306:3306
     environment:

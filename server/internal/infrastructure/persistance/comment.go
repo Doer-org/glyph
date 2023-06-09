@@ -7,6 +7,7 @@ import (
 	"github.com/Doer-org/glyph/internal/domain/repository"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
 	d "github.com/Doer-org/glyph/internal/infrastructure/persistance/dto"
+	"github.com/Doer-org/glyph/utils"
 )
 
 var _ repository.ICommentRepository = &CommentRepository{}
@@ -22,6 +23,8 @@ func NewCommentRepository(conn *database.Conn) repository.ICommentRepository {
 }
 
 func (ur *CommentRepository) CreateComment(ctx context.Context, comment *entity.Comment) (*entity.Comment, error) {
+	id := utils.GetUlid()
+	comment.Id = id
 	query := `
 	INSERT INTO comments (id, user_id, glyph_id, contents, created_at)
 	VALUES (:id, :user_id, :glyph_id, :contents, :created_at)

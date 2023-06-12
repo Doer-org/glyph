@@ -13,7 +13,7 @@ export const CommentsAll: FC<TProps> = ({ comments }) => {
         return (
           <LinkTo
             key={comment.id}
-            href={`service/glyphs/${comment.glyph_id}`}
+            href={`/glyphs/${comment.glyph_id}`}
             className=" block md:w-2/3 m-auto w-full"
           >
             <div className="border rounded-md border-black m-2 grid grid-cols-6 p-2 hover:bg-yellow-100 hover:cursor-pointer items-center">

@@ -53,7 +53,7 @@ export default function GlyphCreateForm({ glyph }: TProps) {
       prev_glyph: 'string',
       next_glyph: 'string',
     });
-    router.push('/service/glyphs');
+    router.push('/glyphs');
   };
   return (
     <>

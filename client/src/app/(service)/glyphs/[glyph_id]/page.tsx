@@ -34,7 +34,7 @@ const GlyphPage = async ({ params }: TProps) => {
         {glyph.value.data.title}
       </Txt>
       <div className="text-center mb-10">
-        <StyledLinkTo href={`/service/glyphs/${glyph.value.data.id}/edit`}>
+        <StyledLinkTo href={`/glyphs/${glyph.value.data.id}/edit`}>
           編集
         </StyledLinkTo>
       </div>

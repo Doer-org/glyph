@@ -16,7 +16,7 @@ const GlyphsPage = async () => {
         Glyph一覧
       </Txt>
       <div className="text-center mb-10">
-        <StyledLinkTo href="/service/glyphs/new">Glyph作成</StyledLinkTo>
+        <StyledLinkTo href="/glyphs/new">Glyph作成</StyledLinkTo>
       </div>
       {glyphs.value.data === null ? (
         <p>Glyphがありません</p>

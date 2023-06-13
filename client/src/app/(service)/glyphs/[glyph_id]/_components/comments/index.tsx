@@ -1,8 +1,9 @@
 "use client";
-import { FC, useEffect, useRef, useState } from "react";
-import { CommentBox } from "./commentBox";
-import { CommentInput } from "./commentInput";
 import * as API from "@/api";
+
+import { CommentInput } from "@/components/organisms/comments/commentInput";
+import { FC, useEffect, useRef, useState } from "react";
+import { CommentBox } from "../commentBox";
 
 type Comment = {
 	id: string;

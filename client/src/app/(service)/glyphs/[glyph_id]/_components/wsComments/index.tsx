@@ -1,9 +1,9 @@
 "use client";
 import { SvgLogo } from "@/components/atoms/svgs/SvgLogo";
 
-import { CommentInput } from "@/components/organisms/comments/commentInput";
 import { FC } from "react";
 import { CommentBox } from "../commentBox";
+import { CommentInput } from "../commentInput";
 import { useWebSocketComments } from "./hooks";
 
 type TProps = {

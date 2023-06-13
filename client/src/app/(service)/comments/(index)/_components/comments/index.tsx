@@ -1,6 +1,6 @@
-import { LinkTo } from '@/components/atoms/LinkTo'
-import { Txt } from '@/components/atoms/Txt'
 import { TComment } from '@/types/Comment'
+import { LinkTo } from '@/ui/LinkTo'
+import { Txt } from '@/ui/Txt'
 import { FC } from 'react'
 import { AiOutlineComment } from 'react-icons/ai'
 type TProps = {

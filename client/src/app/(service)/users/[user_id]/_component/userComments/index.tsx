@@ -1,5 +1,5 @@
 'use client'
-import { LinkTo } from '@/components/atoms/LinkTo'
+import { LinkTo } from '@/ui/LinkTo'
 import { FC } from 'react'
 import { FaRegCommentDots } from 'react-icons/fa'
 

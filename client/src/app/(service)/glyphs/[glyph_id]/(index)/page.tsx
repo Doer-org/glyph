@@ -1,9 +1,9 @@
 import { getLoggedInUser } from '@/api'
 import { readGlyph } from '@/api/glyph'
 import { readUser } from '@/api/user'
-import { StyledLinkTo } from '@/components/atoms/StyledLinkTo'
-import { Txt } from '@/components/atoms/Txt'
 import { getToken } from '@/features/auth'
+import { StyledLinkTo } from '@/ui/StyledLinkTo'
+import { Txt } from '@/ui/Txt'
 import { GlyphDetail } from './_components/glyphDetail'
 
 type TProps = {

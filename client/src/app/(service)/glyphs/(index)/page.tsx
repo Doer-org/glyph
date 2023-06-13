@@ -1,6 +1,6 @@
 import { readAllGlyphs } from '@/api/glyph'
-import { StyledLinkTo } from '@/components/atoms/StyledLinkTo'
-import { Txt } from '@/components/atoms/Txt'
+import { StyledLinkTo } from '@/ui/StyledLinkTo'
+import { Txt } from '@/ui/Txt'
 import { Glyphs } from './_components/glyphs'
 
 const GlyphsPage = async () => {

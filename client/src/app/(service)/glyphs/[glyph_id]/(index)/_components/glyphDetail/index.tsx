@@ -1,5 +1,5 @@
 import { getToken } from '@/api/utils/token'
-import { GlyphPreviewer } from '@/components/organisms/glyphs/glyphPreviewer'
+import { GlyphPreviewer } from '@/components/organisms/_common/markdown/glyphPreviewer'
 import { TGlyph } from '@/types/Glyph'
 import { FC } from 'react'
 import { Comments } from '../comments'

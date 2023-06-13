@@ -1,9 +1,9 @@
-import { JTDDataType } from "ajv/dist/core";
+import { JTDDataType } from 'ajv/dist/core'
 
 const healthSchema = {
-	properties: {
-		health: { type: "string" },
-	},
-} as const;
+  properties: {
+    health: { type: 'string' },
+  },
+} as const
 
-export type Health = JTDDataType<typeof healthSchema>;
+export type Health = JTDDataType<typeof healthSchema>

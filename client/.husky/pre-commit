@@ -7,7 +7,7 @@ echo "${frontend_files_staged}"
 if [ ! -z "${frontend_files_staged}" ]; then
     echo "format!!"
     cd "${root_directory}/client"
-    # pnpm lint-staged
+    pnpm lint-staged
     cd "${root_directory}"
 else
     echo "no client commit"

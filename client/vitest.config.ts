@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   define: {
@@ -8,5 +8,6 @@ export default defineConfig({
   },
   test: {
     includeSource: ['src/**/*.{js,ts}'],
-    setupFiles: ['test/setup.ts'],},
-});
+    setupFiles: ['test/setup.ts'],
+  },
+})

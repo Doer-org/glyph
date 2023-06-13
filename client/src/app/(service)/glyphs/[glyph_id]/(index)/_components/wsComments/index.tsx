@@ -1,5 +1,5 @@
 'use client'
-import { SvgLogo } from '@/components/atoms/svgs/SvgLogo'
+import { SvgLogo } from '@/ui/svgs/SvgLogo'
 
 import { FC } from 'react'
 import { CommentBox } from '../commentBox'

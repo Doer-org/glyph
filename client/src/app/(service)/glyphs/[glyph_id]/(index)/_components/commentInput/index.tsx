@@ -1,6 +1,6 @@
 'use client'
-import { Button } from '@/components/atoms/Button'
-import { Textarea } from '@/components/atoms/Textarea'
+import { Button } from '@/ui/Button'
+import { Textarea } from '@/ui/Textarea'
 import { useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
 type TProps = {

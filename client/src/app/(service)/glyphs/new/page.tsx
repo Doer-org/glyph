@@ -1,4 +1,4 @@
-import { Txt } from '@/components/atoms/Txt'
+import { Txt } from '@/ui/Txt'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 

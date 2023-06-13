@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/atoms/Button";
 import { Textarea } from "@/components/atoms/Textarea";
-import { FC, useState } from "react";
 import { useRouter } from "next/navigation";
+import { FC, useState } from "react";
 type TProps = {
 	sendComment: (comment: string) => void;
 };

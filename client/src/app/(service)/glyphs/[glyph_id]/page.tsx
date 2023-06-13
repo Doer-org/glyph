@@ -1,10 +1,10 @@
 import { getLoggedInUser } from "@/api";
 import { readGlyph } from "@/api/glyph";
 import { readUser } from "@/api/user";
-import { getToken } from "@/features/auth";
 import { StyledLinkTo } from "@/components/atoms/StyledLinkTo";
 import { Txt } from "@/components/atoms/Txt";
-import { GlyphDetail } from "@/components/organisms/glyphs/glyphDetail";
+import { getToken } from "@/features/auth";
+import { GlyphDetail } from "./_components/glyphDetail";
 
 type TProps = {
 	params: { glyph_id: string };

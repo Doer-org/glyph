@@ -1,9 +1,9 @@
+import { getToken } from "@/api/utils/token";
+import { GlyphPreviewer } from "@/components/organisms/glyphs/glyphPreviewer";
 import { TGlyph } from "@/types/Glyph";
 import { FC } from "react";
-import { GlyphPreviewer } from "../glyphPreviewer";
-import { Comments } from "../../comments";
-import { WsComments } from "../../comments/wsComments";
-import { getToken } from "@/api/utils/token";
+import { Comments } from "../comments";
+import { WsComments } from "../wsComments";
 
 type TProps = {
 	glyph: TGlyph;

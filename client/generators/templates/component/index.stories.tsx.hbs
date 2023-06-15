@@ -1,17 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {{pascalCase name}} from "./{{pascalCase name}}";
+import { {{pascalCase name}} } from "./index";
 
-const meta: Meta<typeof {{pascalCase name}}> {
+const meta: Meta<typeof {{pascalCase name}}> = {
     title: "{{template}}/{{pascalCase name}}",
     component: {{pascalCase name}},
     argTypes: {
     },
-} as Meta;
+}
+export default meta
 
-type Story = StoryObj< typeof {{pascalCase name}}>;
+type Story = StoryObj<typeof {{pascalCase name}}>;
 
-export const Primary : {{pascalCase name}} = {
+export const Primary : Story = {
     args : {
     },
 };

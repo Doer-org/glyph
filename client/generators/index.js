@@ -29,13 +29,17 @@ module.exports = (plop) => {
           ? [
               {
                 type: 'add',
-                path: path + '{{name}}/index.tsx',
+                path: path + '{{name}}/page.tsx',
                 templateFile: `templates/${data.template}/index.tsx.hbs`,
               },
               {
                 type: 'add',
-                path: path + '{{name}}/index.test.tsx',
+                path: path + '{{name}}/page.test.tsx',
                 templateFile: `templates/${data.template}/index.test.tsx.hbs`,
+              },
+              {
+                type: 'add',
+                path: path + '{{name}}/_components/index.ts',
               },
             ]
           : [

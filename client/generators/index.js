@@ -1,4 +1,4 @@
-module.export = (plop) => {
+module.exports = (plop) => {
   plop.setGenerator('component', {
     description: 'Create a component',
     prompts: [
@@ -19,28 +19,42 @@ module.export = (plop) => {
       {
         type: 'input',
         name: 'path',
-        message: 'Where do you want to create under src directory? ex) app/(services)/',
+        message: 'Where do you want to create under src directory? [ex) app/(service)]',
       },
     ],
     actions: (data) => {
       const path = `../src/${data.path}/`
-      const actions = [
-        {
-          type: 'add',
-          path: path + '{{pascalCase name}}/index.tsx',
-          templateFile: `templates/${data.template}/index.ts.hbs`,
-        },
-        {
-          type: 'add',
-          path: path + '{{pascalCase name}}/index.test.tsx',
-          templateFile: `templates/${data.template}/index.test.ts.hbs`,
-        },
-        data.templete === 'component' && {
-          type: 'add',
-          path: path + '{{pascalCase name}}/index.stories.tsx',
-          templateFile: `templates/${data.template}/index.stories.ts.hbs`,
-        },
-      ]
+      const actions =
+        data.template === 'page'
+          ? [
+              {
+                type: 'add',
+                path: path + '{{name}}/index.tsx',
+                templateFile: `templates/${data.template}/index.tsx.hbs`,
+              },
+              {
+                type: 'add',
+                path: path + '{{name}}/index.test.tsx',
+                templateFile: `templates/${data.template}/index.test.tsx.hbs`,
+              },
+            ]
+          : [
+              {
+                type: 'add',
+                path: path + '{{name}}/index.tsx',
+                templateFile: `templates/${data.template}/index.tsx.hbs`,
+              },
+              {
+                type: 'add',
+                path: path + '{{name}}/index.test.tsx',
+                templateFile: `templates/${data.template}/index.test.tsx.hbs`,
+              },
+              {
+                type: 'add',
+                path: path + '{{name}}/index.stories.tsx',
+                templateFile: `templates/${data.template}/index.stories.tsx.hbs`,
+              },
+            ]
       return actions
     },
   })

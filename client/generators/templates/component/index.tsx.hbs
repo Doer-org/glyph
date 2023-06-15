@@ -3,11 +3,8 @@ import React, { FC } from "react";
 const defaultProps = {};
 type Props = {} & typeof defaultProps;
 
-const {{properCase name}}<FC> = (props: Props) => {
+export const {{pascalCase name}}:FC<Props> = ( props ) => {
   return (
-    <div>text</div>
+    <div>{{pascalCase name}}</div>
   );
 };
-
-{{properCase name}}.defaultProps = defaultProps;
-export default {{properCase name}};

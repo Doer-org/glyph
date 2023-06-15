@@ -15,7 +15,7 @@ export const GlyphEditor: FC<TProps> = ({ markdown, setMarkdown }) => {
       id="simple-mde"
       className="rounded-md"
       value={markdown}
-      onChange={(value) => handleMarkdownChange(value, setMarkdown)}
+      onChange={(value: string) => handleMarkdownChange(value, setMarkdown)}
       options={options}
       events={{ drop: handleImageDrop }}
     />

@@ -1,5 +1,7 @@
 import { Header } from '@/ui/share/Header'
+import { Murecho } from 'next/font/google'
 import './globals.css'
+const murecho = Murecho({ weight: '100', subsets: ['latin'] })
 
 export const metadata = {
   title: 'Glyph',
@@ -9,9 +11,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body className="font-mono">
+      <body style={{ fontFamily: `${murecho}` }}>
         <Header />
-        <div>{children}</div>
+        <main>{children}</main>
       </body>
     </html>
   )

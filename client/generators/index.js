@@ -19,11 +19,11 @@ module.exports = (plop) => {
       {
         type: 'input',
         name: 'path',
-        message: 'Where do you want to create under src directory? [ex) app/(service)]',
+        message: 'Copy your relative path where you want to create!',
       },
     ],
     actions: (data) => {
-      const path = `../src/${data.path}/`
+      const path = `../${data.path}/`
       const actions =
         data.template === 'page'
           ? [

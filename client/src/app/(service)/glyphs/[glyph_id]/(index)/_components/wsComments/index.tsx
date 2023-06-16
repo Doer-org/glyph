@@ -1,21 +1,15 @@
 'use client'
+import { UserResponse } from '@/api/user/types'
 import { SvgLogo } from '@/ui/svgs/SvgLogo'
-
 import { FC } from 'react'
 import { CommentBox } from '../commentBox'
 import { CommentInput } from '../commentInput'
 import { useWebSocketComments } from './hooks'
 
-type TProps = {
-  glyphId: string
-  user: {
-    user_id: string
-    user_name: string
-    user_img: string
-  }
-}
-export const WsComments: FC<TProps> = (props: TProps) => {
-  const { sendComment, wsComments } = useWebSocketComments(props.glyphId, props.user)
+type TProps = { glyphId: string; user: UserResponse['data'] }
+
+export const WsComments: FC<TProps> = ({ glyphId, user }) => {
+  const { sendComment, wsComments } = useWebSocketComments({ glyphId, user })
 
   return (
     <div className=" fixed">
@@ -34,7 +28,7 @@ export const WsComments: FC<TProps> = (props: TProps) => {
             >
               <SvgLogo />
               <p className="border-2 p-2 rounded-md my-2 break-words">
-                {comment.data.user_name}: {comment.data.comment}
+                {comment.data.userName}: {comment.data.comment}
               </p>
             </div>
           )

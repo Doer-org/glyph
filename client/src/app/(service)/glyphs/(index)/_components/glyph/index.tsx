@@ -10,7 +10,8 @@ export const Glyph: FC<TProps> = ({ glyph }) => {
   return (
     <LinkTo
       href={`/glyphs/${glyph.id}`}
-      className="w-full shadow-[0px_4px_4px_4px_#3A3A3A] rounded-md hover:cursor-pointer p-3 hover:bg-[#FFF500]"
+      className="w-full shadow-push rounded-md hover:cursor-pointer p-3 border-neutral-700 border-2 translate-x-0 translate-y-0 hover:translate-x-4 hover:translate-y-4 hover:shadow-inherit transition
+       shadow-neutral-700 hover:opacity-90"
     >
       <div className="w-14 h-14 m-auto rounded-full bg-[#3A3A3A] flex items-center justify-center mb-3">
         <p className="font-bold text-[#FFF500]">{glyph.title[0]}</p>

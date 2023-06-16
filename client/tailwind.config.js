@@ -14,6 +14,9 @@ module.exports = {
     animation: {
       spinner: 'spinner 1.5s ease infinite;',
     },
+    boxShadow: {
+      push: '14px 14px',
+    },
   },
   plugins: [require('@tailwindcss/typography')],
 }

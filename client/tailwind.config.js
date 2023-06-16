@@ -6,13 +6,13 @@ module.exports = {
       keyframes: {
         spinner: {
           '0%': { transform: 'rotate(0deg)' },
-          '30%': { transform: 'rotate(365deg)' },
+          '20%': { transform: 'rotate(370deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
       },
     },
     animation: {
-      spinner: 'spinner 2s ease infinite;',
+      spinner: 'spinner 1.5s ease infinite;',
     },
   },
   plugins: [require('@tailwindcss/typography')],

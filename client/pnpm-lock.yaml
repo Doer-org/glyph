@@ -25,6 +25,9 @@ dependencies:
   date-fns:
     specifier: ^2.29.3
     version: 2.30.0
+  emoji-mart:
+    specifier: ^5.5.2
+    version: 5.5.2
   eslint:
     specifier: 8.38.0
     version: 8.38.0
@@ -7067,6 +7070,10 @@ packages:
 
   /electron-to-chromium@1.4.429:
     resolution: {integrity: sha512-COua8RvN548KwPFzKMrTjFbmDsQRgdi0zSAhmo70TwC1tfLOSqq8p09n+GkdF5buvzE/NEYn1dP3itbfhun9gg==}
+
+  /emoji-mart@5.5.2:
+    resolution: {integrity: sha512-Sqc/nso4cjxhOwWJsp9xkVm8OF5c+mJLZJFoFfzRuKO+yWiN7K8c96xmtughYb0d/fZ8UC6cLIQ/p4BR6Pv3/A==}
+    dev: false
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}

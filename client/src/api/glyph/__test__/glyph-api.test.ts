@@ -1,6 +1,7 @@
-import { createUser } from '../../user'
-import { createGlyph, deleteGlyph, editGlyph, getGlyphsByAuthor, readGlyph, readAllGlyphs } from '../'
+import 'cross-fetch/polyfill'
 import { expect, test } from 'vitest'
+import { createGlyph, deleteGlyph, editGlyph, getGlyphsByAuthor, readAllGlyphs, readGlyph } from '../'
+import { createUser } from '../../user'
 
 test('Glyph：Create', async () => {
   const resp = await createGlyph({

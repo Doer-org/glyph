@@ -1,5 +1,6 @@
-import { createUser } from '../../user'
+import 'cross-fetch/polyfill'
 import { getCommentsByGlyphId, getCommentsByUserID, postComment } from '../'
+import { createUser } from '../../user'
 
 import { expect, test } from 'vitest'
 import { createGlyph } from '../../glyph'

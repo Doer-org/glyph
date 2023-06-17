@@ -1,6 +1,6 @@
 import Ajv, { AnySchema } from 'ajv'
-import { Result } from './types'
 import { JTDDataType } from 'ajv/dist/core'
+import { Result } from './types'
 
 export type ResponseError = {
   status: number

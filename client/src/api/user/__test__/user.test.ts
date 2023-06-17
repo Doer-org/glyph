@@ -1,5 +1,6 @@
-import { createUser, readUser, deleteUser } from '../'
+import 'cross-fetch/polyfill'
 import { expect, test } from 'vitest'
+import { createUser, deleteUser, readUser } from '../'
 
 test('User: Create', async () => {
   const resp = await createUser({

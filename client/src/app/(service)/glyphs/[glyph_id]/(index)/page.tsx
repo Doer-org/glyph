@@ -1,6 +1,5 @@
 import { getLoggedInUser } from '@/api'
 import { readGlyph } from '@/api/glyph'
-import { readUser } from '@/api/user'
 import { getToken } from '@/features/auth'
 import { StyledLinkTo } from '@/ui/StyledLinkTo'
 import { Txt } from '@/ui/Txt'
@@ -17,17 +16,15 @@ const GlyphPage = async ({ params }: TProps) => {
   const userResp = await getLoggedInUser(token || '')
   if (userResp.type === 'error') throw new Error('ログインしてください')
   const loggedInUser = userResp.value.user
-  const userInfo = await readUser(loggedInUser.Id, getToken())
   const u = {
     user_id: loggedInUser.Id,
     user_name: loggedInUser.Name,
-    user_img: 'https://pbs.twimg.com/profile_images/1354479643882004483/Btnfm47p_400x400.jpg',
+    user_img: loggedInUser.Img, // 'https://pbs.twimg.com/profile_images/1354479643882004483/Btnfm47p_400x400.jpg',
   }
   const glyph = await readGlyph(params.glyph_id)
   if (glyph.type === 'error') {
     return <p>Glyphが取得できない</p>
   }
-  console.log(glyph)
   return (
     <>
       <Txt elm="h2" size="text-3xl" className="text-center pb-10">

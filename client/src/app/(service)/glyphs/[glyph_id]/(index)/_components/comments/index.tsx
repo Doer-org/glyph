@@ -8,7 +8,7 @@ import { CommentInput } from '../commentInput'
 
 type Comment = {
   id: string
-  author_id: string
+  user_id: string
   glyph_id: string
   contents: string
   created_at: string
@@ -30,6 +30,7 @@ export const Comments: FC<TProps> = (props: TProps) => {
   useEffect(() => {
     ;(async () => {
       const comments = await API.getCommentsByGlyphId(props.glyphId)
+      console.log('comments', comments)
       if (comments.type === 'error') return
 
       if (!comments.value.data) {
@@ -38,7 +39,10 @@ export const Comments: FC<TProps> = (props: TProps) => {
       }
       const commentsAndUsers = await Promise.all(
         comments.value.data.map(async (comment) => {
-          const user = await API.readUser(comment.author_id, props.token)
+          console.log('comment', comment)
+          console.log('comment.user_id', comment.user_id)
+          const user = await API.readUser(comment.user_id, props.token)
+          console.log('user', user)
           return {
             ...comment,
             user: (user.type === 'ok' && user.value.data) || undefined,
@@ -47,7 +51,7 @@ export const Comments: FC<TProps> = (props: TProps) => {
       )
       setComments(commentsAndUsers)
     })()
-  }, [])
+  }, [props.glyphId, props.token])
 
   const scrollLastCommentRef = useRef<HTMLParagraphElement>(null)
   useEffect(() => {

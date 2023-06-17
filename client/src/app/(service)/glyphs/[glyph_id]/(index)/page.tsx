@@ -4,6 +4,7 @@ import { readUser } from '@/api/user'
 import { getToken } from '@/features/auth'
 import { StyledLinkTo } from '@/ui/StyledLinkTo'
 import { Txt } from '@/ui/Txt'
+
 import { GlyphDetail } from './_components/glyphDetail'
 
 type TProps = {

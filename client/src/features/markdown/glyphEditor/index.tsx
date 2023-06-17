@@ -2,6 +2,7 @@
 import 'easymde/dist/easymde.min.css'
 import { FC } from 'react'
 import SimpleMDE from 'react-simplemde-editor'
+
 import { handleImageDrop, handleMarkdownChange, options } from '../MarkdownUtils'
 
 type TProps = {

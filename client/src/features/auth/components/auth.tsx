@@ -1,5 +1,7 @@
-import { getEnv } from '@/utils'
 import { redirect } from 'next/navigation'
+
+import { getEnv } from '@/utils'
+
 import { getToken } from '../utils/get-token'
 const { clientURL } = getEnv()
 type Props = {

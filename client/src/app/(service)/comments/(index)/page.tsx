@@ -2,6 +2,7 @@ import { getLoggedInUser } from '@/api'
 import { getToken } from '@/features/auth'
 import { TComment } from '@/types/Comment'
 import { Txt } from '@/ui/Txt'
+
 import { Comments } from './_components'
 
 export const metadata = { title: 'Comment' }

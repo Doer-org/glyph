@@ -1,9 +1,11 @@
 'use client'
+import { FC } from 'react'
+
 import { SvgLogo } from '@/ui/svgs/SvgLogo'
 
-import { FC } from 'react'
 import { CommentBox } from '../commentBox'
 import { CommentInput } from '../commentInput'
+
 import { useWebSocketComments } from './hooks'
 
 type TProps = {

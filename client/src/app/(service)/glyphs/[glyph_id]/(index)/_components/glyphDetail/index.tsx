@@ -1,7 +1,9 @@
+import { FC } from 'react'
+
 import { getToken } from '@/api/utils/token'
 import { GlyphPreviewer } from '@/features/markdown/glyphPreviewer'
 import { TGlyph } from '@/types/Glyph'
-import { FC } from 'react'
+
 import { Comments } from '../comments'
 import { WsComments } from '../wsComments'
 

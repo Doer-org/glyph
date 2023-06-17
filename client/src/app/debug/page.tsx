@@ -1,8 +1,9 @@
 'use client'
 
 import { useWebSocketApi } from '@/hooks/useWebSocketApi'
+import { getEnv } from '@/utils'
 import { useState } from 'react'
-import React from 'react'
+const { wsURL } = getEnv()
 
 type Comment = {
   type: 'comment'
@@ -17,7 +18,7 @@ type Comment = {
 export default function Debug() {
   const [messages, setMessages] = useState<Comment[]>([])
   const glyph_id = 'aa'
-  const { send, connectionStatus } = useWebSocketApi(`${process.env.NEXT_PUBLIC_WS_URL}/ws/${glyph_id}`, [
+  const { send, connectionStatus } = useWebSocketApi(`${wsURL}/ws/${glyph_id}`, [
     (msg) => {
       if (msg.type !== 'comment') return undefined
       setMessages([...messages, msg as Comment])

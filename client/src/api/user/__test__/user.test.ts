@@ -1,5 +1,6 @@
 import 'cross-fetch/polyfill'
 import { expect, test } from 'vitest'
+
 import { createUser, deleteUser, readUser } from '../'
 
 test('User: Create', async () => {

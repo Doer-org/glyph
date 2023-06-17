@@ -3,6 +3,23 @@
   "plugins": ["react-hooks"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "parent", "sibling", "index", "object", "type"],
+        "pathGroups": [
+          {
+            "pattern": "@/**",
+            "group": "parent",
+            "position": "before"
+          }
+        ],
+        "alphabetize": {
+          "order": "asc"
+        },
+        "newlines-between": "always"
+      }
+    ]
   }
 }

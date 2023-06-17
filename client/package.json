@@ -8,7 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint . --fix",
     "format": "prettier --write **/*.{js,ts,jsx,tsx,md,json}",
     "test": "vitest",
     "storybook": "storybook dev -p 6006",
@@ -18,7 +18,7 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
-      "eslint --fix"
+      "eslint . --fix"
     ],
     "*.{js,ts,jsx,tsx,md,json}": [
       "prettier --write"

@@ -23,7 +23,7 @@ export const User: FC<UserProps> = ({ id, ...props }) => {
       setUser(user.value)
     }
     getUser(id)
-  }, [id])
+  }, [id, props.token])
 
   const testuser = {
     data: { name: 'test', img: 'https://github.com/meow520.png' },

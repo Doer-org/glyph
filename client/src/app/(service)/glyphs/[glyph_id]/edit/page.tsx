@@ -1,6 +1,7 @@
+import dynamic from 'next/dynamic'
+
 import { readGlyph } from '@/api/glyph'
 import { Txt } from '@/ui/Txt'
-import dynamic from 'next/dynamic'
 const GlyphEditForm = dynamic(() => import('./_components/glyphEditForm'), { ssr: false })
 
 export const metadata = {

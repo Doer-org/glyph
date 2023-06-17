@@ -1,8 +1,9 @@
 'use client'
-import { Button } from '@/ui/Button'
-import { Textarea } from '@/ui/Textarea'
 import { useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
+
+import { Button } from '@/ui/Button'
+import { Textarea } from '@/ui/Textarea'
 type TProps = {
   sendComment: (comment: string) => void
 }

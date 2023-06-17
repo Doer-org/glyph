@@ -1,7 +1,8 @@
 'use client'
+import { FC, useEffect, useRef, useState } from 'react'
+
 import * as API from '@/api'
 
-import { FC, useEffect, useRef, useState } from 'react'
 import { CommentBox } from '../commentBox'
 import { CommentInput } from '../commentInput'
 

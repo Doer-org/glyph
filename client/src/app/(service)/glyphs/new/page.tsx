@@ -1,6 +1,7 @@
-import { Txt } from '@/ui/Txt'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
+
+import { Txt } from '@/ui/Txt'
 
 const GlyphCreateForm = dynamic(() => import('./_components/glyphCreateForm'), { ssr: false })
 const GlyphNewPage: NextPage = () => {

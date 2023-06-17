@@ -1,6 +1,7 @@
+import { useState } from 'react'
+
 import { useWebSocketApi } from '@/hooks/useWebSocketApi'
 import { getEnv } from '@/utils'
-import { useState } from 'react'
 const { wsURL } = getEnv()
 
 type Comment = {

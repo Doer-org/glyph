@@ -1,8 +1,9 @@
 'use client'
-import { readUser } from '@/api'
-import { UserResponse } from '@/api/user/types'
 import Image from 'next/image'
 import { useEffect, useState, type FC } from 'react'
+
+import { readUser } from '@/api'
+import { UserResponse } from '@/api/user/types'
 
 type UserProps = {
   id: string

@@ -1,5 +1,6 @@
 import { readAllGlyphs } from '@/api/glyph'
 import { TGlyph } from '@/types/Glyph'
+
 import { Glyph } from '../glyph'
 
 export const Glyphs = async () => {

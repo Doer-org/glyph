@@ -1,8 +1,10 @@
+import { FC } from 'react'
+
 import { UserResponse } from '@/api/user/types'
 import { getToken } from '@/features'
 import { GlyphPreviewer } from '@/features/markdown/glyphPreviewer'
 import { TGlyph } from '@/types/Glyph'
-import { FC } from 'react'
+
 import { Comments } from '../comments'
 import { WsComments } from '../wsComments'
 
@@ -18,7 +20,7 @@ export const GlyphDetail: FC<TProps> = ({ glyph, user }) => {
         {glyph.is_study ? (
           <WsComments glyphId={glyph.id} user={user} />
         ) : (
-          <Comments glyphId={glyph.id} user_id={user.id} token={getToken()} />
+          <Comments glyphId={glyph.id} userId={user.id} token={getToken()} />
         )}
       </div>
     </div>

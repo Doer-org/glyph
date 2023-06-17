@@ -1,7 +1,7 @@
-import { getLoggedInUser } from '@/api'
+import { getLoggedInUser, readUser } from '@/api'
 import { readGlyph } from '@/api/glyph'
-import { readUser } from '@/api/user'
 import { getToken } from '@/features/auth'
+
 import { GlyphTitle } from './_components'
 import { GlyphDetail } from './_components/glyphDetail'
 

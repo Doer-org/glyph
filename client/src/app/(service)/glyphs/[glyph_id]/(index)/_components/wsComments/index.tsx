@@ -1,8 +1,11 @@
 'use client'
-import { UserResponse } from '@/api/user/types'
 import { FC } from 'react'
+
+import { UserResponse } from '@/api/user/types'
+
 import { CommentBox } from '../commentBox'
 import { CommentInput } from '../commentInput'
+
 import { useWebSocketComments } from './hooks'
 
 type TProps = { glyphId: string; user: UserResponse['data'] }

@@ -1,5 +1,6 @@
-import { Header } from '@/ui/share/Header'
 import { Murecho } from 'next/font/google'
+
+import { Header } from '@/ui/share/Header'
 import './globals.css'
 const murecho = Murecho({ weight: '100', subsets: ['latin'] })
 

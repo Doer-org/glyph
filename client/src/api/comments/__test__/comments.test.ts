@@ -1,9 +1,9 @@
 import 'cross-fetch/polyfill'
-import { getCommentsByGlyphId, getCommentsByUserID, postComment } from '../'
-import { createUser } from '../../user'
-
 import { expect, test } from 'vitest'
+
+import { getCommentsByGlyphId, getCommentsByUserID, postComment } from '../'
 import { createGlyph } from '../../glyph'
+import { createUser } from '../../user'
 
 test('Comment: Create', async () => {
   const resp = await createUser({

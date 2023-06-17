@@ -1,5 +1,7 @@
 import { useWebSocketApi } from '@/hooks/useWebSocketApi'
+import { getEnv } from '@/utils'
 import { useState } from 'react'
+const { wsURL } = getEnv()
 
 type Comment = {
   type: 'comment'
@@ -20,7 +22,7 @@ export const useWebSocketComments = (
   }
 ) => {
   const [wsComments, setWsComments] = useState<Comment[]>([])
-  const { send, connectionStatus } = useWebSocketApi(`${process.env.NEXT_PUBLIC_WS_URL}/ws/${glyphId}`, [
+  const { send, connectionStatus } = useWebSocketApi(`${wsURL}/ws/${glyphId}`, [
     (msg) => {
       if (msg.type !== 'comment') return undefined
       setWsComments([...wsComments, msg as Comment])

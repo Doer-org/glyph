@@ -2,7 +2,7 @@
 import { FC } from 'react'
 import { FaRegCommentDots } from 'react-icons/fa'
 
-import { LinkTo } from '@/ui/LinkTo/components'
+import { LinkTo } from '@/ui/LinkTo'
 
 interface Comment {
   id: string

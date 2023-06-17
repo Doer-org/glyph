@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from 'react'
 import { GrDocumentText } from 'react-icons/gr'
 
 import { TGlyph } from '@/types/Glyph'
-import { LinkTo } from '@/ui/LinkTo/components'
+import { LinkTo } from '@/ui/LinkTo'
 import { Txt } from '@/ui/Txt'
 
 type UserGlyphsProps = {

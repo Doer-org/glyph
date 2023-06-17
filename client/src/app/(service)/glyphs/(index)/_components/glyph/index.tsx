@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 import { FC } from 'react'
 
 import { TGlyph } from '@/types/Glyph'
-import { LinkTo } from '@/ui/LinkTo/components'
+import { LinkTo } from '@/ui/LinkTo'
 
 import { GlyphStatus } from '../glyphStatus'
 

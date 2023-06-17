@@ -1,6 +1,7 @@
+import { FC } from 'react'
+
 import { GlyphResponse } from '@/api/glyph/types'
 import { StyledLinkTo } from '@/ui/StyledLinkTo'
-import { FC } from 'react'
 
 type TProps = {
   glyph: GlyphResponse['data']

@@ -2,7 +2,8 @@
   "core": {
     "workingDir": ".reg",
     "actualDir": "__screenshots__",
-    "thresholdRate": 0.05
+    "thresholdRate": 0.001,
+    "enableAntialias": true
   },
   "plugins": {
     "reg-keygen-git-hash-plugin": true,

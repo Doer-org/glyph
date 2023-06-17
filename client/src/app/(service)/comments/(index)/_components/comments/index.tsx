@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { AiOutlineComment } from 'react-icons/ai'
 
 import { TComment } from '@/types/Comment'
-import { LinkTo } from '@/ui/LinkTo'
+import { LinkTo } from '@/ui/LinkTo/components'
 import { Txt } from '@/ui/Txt'
 type TProps = {
   comments: TComment[]

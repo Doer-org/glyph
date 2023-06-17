@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 type TButton = {
   children: ReactNode
@@ -7,7 +7,7 @@ type TButton = {
   disable?: boolean
   border?: boolean
 }
-export const Button: FC<TButton> = ({ children, className, onClick, disable }) => {
+export const Button = ({ children, className, onClick, disable }: TButton) => {
   return (
     <button
       onClick={onClick}

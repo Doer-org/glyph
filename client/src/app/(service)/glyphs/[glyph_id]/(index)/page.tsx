@@ -1,9 +1,8 @@
-import { getLoggedInUser } from '@/api'
+import { getLoggedInUser, readUser } from '@/api'
 import { readGlyph } from '@/api/glyph'
 import { getToken } from '@/features/auth'
-import { StyledLinkTo } from '@/ui/StyledLinkTo'
-import { Txt } from '@/ui/Txt'
 
+import { GlyphTitle } from './_components'
 import { GlyphDetail } from './_components/glyphDetail'
 
 type TProps = {
@@ -12,29 +11,20 @@ type TProps = {
 }
 
 const GlyphPage = async ({ params }: TProps) => {
+  // TODO: 処理が多いように見えるが背景が見えてないので一旦このままで
   const token = getToken()
   const userResp = await getLoggedInUser(token || '')
-  if (userResp.type === 'error') throw new Error('ログインしてください')
+  if (userResp.type === 'error') return <p>ユーザーが取得できませんでした。ログインしてください</p>
   const loggedInUser = userResp.value.user
-  const u = {
-    user_id: loggedInUser.Id,
-    user_name: loggedInUser.Name,
-    user_img: loggedInUser.Img, // 'https://pbs.twimg.com/profile_images/1354479643882004483/Btnfm47p_400x400.jpg',
-  }
+  const user = await readUser(loggedInUser.Id, getToken())
   const glyph = await readGlyph(params.glyph_id)
-  if (glyph.type === 'error') {
-    return <p>Glyphが取得できない</p>
-  }
+  if (user.type === 'error') return <p>ユーザーが取得できない</p>
+  if (glyph.type === 'error') return <p>Glyphが取得できない</p>
+
   return (
     <>
-      <Txt elm="h2" size="text-3xl" className="text-center pb-10">
-        {glyph.value.data.title}
-      </Txt>
-      <div className="text-center mb-10">
-        <StyledLinkTo href={`/glyphs/${glyph.value.data.id}/edit`}>編集</StyledLinkTo>
-      </div>
-      {/* //TODO: ユーザー情報を取得 */}
-      <GlyphDetail glyph={glyph.value.data} user={u} />
+      <GlyphTitle glyph={glyph.value.data} />
+      <GlyphDetail glyph={glyph.value.data} user={user.value.data} />
     </>
   )
 }

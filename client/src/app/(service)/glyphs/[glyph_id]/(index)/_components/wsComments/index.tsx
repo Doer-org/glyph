@@ -14,11 +14,11 @@ export const WsComments: FC<TProps> = ({ glyphId, user }) => {
   const { sendComment, wsComments } = useWebSocketComments({ glyphId, user })
 
   return (
-    <div className="fixed break-all">
+    <div className="sticky top-0">
       <CommentBox>
         {wsComments.map((comment, index) => {
           return (
-            <p className="border-2 p-2 rounded-md my-2 break-all" key={`${comment.data.comment}-${index}`}>
+            <p className="border-2 p-2 rounded-md my-2 overflow-hidden w-full" key={`${comment.data.comment}-${index}`}>
               {comment.data.comment}
             </p>
           )

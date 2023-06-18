@@ -13,7 +13,7 @@ type TProps = { glyph: TGlyph; user: UserResponse['data'] }
 export const GlyphDetail: FC<TProps> = ({ glyph, user }) => {
   return (
     <div className="grid grid-cols-12 gap-10 justify-center">
-      <div className="col-span-6 col-start-4 ">
+      <div className="col-span-6 col-start-4">
         <GlyphPreviewer markdown={glyph.content} />
       </div>
       <div className="col-span-2 break-all">

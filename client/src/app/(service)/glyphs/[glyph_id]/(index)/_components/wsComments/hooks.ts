@@ -26,15 +26,7 @@ export const useWebSocketComments = ({ glyphId, user }: TProps) => {
     },
   ])
   const sendComment = (comment: string) => {
-    send(
-      JSON.stringify({
-        type: 'comment',
-        data: {
-          comment: comment,
-          ...user,
-        },
-      })
-    )
+    send(JSON.stringify({ type: 'comment', data: { comment: comment, ...user } }))
   }
   return { wsComments, sendComment, connectionStatus }
 }

@@ -6,6 +6,12 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     'storycap', // <-- Add storycap https://storybook.js.org/addons/storycap
+    {
+      name: '@storybook/addon-styling',
+      options: {
+        postcss: true,
+      },
+    },
   ],
   framework: {
     name: '@storybook/nextjs',

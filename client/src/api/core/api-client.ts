@@ -41,7 +41,6 @@ export const apiClient = {
     const data = await fetch(url, {
       cache: 'no-store',
       method: 'GET',
-      credentials: 'include',
       headers: {
         ...(token && { jwt: token }),
       },
@@ -56,7 +55,6 @@ export const apiClient = {
     const data = await fetch(url, {
       cache: 'no-store',
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         ...(token && { jwt: token }),
@@ -73,7 +71,6 @@ export const apiClient = {
     const data = await fetch(url, {
       cache: 'no-store',
       method: 'PUT',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         ...(token && { jwt: token }),
@@ -90,7 +87,6 @@ export const apiClient = {
     const data = await fetch(url, {
       cache: 'no-store',
       method: 'DELETE',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         ...(token && { jwt: token }),

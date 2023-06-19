@@ -1,6 +1,6 @@
+import { CodeComponent } from 'react-markdown/lib/ast-to-react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import { CodeComponent } from 'react-markdown/lib/ast-to-react'
 
 const customCode: CodeComponent = ({ inline, className, children }) => {
   const style = a11yDark

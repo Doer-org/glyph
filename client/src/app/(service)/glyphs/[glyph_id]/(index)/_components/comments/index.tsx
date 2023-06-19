@@ -1,13 +1,14 @@
 'use client'
+import { FC, useEffect, useState } from 'react'
+
 import * as API from '@/api'
 
-import { FC, useEffect, useRef, useState } from 'react'
 import { CommentBox } from '../commentBox'
 import { CommentInput } from '../commentInput'
 
 type Comment = {
   id: string
-  author_id: string
+  user_id: string
   glyph_id: string
   contents: string
   created_at: string
@@ -20,15 +21,16 @@ type Comment = {
 
 type TProps = {
   glyphId: string
-  user_id: string
+  userId: string
   token?: string
 }
 
-export const Comments: FC<TProps> = (props: TProps) => {
+export const Comments: FC<TProps> = ({ glyphId, userId, token }: TProps) => {
   const [comments, setComments] = useState<Comment[]>([])
   useEffect(() => {
     ;(async () => {
-      const comments = await API.getCommentsByGlyphId(props.glyphId)
+      const comments = await API.getCommentsByGlyphId(glyphId)
+      console.log('comments', comments)
       if (comments.type === 'error') return
 
       if (!comments.value.data) {
@@ -37,33 +39,25 @@ export const Comments: FC<TProps> = (props: TProps) => {
       }
       const commentsAndUsers = await Promise.all(
         comments.value.data.map(async (comment) => {
-          const user = await API.readUser(comment.author_id, props.token)
-          return {
-            ...comment,
-            user: (user.type === 'ok' && user.value.data) || undefined,
-          }
+          const user = await API.readUser(comment.user_id, token)
+          return { ...comment, user: (user.type === 'ok' && user.value.data) || undefined }
         })
       )
       setComments(commentsAndUsers)
     })()
-  }, [])
+  }, [glyphId, token])
 
-  const scrollLastCommentRef = useRef<HTMLParagraphElement>(null)
-  useEffect(() => {
-    scrollLastCommentRef?.current?.scrollIntoView()
-  }, [comments])
+  // const scrollLastCommentRef = useRef<HTMLParagraphElement>(null)
+  // useEffect(() => {
+  //   scrollLastCommentRef?.current?.scrollIntoView()
+  // }, [comments])
   return (
     <>
       <CommentBox>
         {comments.map((comment, index) => {
           return (
             <div key={`${comment}-${index}`}>
-              <p
-                className="border-2 p-2 rounded-md my-2 break-words"
-                ref={index === comments.length - 1 ? scrollLastCommentRef : undefined}
-              >
-                {comment.contents}
-              </p>
+              <p className="border-2 p-2 rounded-md my-2">{comment.contents}</p>
             </div>
           )
         })}
@@ -71,8 +65,8 @@ export const Comments: FC<TProps> = (props: TProps) => {
       <CommentInput
         sendComment={(comment) =>
           API.postComment({
-            user_id: props.user_id,
-            glyph_id: props.glyphId,
+            user_id: userId,
+            glyph_id: glyphId,
             contents: comment,
           })
         }

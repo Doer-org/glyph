@@ -1,8 +1,9 @@
 'use client'
-import { readUser } from '@/api'
-import { UserResponse } from '@/api/user/types'
 import Image from 'next/image'
 import { useEffect, useState, type FC } from 'react'
+
+import { readUser } from '@/api'
+import { UserResponse } from '@/api/user/types'
 
 type UserProps = {
   id: string
@@ -22,7 +23,7 @@ export const User: FC<UserProps> = ({ id, ...props }) => {
       setUser(user.value)
     }
     getUser(id)
-  }, [id])
+  }, [id, props.token])
 
   const testuser = {
     data: { name: 'test', img: 'https://github.com/meow520.png' },

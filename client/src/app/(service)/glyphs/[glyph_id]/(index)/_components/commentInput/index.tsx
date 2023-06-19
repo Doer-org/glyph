@@ -1,8 +1,9 @@
 'use client'
-import { Button } from '@/ui/Button'
-import { Textarea } from '@/ui/Textarea'
 import { useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
+
+import { Button } from '@/ui/Button'
+import { Textarea } from '@/ui/Textarea'
 type TProps = {
   sendComment: (comment: string) => void
 }
@@ -10,19 +11,20 @@ export const CommentInput: FC<TProps> = ({ sendComment }) => {
   const [content, setContent] = useState('')
   const router = useRouter()
   return (
-    <div className="flex items-start my-3 gap-3">
-      <Textarea content={content} changeContent={setContent} className="rounded-md w-3/4" />
-      <Button
-        onClick={() => {
-          if (content.length !== 0) {
+    <div className="mt-5 block">
+      <Textarea content={content} changeContent={setContent} className="rounded-md shadow-lg w-full" />
+      <div className="flex justify-center">
+        <Button
+          className="w-3/4 m-auto bg-white mt-3"
+          disable={content.length === 0}
+          onClick={() => {
             sendComment(content)
             setContent('')
-            // window.location.reload();
-          }
-        }}
-      >
-        投稿
-      </Button>
+          }}
+        >
+          投稿
+        </Button>
+      </div>
     </div>
   )
 }

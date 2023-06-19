@@ -6,6 +6,7 @@ on:
     paths:
       - .github/**
       - client/**
+      - dev
 
 env:
   REG_NOTICE_CLIENT_ID: ${{ secrets.REG_NOTICE_CLIENT_ID }}
@@ -24,7 +25,7 @@ jobs:
         working-directory: client
 
     steps:
-      - uses: 'actions/checkout@v3'
+      - uses: "actions/checkout@v3"
         with:
           fetch-depth: 0
 
@@ -43,14 +44,14 @@ jobs:
 
       # https://azujuuuuuun.hatenablog.com/entry/2022/09/03/225811
       # https://cloud.google.com/blog/ja/products/identity-security/enabling-keyless-authentication-from-github-actions
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v1.1.1'
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v1.1.1"
         with:
-          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+          credentials_json: "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}"
 
       # - name: Authenticate to Google Cloud
-      #   env: 
+      #   env:
       #     GOOGLE_APPLICATION_CREDENTIALS: credentials_json.json
       #   run: |
       #     echo -n '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' > credentials_json.json

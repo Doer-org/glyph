@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
+import { test } from 'vitest'
+
 import { {{pascalCase name}} } from './index'
 
-describe('<{{pascalCase name}} />', () => {
-  test('should display a blank login form, with remember me checked by default', async () => {
-    render(<{{pascalCase name}} />)
-  })
+test('{{name}}', async () => {
+  render(<{{pascalCase name}} />)
 })

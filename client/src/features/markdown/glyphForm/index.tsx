@@ -23,7 +23,7 @@ const GlyphForm: FC<TProps> = ({ glyph, actionKind }) => {
   const { bool: isPublic, toggle: togglePublic, toFalse: notPublic } = useToggle(glyph?.status === 'Public')
   const { bool: isDraft, toggle: toggleDraft, toFalse: notDraft } = useToggle(glyph?.status === 'Draft')
   const { bool: isStudy, toggle: toggleStudy } = useToggle(glyph?.is_study)
-  const [title, setTitle] = useState<string>('')
+  const [title, setTitle] = useState<string>(glyph?.title ?? '')
   const statusDefineder = (): TGlyph['status'] => {
     if (isPublic && isDraft) return 'Draft'
     if (isPublic && !isDraft) return 'Public'

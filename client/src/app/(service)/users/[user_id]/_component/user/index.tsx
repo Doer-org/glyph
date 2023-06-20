@@ -30,19 +30,9 @@ export const User: FC<UserProps> = ({ id, ...props }) => {
   }
 
   return (
-    <div className="flex justify-start gap-3 lg:gap-8">
-      {/* <Image
-            src={user?.data.img}
-            width={100}
-            height={100}
-            alt={"icon"}
-            className="rounded-full"
-          />
-        <div className="text-3xl">{user?.data.name}</div> */}
-      <div className="rounded-full">
-        <Image src={testuser?.data.img} width={150} height={150} alt={'icon'} className="rounded-full" />
-      </div>
-      <div className="text-4xl my-auto font-bold">{testuser?.data.name}</div>
+    <div className="flex items-center text-center gap-5">
+      <Image src={testuser?.data.img} width={120} height={120} alt={'icon'} className="rounded-full" />
+      <h1 className="text-3xl font-bold">{testuser?.data.name}</h1>
     </div>
   )
 }

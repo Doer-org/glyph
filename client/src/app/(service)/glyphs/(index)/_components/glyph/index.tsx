@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 import { FC } from 'react'
 
 import { TGlyph } from '@/types/Glyph'
-import { LinkTo } from '@/ui/LinkTo'
+import { PopLinkTo } from '@/ui/LinkTo/components/popLinkTo'
 
 import { GlyphStatus } from '../glyphStatus'
 
@@ -10,11 +10,7 @@ type TProps = { glyph: TGlyph }
 
 export const Glyph: FC<TProps> = ({ glyph }) => {
   return (
-    <LinkTo
-      href={`/glyphs/${glyph.id}`}
-      className="w-full shadow-origin rounded-md hover:cursor-pointer p-3 border-neutral-700 border-2 translate-x-0 translate-y-0 hover:translate-x-4 hover:translate-y-4 hover:shadow-inherit transition
-       shadow-neutral-700 hover:opacity-90"
-    >
+    <PopLinkTo href={`/glyphs/${glyph.id}`}>
       <div className="w-14 h-14 m-auto rounded-full bg-[#3A3A3A] flex items-center justify-center mb-3">
         <p className="font-bold text-[#FFF500]">{glyph.title[0]}</p>
       </div>
@@ -29,6 +25,6 @@ export const Glyph: FC<TProps> = ({ glyph }) => {
         {glyph.status === 'Private' && <GlyphStatus text="非公開" className="bg-orange-200" />}
         {glyph.status === 'Draft' && <GlyphStatus text="下書き" className="bg-orange-200" />}
       </div>
-    </LinkTo>
+    </PopLinkTo>
   )
 }

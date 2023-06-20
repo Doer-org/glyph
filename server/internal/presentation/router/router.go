@@ -62,6 +62,7 @@ func (r *Router) cors() {
 			"Content-Length",
 			"Accept-Encoding",
 			"Authorization",
+			"jwt",
 		},
 		// cookieなどの情報を必要とするかどうか
 		AllowCredentials: true,

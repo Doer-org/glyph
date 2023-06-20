@@ -67,7 +67,7 @@ del-data:
 
 .PHONY: migrate
 migrate: ## dbのマイグレーションを行う
-	migrate -path migrations -database='mysql://hoge:hoge@tcp(127.0.0.1:3306)/hoge?parseTime=true&collation=utf8mb4_bin' --verbose up
+	migrate -path migrations -database='mysql://hoge:hoge@tcp(localhost:3306)/hoge?parseTime=true&collation=utf8mb4_bin' --verbose up
 
 
 .PHONY: attach-db

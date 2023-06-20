@@ -7,8 +7,9 @@ module.exports = (plop) => {
         name: 'template',
         message: 'Choose template?',
         choices: [
-          { name: 'component', value: 'component' },
           { name: 'page', value: 'page' },
+          { name: 'component', value: 'component' },
+          { name: 'ui', value: 'ui' },
         ],
       },
       {
@@ -42,7 +43,8 @@ module.exports = (plop) => {
                 path: path + '{{name}}/_components/index.ts',
               },
             ]
-          : [
+          : data.template === 'component'
+          ? [
               {
                 type: 'add',
                 path: path + '{{name}}/index.tsx',
@@ -57,6 +59,28 @@ module.exports = (plop) => {
                 type: 'add',
                 path: path + '{{name}}/index.stories.tsx',
                 templateFile: `templates/${data.template}/index.stories.tsx.hbs`,
+              },
+            ]
+          : [
+              {
+                type: 'add',
+                path: path + '{{pascalCase name}}/index.ts',
+                templateFile: `templates/${data.template}/index.ts.hbs`,
+              },
+              {
+                type: 'add',
+                path: path + '{{pascalCase name}}/components/index.ts',
+                templateFile: `templates/${data.template}/components/index.ts.hbs`,
+              },
+              {
+                type: 'add',
+                path: path + '{{pascalCase name}}/components/{{pascalCase name}}.tsx',
+                templateFile: `templates/${data.template}/components/index.tsx.hbs`,
+              },
+              {
+                type: 'add',
+                path: path + '{{pascalCase name}}/stories/{{name}}.stories.tsx',
+                templateFile: `templates/${data.template}/stories/index.stories.tsx.hbs`,
               },
             ]
       return actions

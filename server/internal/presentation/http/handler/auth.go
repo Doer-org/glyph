@@ -97,6 +97,7 @@ func (u *AuthHandler) Callback(ctx *gin.Context) {
 
 	accessToken, _ := token.SignedString([]byte(os.Getenv("rawPrivKey")))
 	ctx.SetCookie("token", accessToken, oneWeek, "/", "", false, true)
+	ctx.Header("Access-Control-Allow-Credentials", "true")
 	ctx.Redirect(http.StatusFound, redirectURL)
 }
 

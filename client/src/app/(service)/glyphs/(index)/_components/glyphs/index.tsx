@@ -8,6 +8,7 @@ export const Glyphs = async () => {
   const glyphs = await readAllGlyphs()
 
   if (glyphs.type === 'error') return new Error('Glyphを取得できませんでした')
+  if (!glyphs.value.data) return <p>データがありません</p>
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 my-10">

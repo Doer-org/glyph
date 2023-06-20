@@ -1,15 +1,13 @@
 'use client'
-import { useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
 
 import { Button } from '@/ui/Button'
 import { Textarea } from '@/ui/Textarea'
-type TProps = {
-  sendComment: (comment: string) => void
-}
+
+type TProps = { sendComment: (comment: string) => void }
+
 export const CommentInput: FC<TProps> = ({ sendComment }) => {
   const [content, setContent] = useState('')
-  const router = useRouter()
   return (
     <div className="mt-5 block">
       <Textarea content={content} changeContent={setContent} className="rounded-md shadow-lg w-full" />

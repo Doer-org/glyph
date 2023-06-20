@@ -1,36 +1,27 @@
 import { FC } from 'react'
 
-import { getToken } from '@/api/utils/token'
+import { UserResponse } from '@/api/user/types'
+import { getToken } from '@/features'
 import { GlyphPreviewer } from '@/features/markdown/glyphPreviewer'
 import { TGlyph } from '@/types/Glyph'
 
 import { Comments } from '../comments'
 import { WsComments } from '../wsComments'
 
-type TProps = {
-  glyph: TGlyph
-  user: {
-    user_id: string
-    user_name: string
-    user_img: string
-  }
-}
+type TProps = { glyph: TGlyph; user: UserResponse['data'] }
 
-export const GlyphDetail: FC<TProps> = (props: TProps) => {
+export const GlyphDetail: FC<TProps> = ({ glyph, user }) => {
   return (
-    <div className="lg:flex block">
-      <div className="lg:w-2/3 w-full">
-        <GlyphPreviewer markdown={props.glyph.content} />
+    <div className="grid grid-cols-12 gap-10 justify-center">
+      <div className="col-span-6 col-start-4">
+        <GlyphPreviewer markdown={glyph.content} />
       </div>
-      <div className="lg:w-1/3 lg:my-0 w-full my-10 ">
-        <div className="lg:ml-2 transition">
-          {props.glyph.is_study ? (
-            // trueならwebsocketを扱うcommentsを返す
-            <WsComments glyphId={props.glyph.id} user={props.user} />
-          ) : (
-            <Comments glyphId={props.glyph.id} user_id={props.user.user_id} token={getToken()} />
-          )}
-        </div>
+      <div className="col-span-2 break-all">
+        {glyph.is_study ? (
+          <WsComments glyphId={glyph.id} user={user} />
+        ) : (
+          <Comments glyphId={glyph.id} userId={user.id} token={getToken()} />
+        )}
       </div>
     </div>
   )

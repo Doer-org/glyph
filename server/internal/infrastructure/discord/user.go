@@ -26,6 +26,7 @@ func (c *Client) GetMe(ctx context.Context) (*entity.User, error) {
 	if err := json.NewDecoder(resp.Body).Decode(&j); err != nil {
 		return nil, fmt.Errorf("decode: %w", err)
 	}
+	j.Avator = fmt.Sprintf("https://cdn.discordapp.com/avatars/%s/%s", j.Id, j.Avator)
 	user := &entity.User{
 		Id:   j.Id,
 		Name: j.Name,

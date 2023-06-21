@@ -14,7 +14,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "storycap": "storycap --serverCmd \"storybook dev --ci -p 9001\" http://localhost:9001 --serverTimeout 100000 --captureTimeout 30000",
-    "vrt": "reg-suit run"
+    "vrt": "reg-suit run",
+    "generate": "plop --plopfile generators/index.js"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
@@ -76,6 +77,7 @@
     "husky": "^8.0.0",
     "lint-staged": "^13.2.2",
     "postcss-loader": "^7.3.3",
+    "plop": "^3.1.2",
     "puppeteer": "^20.0.0",
     "react-simplemde-editor": "^5.2.0",
     "reg-keygen-git-hash-plugin": "^0.12.1",

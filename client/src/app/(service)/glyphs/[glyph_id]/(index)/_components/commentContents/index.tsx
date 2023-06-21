@@ -18,16 +18,9 @@ type TProps = {
 }
 
 export const CommentContents: FC<TProps> = ({ comments }) => {
-  // const commentsAndUsers = await Promise.all(
-  //     comments.value.data.map(async (comment) => {
-  //       const user = await API.readUser(comment.user_id, token).catch((error) => {
-  //         throw new Error('era-')
-  //       })
-  //       return { ...comment, user: (user.type === 'ok' && user.value.data) || undefined }
-  //     })
   if (comments.length === 0) return <p>コメントはありません</p>
   return (
-    <div>
+    <>
       {comments?.map((comment, index) => {
         return (
           <div key={`${comment.id}-${index}`}>
@@ -35,6 +28,6 @@ export const CommentContents: FC<TProps> = ({ comments }) => {
           </div>
         )
       })}
-    </div>
+    </>
   )
 }

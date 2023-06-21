@@ -13,7 +13,7 @@ const nextConfig = {
     NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
   },
   images: {
-    domains: ['github.com'],
+    domains: ['cdn.discordapp.com'],
   },
 }
 

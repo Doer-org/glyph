@@ -1,23 +1,20 @@
 import { getLoggedInUser } from '@/api'
 import { getToken } from '@/api/utils/token'
 
-import { User, UserComments, UserGlyphs } from './_component'
+import { User } from './_component'
+import { UserInfoWrapper } from './_component/userInfoWrapper'
 
 export default async function UserSetting() {
   const token = getToken()
-  const user = await getLoggedInUser(token).catch((error) => {
-    throw Error(error)
-  })
-  console.log(user)
+  const user = await getLoggedInUser(token)
   if (user.type === 'error') return <p>userが取得できませんした</p>
+
+  // sectionbarみたいなの作って切り替えれるようにしたい
 
   return (
     <>
-      <User id={user.value.user.Id} token={getToken()} />
-      <div className="grid grid-cols-1 md:grid-cols-2 my-14">
-        <UserGlyphs id={user.value.user.Id} />
-        <UserComments id={user.value.user.Id} />
-      </div>
+      <User user={user.value.user} />
+      <UserInfoWrapper user={user.value.user} />
     </>
   )
 }

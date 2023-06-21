@@ -28,22 +28,19 @@ export const Comments = ({ glyphId, userId, token }: TProps) => {
   const [commentContents, setCommentContents] = useState<TCommentUser[]>([])
 
   useEffect(() => {
-    const fetchUserComments = async () => {
-      return await API.getCommentsByGlyphId(glyphId).then(async (result) => {
-        if (result.type === 'error') return
-        if (result.value.data === null) return
-        return (
-          result.type === 'ok' &&
-          (await Promise.all(
-            result.value.data.map(async (comment) => {
-              const user = await API.readUser(comment.user_id, token)
-              return { ...comment, user: (user.type === 'ok' && user.value.data) || undefined }
-            })
-          ))
-        )
-      })
-    }
-    fetchUserComments()
+    ;(async () => {
+      const comments = await API.getCommentsByGlyphId(glyphId)
+      if (comments.type === 'error') return
+      if (!comments.value.data) return
+
+      const commentsAndUsers = await Promise.all(
+        comments.value.data.map(async (comment) => {
+          const user = await API.readUser(comment.user_id, token)
+          return { ...comment, user: (user.type === 'ok' && user.value.data) || undefined }
+        })
+      )
+      setCommentContents(commentsAndUsers)
+    })()
   }, [glyphId, token])
 
   const createComment = (comment: string) => {

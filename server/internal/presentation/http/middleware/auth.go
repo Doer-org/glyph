@@ -27,10 +27,6 @@ func NewAuth(uc usecase.IAuthUsecase) IAuth {
 
 func (m *Auth) Authenticate() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if os.Getenv("ENVIRONMENT") == "dev" {
-			c.Next()
-			return
-		}
 		logger := log.New()
 		tokenString := c.Request.Header.Get("jwt")
 		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {

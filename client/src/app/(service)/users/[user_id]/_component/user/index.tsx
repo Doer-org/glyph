@@ -1,48 +1,22 @@
 'use client'
 import Image from 'next/image'
-import { useEffect, useState, type FC } from 'react'
+import { type FC } from 'react'
 
-import { readUser } from '@/api'
-import { UserResponse } from '@/api/user/types'
+import { TUser } from '@/types/User'
 
-type UserProps = {
-  id: string
-  token?: string
-}
+type TProps = { user: TUser }
 
-export const User: FC<UserProps> = ({ id, ...props }) => {
-  const [user, setUser] = useState<UserResponse | null>(null)
-
-  useEffect(() => {
-    const getUser = async (id: string) => {
-      const user = await readUser(id, props.token)
-      if (user.type === 'error') {
-        console.log('Error:', user.error)
-        return
-      }
-      setUser(user.value)
-    }
-    getUser(id)
-  }, [id, props.token])
-
-  const testuser = {
-    data: { name: 'test', img: 'https://github.com/meow520.png' },
-  }
-
+export const User: FC<TProps> = ({ user }) => {
   return (
-    <div className="flex justify-start gap-3 lg:gap-8">
-      {/* <Image
-            src={user?.data.img}
-            width={100}
-            height={100}
-            alt={"icon"}
-            className="rounded-full"
-          />
-        <div className="text-3xl">{user?.data.name}</div> */}
-      <div className="rounded-full">
-        <Image src={testuser?.data.img} width={150} height={150} alt={'icon'} className="rounded-full" />
-      </div>
-      <div className="text-4xl my-auto font-bold">{testuser?.data.name}</div>
+    <div className="flex items-center text-center gap-5">
+      <Image
+        src={`https://cdn.discordapp.com/avatars/${user.Id}/${user.Img}`}
+        width={120}
+        height={120}
+        alt={'icon'}
+        className="rounded-full"
+      />
+      <h1 className="text-3xl font-bold">{user.Name}</h1>
     </div>
   )
 }

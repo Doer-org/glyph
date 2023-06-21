@@ -12,8 +12,8 @@ export default async function CommentsPage() {
   const loggedInUser = userResp.type === 'ok' && userResp.value.user
   const glyph_id = 'aa' // TODO: Glyph ID
   const CommentMock: TComment[] = [
-    { id: '1', author_id: '1', glyph_id: '1', contents: 'コメント1', created_at: '1' },
-    { id: '1', author_id: '1', glyph_id: '1', contents: 'コメント2', created_at: '1' },
+    { id: '1', user_id: '1', glyph_id: '1', contents: 'コメント1', created_at: '1' },
+    { id: '1', user_id: '1', glyph_id: '1', contents: 'コメント2', created_at: '1' },
   ]
   return (
     <>

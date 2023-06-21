@@ -8,15 +8,16 @@ import { GlyphEditor } from '@/features/markdown/glyphEditor'
 import { GlyphPreviewer } from '@/features/markdown/glyphPreviewer'
 import { useToggle } from '@/hooks/common/useToggle'
 import { TGlyph } from '@/types/Glyph'
+import { TUser } from '@/types/User'
 import { Button } from '@/ui/Button'
 import { Input } from '@/ui/Input'
 
 import 'easymde/dist/easymde.min.css'
 import { GlyphStatusToggleButton } from '../glyphStatusToggleButton'
 
-type TProps = { glyph?: TGlyph; actionKind: 'create' | 'edit' }
+type TProps = { glyph?: TGlyph; actionKind: 'create' | 'edit'; user: TUser }
 
-const GlyphForm: FC<TProps> = ({ glyph, actionKind }) => {
+const GlyphForm: FC<TProps> = ({ glyph, actionKind, user }) => {
   const router = useRouter()
   const [markdown, setMarkdown] = useState<string>(glyph?.content ?? '')
   const { bool: isPreview, toggle: togglePreview } = useToggle(glyph?.status === 'Private')
@@ -45,7 +46,7 @@ const GlyphForm: FC<TProps> = ({ glyph, actionKind }) => {
   const handleAction = () => {
     if (actionKind === 'create') {
       createGlyph({
-        author_id: 'tekitou',
+        author_id: user.Id,
         title: title,
         content: markdown,
         status: statusDefineder(),

@@ -1,7 +1,5 @@
-'use client'
 import { getEnv } from '@/utils'
 const { serverURL, clientURL } = getEnv()
-console.log(serverURL)
 export const DiscordLink = () => {
   const url = `${serverURL}/auth/login?redirect_url=${clientURL}/glyphs`
   return (

@@ -89,8 +89,6 @@ func (u *AuthHandler) Callback(ctx *gin.Context) {
 		return
 	}
 
-	logger.Info("", map[string]string{"place": "callback", "type": "discord auth redirect", "redirecturl": redirectURL})
-
 	claims := jwt.MapClaims{
 		"session": sessionID,
 		"exp":     time.Now().Add(time.Hour * 72).Unix(), // 72時間が有効期限

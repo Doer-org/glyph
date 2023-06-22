@@ -1,15 +1,12 @@
 import { redirect } from 'next/navigation'
 
-import { getEnv } from '@/utils'
-
 import { getToken } from '../utils/get-token'
-const { clientURL } = getEnv()
 type Props = {
   children: React.ReactNode
 }
 
 export const Auth = async (props: Props) => {
   const token = getToken()
-  if (!token) redirect(`${clientURL}`)
+  if (!token) redirect('/')
   return <>{props.children}</>
 }

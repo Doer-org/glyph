@@ -40,6 +40,7 @@ export const apiClient = {
   get: async <T extends AnySchema>(url: string, token?: string) => {
     const data = await fetch(url, {
       cache: 'no-store',
+      credentials: 'include',
       method: 'GET',
       headers: {
         ...(token && { jwt: token }),
@@ -54,6 +55,7 @@ export const apiClient = {
   ) => {
     const data = await fetch(url, {
       cache: 'no-store',
+      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,6 +72,7 @@ export const apiClient = {
   ) => {
     const data = await fetch(url, {
       cache: 'no-store',
+      credentials: 'include',
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -86,6 +89,7 @@ export const apiClient = {
   ) => {
     const data = await fetch(url, {
       cache: 'no-store',
+      credentials: 'include',
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

@@ -58,6 +58,7 @@ func (r *Router) cors() {
 		AllowHeaders: []string{
 			"Access-Control-Allow-Credentials",
 			"Access-Control-Allow-Headers",
+			"Access-Control-Allow-Origin",
 			"Content-Type",
 			"Content-Length",
 			"Accept-Encoding",

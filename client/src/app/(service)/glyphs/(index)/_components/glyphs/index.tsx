@@ -22,7 +22,7 @@ export const Glyphs = async () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 my-10">
-      {glyphs.value.data.map((glyph: TGlyph, index: number) => {
+      {glyphs.value.data.map((glyph: TGlyph) => {
         return (
           <>
             {/* @ts-expect-error Server Component */}

@@ -1,20 +1,23 @@
 import { format } from 'date-fns'
 import Image from 'next/image'
-import { FC } from 'react'
 
+import { readUser } from '@/api/user'
 import { TGlyph } from '@/types/Glyph'
 import { PopLinkTo } from '@/ui/LinkTo/components/popLinkTo'
 
 import { GlyphStatus } from '../glyphStatus'
 
-type TProps = { glyph: TGlyph; avatar: string | null }
+type TProps = { glyph: TGlyph; token: string }
 
-export const Glyph: FC<TProps> = ({ glyph, avatar }) => {
+export const Glyph = async ({ glyph, token }: TProps) => {
+  const user = await readUser(glyph.author_id, token)
+  if (user.type == 'error') return <p>存在しないユーザーの投稿です</p>
+
   return (
     <PopLinkTo href={`/glyphs/${glyph.id}`}>
-      {avatar ? (
+      {user ? (
         <div className="w-14 h-14 m-auto rounded-full flex items-center justify-center mb-3">
-          <Image src={avatar} alt="avatar" width={56} height={56} className="rounded-full" />
+          <Image src={user.value.data.img} alt="avatar" width={56} height={56} className="rounded-full" />
         </div>
       ) : (
         <div className="w-14 h-14 m-auto rounded-full bg-[#3A3A3A] flex items-center justify-center mb-3">

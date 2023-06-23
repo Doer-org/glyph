@@ -12,7 +12,7 @@ type TProps = { glyph: TGlyph; token: string }
 export const Glyph = async ({ glyph, token }: TProps) => {
   const user = await readUser(glyph.author_id, token)
   if (user.type == 'error') return <p>存在しないユーザーの投稿です</p>
-
+  console.log(user)
   return (
     <PopLinkTo href={`/glyphs/${glyph.id}`}>
       {user ? (

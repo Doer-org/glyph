@@ -7,3 +7,5 @@ import { AuthUserResponse } from './types'
 const { serverURL } = getEnv()
 export const getLoggedInUser = async (token: string) =>
   await apiClient.get<AuthUserResponse>(`${serverURL}/auth/user`, token)
+
+export const logout = async (token: string) => await apiClient.get<AuthUserResponse>(`${serverURL}/auth/logout`, token)

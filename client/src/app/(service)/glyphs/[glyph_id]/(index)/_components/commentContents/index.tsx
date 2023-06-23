@@ -30,7 +30,7 @@ export const CommentContents: FC<TProps> = ({ comments }) => {
                 <Image src={comment.user.img} alt="avatar" width={28} height={28} className="rounded-full " />
               )}
             </div>
-            <p className="border-2 p-2 rounded-md col-span-4">{comment.contents}</p>
+            <p className="border-2 p-2 rounded-md col-span-4 whitespace-break-spaces">{comment.contents}</p>
           </div>
         )
       })}

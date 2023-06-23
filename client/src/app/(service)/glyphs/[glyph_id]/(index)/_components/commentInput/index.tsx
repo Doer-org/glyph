@@ -1,27 +1,48 @@
 'use client'
-import { FC, useState } from 'react'
+import { FC, KeyboardEvent, useState } from 'react'
+import { IoMdSend } from 'react-icons/io'
 
-import { Button } from '@/ui/Button'
+import { IconButton } from '@/ui/Button/components/iconButton'
 import { Textarea } from '@/ui/Textarea'
 
 type TProps = { sendComment: (comment: string) => void }
 
 export const CommentInput: FC<TProps> = ({ sendComment }) => {
   const [content, setContent] = useState('')
+  const [height, setHeight] = useState(30)
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter') {
+      if (height < 60) {
+        const new_height = height + 15
+        setHeight(new_height)
+      }
+      console.log(height)
+    }
+  }
+
   return (
-    <div className="mt-5 block">
-      <Textarea content={content} changeContent={setContent} className="rounded-md shadow-lg w-full" />
+    <div className="mt-5 flex bg-white rounded-md shadow-lg px-3 py-[10px] w-full">
+      <Textarea
+        content={content}
+        changeContent={setContent}
+        // onKeyDown={handleKeyDown}
+        className={`w-full h-[${height}px] border-none resize-none align-middle outline-none overflow-hidden`}
+      />
       <div className="flex justify-center">
-        <Button
-          className="w-3/4 m-auto bg-white mt-3"
+        <IconButton
+          className="border-none w-7 h-7 right-6"
           disable={content.length === 0}
+          border={false}
           onClick={() => {
+            if (content === '') {
+              return
+            }
             sendComment(content)
             setContent('')
           }}
         >
-          投稿
-        </Button>
+          <IoMdSend width={24} height={24} className="m-auto" />
+        </IconButton>
       </div>
     </div>
   )

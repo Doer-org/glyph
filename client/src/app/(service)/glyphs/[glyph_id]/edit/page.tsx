@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
 import { redirect } from 'next/navigation'
-import { useRouter } from 'next/router'
 
 import { getLoggedInUser } from '@/api'
 import { readGlyph } from '@/api/glyph'
@@ -13,7 +12,6 @@ export const metadata = { title: 'Glyph edit' }
 type TProps = { params: { glyph_id: string }; searchParams: { id: string } }
 
 const GlyphEditPage = async ({ params }: TProps) => {
-  const router = useRouter()
   const glyph = await readGlyph(params.glyph_id)
   const token = getToken()
   const user = await getLoggedInUser(token)

@@ -2,8 +2,8 @@
 import { FC, KeyboardEvent, useState } from 'react'
 import { IoMdSend } from 'react-icons/io'
 
-import { IconButton } from '../../../../../../../ui/Button/components/iconButton'
-import { Textarea } from '../../../../../../../ui/Textarea'
+import { IconButton } from '@/ui/Button/components/iconButton'
+import { Textarea } from '@/ui/Textarea'
 
 type TProps = { sendComment: (comment: string) => void }
 

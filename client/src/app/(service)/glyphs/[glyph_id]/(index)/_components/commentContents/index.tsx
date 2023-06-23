@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import { FC } from 'react'
 
+import { LinkTo } from '@/ui/LinkTo'
+
 type Comment = {
   id: string
   user_id: string
@@ -27,7 +29,9 @@ export const CommentContents: FC<TProps> = ({ comments }) => {
           <div key={`${comment.id}-${index}`} className="flex gap-3">
             <div className="w-7 h-7 my-auto">
               {comment.user && comment.user.img && (
-                <Image src={comment.user.img} alt="avatar" width={28} height={28} className="rounded-full " />
+                <LinkTo href={`/users/${comment.user.id}`}>
+                  <Image src={comment.user.img} alt="avatar" width={28} height={28} className="rounded-full " />
+                </LinkTo>
               )}
             </div>
             <p className="border-2 p-2 rounded-md my-2">{comment.contents}</p>

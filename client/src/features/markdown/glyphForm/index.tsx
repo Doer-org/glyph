@@ -53,6 +53,9 @@ const GlyphForm: FC<TProps> = ({ glyph, actionKind, user }) => {
         is_study: isStudy,
         prev_glyph: 'string',
         next_glyph: 'string',
+      }).then((result) => {
+        if (result.type === 'error') return
+        router.push(`glyphs/${result.value.data.id}`)
       })
     }
     if (actionKind === 'edit') {
@@ -65,10 +68,11 @@ const GlyphForm: FC<TProps> = ({ glyph, actionKind, user }) => {
         is_study: isStudy,
         prev_glyph: 'string',
         next_glyph: 'string',
+      }).then((result) => {
+        if (result.type === 'error') return
+        router.push(`glyphs/${result.value.data.id}`)
       })
     }
-
-    router.push('/glyphs')
   }
 
   if (actionKind === 'edit' && !glyph) return <p>コンテンツが取得できませんでした</p>

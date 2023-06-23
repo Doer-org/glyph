@@ -1,4 +1,4 @@
-import React, { ElementRef, FC } from 'react'
+import React, { ElementRef, FC, KeyboardEvent } from 'react'
 
 type TTextarea = {
   label?: string
@@ -9,7 +9,7 @@ type TTextarea = {
   maxLength?: number
   className?: string
   ref?: React.MutableRefObject<HTMLTextAreaElement | null>
-  tabIndex?: number
+  onKeyDown?: (e: KeyboardEvent<HTMLTextAreaElement>) => void
 }
 export const Textarea: FC<TTextarea> = ({
   label,
@@ -19,8 +19,7 @@ export const Textarea: FC<TTextarea> = ({
   minLength,
   maxLength,
   className,
-  ref,
-  tabIndex,
+  onKeyDown,
 }) => {
   return (
     <>
@@ -36,8 +35,7 @@ export const Textarea: FC<TTextarea> = ({
         onChange={(e) => changeContent(e.target.value)}
         value={content}
         required={required}
-        ref={ref}
-        tabIndex={tabIndex}
+        onKeyDown={onKeyDown}
       />
     </>
   )

@@ -97,7 +97,11 @@ func (u *AuthHandler) Callback(ctx *gin.Context) {
 
 	accessToken, _ := token.SignedString([]byte(os.Getenv("rawPrivKey")))
 	ctx.SetSameSite(http.SameSiteLaxMode)
-	ctx.SetCookie("token", accessToken, oneWeek, "", "doer-glyph.net", true, true)
+	if os.Getenv("ENVIRONMENT") == "dev" { 
+		ctx.SetCookie("token", accessToken, oneWeek, "", "", true, true)
+	} else {
+		ctx.SetCookie("token", accessToken, oneWeek, "", "doer-glyph.net", true, true)
+	} 
 	ctx.Header("Access-Control-Allow-Credentials", "true")
 	ctx.Redirect(http.StatusFound, redirectURL)
 }

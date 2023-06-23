@@ -12,11 +12,11 @@ type TProps = { glyph: TGlyph; user: UserResponse['data'] }
 
 export const GlyphDetail: FC<TProps> = ({ glyph, user }) => {
   return (
-    <div className="grid grid-cols-12 gap-10 justify-center max-w-[1200px] mx-auto mb-10">
-      <div className="col-span-7 col-start-2">
+    <div className="grid lg:grid-cols-12 gap-10 justify-center max-w-[1200px] mx-auto mb-10 px-5 lg:px-0">
+      <div className="lg:col-span-7 lg:col-start-2">
         <GlyphPreviewer markdown={glyph.content} />
       </div>
-      <div className="col-span-3 break-all">
+      <div className="lg:col-span-3 break-all">
         {glyph.is_study ? (
           <WsComments glyphId={glyph.id} user={user} />
         ) : (

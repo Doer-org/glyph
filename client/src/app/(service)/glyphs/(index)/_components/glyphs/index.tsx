@@ -22,6 +22,7 @@ export const Glyphs = async () => {
       return user.value.data.img
     })
   )
+  console.log(userImgs)
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 my-10">
       {glyphs.value.data.map((glyph: TGlyph, index: number) => {

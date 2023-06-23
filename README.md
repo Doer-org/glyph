@@ -1,9 +1,9 @@
-# glyph
+# Glyph
+<p align="center">
+  <img src="https://github.com/Doer-org/glyph/assets/70254634/6beba1bb-fa15-4b8e-a600-f7f6e92d8062" />
+</p>
 
-glyph is a document management and sharing service used as an alternative to notion within the Doer circle of engineers.
-
-
-![image](https://user-images.githubusercontent.com/88176012/235742252-b3701cae-3632-4cec-9d52-26d2883a32e7.png)
+**Glyph** is a document management and sharing service used as an alternative to notion within the Do`er circle of engineers.
 
 ## License
 Code licensed under 

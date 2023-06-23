@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { ElementRef, FC } from 'react'
 
 type TTextarea = {
   label?: string
@@ -8,6 +8,8 @@ type TTextarea = {
   minLength?: number
   maxLength?: number
   className?: string
+  ref?: React.MutableRefObject<HTMLTextAreaElement | null>
+  tabIndex?: number
 }
 export const Textarea: FC<TTextarea> = ({
   label,
@@ -17,6 +19,8 @@ export const Textarea: FC<TTextarea> = ({
   minLength,
   maxLength,
   className,
+  ref,
+  tabIndex,
 }) => {
   return (
     <>
@@ -32,6 +36,8 @@ export const Textarea: FC<TTextarea> = ({
         onChange={(e) => changeContent(e.target.value)}
         value={content}
         required={required}
+        ref={ref}
+        tabIndex={tabIndex}
       />
     </>
   )

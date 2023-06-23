@@ -1,5 +1,5 @@
 'use client'
-import { FC, KeyboardEvent, useState } from 'react'
+import { FC, useState } from 'react'
 import { IoMdSend } from 'react-icons/io'
 
 import { IconButton } from '@/ui/Button/components/iconButton'
@@ -9,24 +9,23 @@ type TProps = { sendComment: (comment: string) => void }
 
 export const CommentInput: FC<TProps> = ({ sendComment }) => {
   const [content, setContent] = useState('')
-  const [height, setHeight] = useState(30)
-  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter') {
-      if (height < 60) {
-        const new_height = height + 15
-        setHeight(new_height)
-      }
-      console.log(height)
-    }
-  }
+  // const [height, setHeight] = useState(30)
+  // const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+  //   if (e.key === 'Enter') {
+  //     if (height < 60) {
+  //       const new_height = height + 15
+  //       setHeight(new_height)
+  //     }
+  //     console.log(height)
+  //   }
+  // }
 
   return (
     <div className="mt-5 flex bg-white rounded-md shadow-lg px-3 py-[10px] w-full">
       <Textarea
         content={content}
         changeContent={setContent}
-        // onKeyDown={handleKeyDown}
-        className={`w-full h-[${height}px] border-none resize-none align-middle outline-none overflow-hidden`}
+        className={`w-full border-none resize-none align-middle outline-none hidden-scrollbar `}
       />
       <div className="flex justify-center">
         <IconButton
@@ -34,9 +33,7 @@ export const CommentInput: FC<TProps> = ({ sendComment }) => {
           disable={content.length === 0}
           border={false}
           onClick={() => {
-            if (content === '') {
-              return
-            }
+            if (content === '') return
             sendComment(content)
             setContent('')
           }}

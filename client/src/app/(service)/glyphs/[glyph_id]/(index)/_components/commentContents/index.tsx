@@ -26,15 +26,15 @@ export const CommentContents: FC<TProps> = ({ comments }) => {
     <>
       {comments?.map((comment, index) => {
         return (
-          <div key={`${comment.id}-${index}`} className="flex gap-3">
-            <div className="w-7 h-7 my-auto">
+          <div key={`${comment.id}-${index}`} className="grid grid-cols-1 my-5 gap-2">
+            <div className="w-7 h-7">
               {comment.user && comment.user.img && (
                 <LinkTo href={`/users/${comment.user.id}`}>
                   <Image src={comment.user.img} alt="avatar" width={28} height={28} className="rounded-full " />
                 </LinkTo>
               )}
             </div>
-            <p className="border-2 p-2 rounded-md my-2">{comment.contents}</p>
+            <p className="border-2 p-2 rounded-md col-span-4 whitespace-break-spaces">{comment.contents}</p>
           </div>
         )
       })}

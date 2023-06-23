@@ -11,12 +11,15 @@ import { WsComments } from '../wsComments'
 type TProps = { glyph: TGlyph; user: UserResponse['data'] }
 
 export const GlyphDetail: FC<TProps> = ({ glyph, user }) => {
+  // lg:grid-cols-12 lg:px-0
   return (
-    <div className="grid lg:grid-cols-12 gap-10 justify-center max-w-[1200px] mx-auto mb-10 px-5 lg:px-0">
-      <div className="lg:col-span-7 lg:col-start-2">
+    <div className="grid grid-cols-1 gap-10 justify-center mx-auto mb-10 px-5 w-2/3">
+      {/* lg:col-span-7 lg:col-start-2  */}
+      <div className="w-full">
         <GlyphPreviewer markdown={glyph.content} />
       </div>
-      <div className="lg:col-span-3 break-all">
+      {/* lg:col-span-3 */}
+      <div className="break-all">
         {glyph.is_study ? (
           <WsComments glyphId={glyph.id} user={user} />
         ) : (

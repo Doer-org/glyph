@@ -7,7 +7,6 @@ import (
 	"github.com/Doer-org/glyph/internal/domain/repository"
 	"github.com/Doer-org/glyph/internal/infrastructure/database"
 	d "github.com/Doer-org/glyph/internal/infrastructure/persistance/dto"
-	"github.com/Doer-org/glyph/utils"
 )
 
 var _ repository.IUserRepository = &UserRepository{}
@@ -23,8 +22,6 @@ func NewUserRepository(conn *database.Conn) repository.IUserRepository {
 }
 
 func (ur *UserRepository) CreateUser(ctx context.Context, user *entity.User) (*entity.User, error) {
-	id := utils.GetUlid()
-	user.Id = id
 	query := `
 	INSERT INTO users (id, name,img)
 	VALUES (:id,:name,:img)
@@ -54,7 +51,7 @@ func (ur *UserRepository) DeleteUser(ctx context.Context, id string) error {
 
 func (ur *UserRepository) GetUser(ctx context.Context, id string) (*entity.User, error) {
 	query := `
-	SELECT * 
+	SELECT *
 	FROM users
 	WHERE id = ?
 	`

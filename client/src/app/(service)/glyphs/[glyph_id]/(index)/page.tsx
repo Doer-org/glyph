@@ -23,8 +23,7 @@ const GlyphPage = async ({ params }: TProps) => {
 
   return (
     <>
-      {/* @ts-expect-error Server Component */}
-      <GlyphTitle glyph={glyph.value.data} user={user.value.data} />
+      <GlyphTitle glyph={glyph.value.data} user={user.value.data} token={token} />
       <GlyphDetail glyph={glyph.value.data} user={user.value.data} />
     </>
   )

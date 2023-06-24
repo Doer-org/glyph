@@ -19,7 +19,8 @@ export const readRelativeAllGlyphs = async (glyph_id: string) =>
 export const editGlyph = async (glyph: GlyphEdit) =>
   await apiClient.put<GlyphResponse>(`${serverURL}/glyphs/${glyph.id}`, glyph)
 
-export const deleteGlyph = async (glyph_id: string) => await apiClient.delete(`${serverURL}/glyphs/${glyph_id}`)
+export const deleteGlyph = async (glyph_id: string, token?: string) =>
+  await apiClient.delete<GlyphsResponse>(`${serverURL}/glyphs/${glyph_id}`, undefined, token)
 
 export const getGlyphsByAuthor = async (author_id: string) =>
   await apiClient.get<GlyphsResponse>(`${serverURL}/glyphs/user/${author_id}`)

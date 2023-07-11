@@ -7,7 +7,6 @@ import (
 
 	"github.com/Doer-org/glyph/internal/domain/entity"
 	"github.com/Doer-org/glyph/internal/domain/repository"
-	"github.com/Doer-org/glyph/utils"
 )
 
 var _ ICommentUsecase = &CommentUsecase{}
@@ -40,7 +39,6 @@ func (uc *CommentUsecase) CreateComment(ctx context.Context, comment *entity.Com
 	}
 	now := time.Now().In(jst)
 	comment.Created_at = now
-	comment.Id = utils.GetUlid()
 
 	return uc.repo.CreateComment(ctx, comment)
 }

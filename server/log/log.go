@@ -3,11 +3,12 @@ package log
 import (
 	"os"
 
-	"github.com/seipan/logdis"
+	"github.com/seipan/loghook"
 )
 
-func New() *logdis.Logger {
-	logger := logdis.NewLogger(os.Getenv("WEBHOOKURL"), os.Getenv("LOGIMG"), os.Getenv("LOGNAME"))
+func New() *loghook.Logger {
+	logger := loghook.NewLogger(os.Getenv("LOGIMG"), os.Getenv("LOGNAME"), "discord", os.Getenv("WEBHOOKURL"))
+	logger.NoSendDebug()
 	logger.SetErrorWebhook(os.Getenv("ERRORWEBHOOKURL"))
 	return logger
 }

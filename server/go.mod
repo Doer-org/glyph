@@ -12,7 +12,7 @@ require (
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/oklog/ulid v1.3.1
 	github.com/patrickmn/go-cache v2.1.0+incompatible
-	github.com/seipan/loghook v0.1.9
+	github.com/seipan/loghook v0.1.11
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/oauth2 v0.13.0
 )

@@ -95,8 +95,8 @@ devDependencies:
     specifier: 7.0.8
     version: 7.0.8(react-dom@18.2.0)(react@18.2.0)
   '@storybook/addon-links':
-    specifier: 7.0.8
-    version: 7.0.8(react-dom@18.2.0)(react@18.2.0)
+    specifier: 7.6.20
+    version: 7.6.20(react@18.2.0)
   '@storybook/addon-postcss':
     specifier: ^2.0.0
     version: 2.0.0(webpack@5.86.0)
@@ -4005,28 +4005,17 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/addon-links@7.0.8(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-BhEwbrNfyJrSzbdyv+jE33QDXADA3ilBooJm2KY9NsVLu56Jk5d76dELZ+ucLLRvsg1wc+5Z8yH+knqtmUD+Hg==}
+  /@storybook/addon-links@7.6.20(react@18.2.0):
+    resolution: {integrity: sha512-iomSnBD90CA4MinesYiJkFX2kb3P1Psd/a1Y0ghlFEsHD4uMId9iT6sx2s16DYMja0SlPkrbWYnGukqaCjZpRw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
-      react-dom:
-        optional: true
     dependencies:
-      '@storybook/client-logger': 7.0.8
-      '@storybook/core-events': 7.0.8
-      '@storybook/csf': 0.1.1
+      '@storybook/csf': 0.1.9
       '@storybook/global': 5.0.0
-      '@storybook/manager-api': 7.0.8(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/preview-api': 7.0.8
-      '@storybook/router': 7.0.8(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/types': 7.0.8
-      prop-types: 15.8.1
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
       ts-dedent: 2.2.0
     dev: true
 
@@ -4467,7 +4456,7 @@ packages:
       '@babel/core': 7.21.8
       '@babel/preset-env': 7.21.5(@babel/core@7.21.8)
       '@babel/types': 7.21.5
-      '@storybook/csf': 0.1.1
+      '@storybook/csf': 0.1.9
       '@storybook/csf-tools': 7.0.8
       '@storybook/node-logger': 7.0.8
       '@storybook/types': 7.0.8
@@ -4488,7 +4477,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@storybook/client-logger': 7.0.21
-      '@storybook/csf': 0.1.1
+      '@storybook/csf': 0.1.9
       '@storybook/global': 5.0.0
       '@storybook/theming': 7.0.21(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.0.21
@@ -4506,7 +4495,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@storybook/client-logger': 7.0.8
-      '@storybook/csf': 0.1.1
+      '@storybook/csf': 0.1.9
       '@storybook/global': 5.0.0
       '@storybook/theming': 7.0.8(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.0.8
@@ -4596,7 +4585,7 @@ packages:
       '@storybook/builder-manager': 7.0.8
       '@storybook/core-common': 7.0.8
       '@storybook/core-events': 7.0.8
-      '@storybook/csf': 0.1.1
+      '@storybook/csf': 0.1.9
       '@storybook/csf-tools': 7.0.8
       '@storybook/docs-mdx': 0.1.0
       '@storybook/global': 5.0.0
@@ -4668,7 +4657,7 @@ packages:
       '@babel/parser': 7.21.9
       '@babel/traverse': 7.21.5
       '@babel/types': 7.21.5
-      '@storybook/csf': 0.1.1
+      '@storybook/csf': 0.1.9
       '@storybook/types': 7.0.21
       fs-extra: 11.1.1
       recast: 0.23.2
@@ -4684,7 +4673,7 @@ packages:
       '@babel/parser': 7.21.9
       '@babel/traverse': 7.21.5
       '@babel/types': 7.21.5
-      '@storybook/csf': 0.1.1
+      '@storybook/csf': 0.1.9
       '@storybook/types': 7.0.8
       fs-extra: 11.1.1
       recast: 0.23.2
@@ -4701,6 +4690,12 @@ packages:
 
   /@storybook/csf@0.1.1:
     resolution: {integrity: sha512-4hE3AlNVxR60Wc5KSC68ASYzUobjPqtSKyhV6G+ge0FIXU55N5nTY7dXGRZHQGDBPq+XqchMkIdlkHPRs8nTHg==}
+    dependencies:
+      type-fest: 2.19.0
+    dev: true
+
+  /@storybook/csf@0.1.9:
+    resolution: {integrity: sha512-JlZ6v/iFn+iKohKGpYXnMeNeTiiAMeFoDhYnPLIC8GnyyIWqEI9wJYrOK9i9rxlJ8NZAH/ojGC/u/xVC41qSgQ==}
     dependencies:
       type-fest: 2.19.0
     dev: true
@@ -4756,7 +4751,7 @@ packages:
       '@storybook/channels': 7.0.21
       '@storybook/client-logger': 7.0.21
       '@storybook/core-events': 7.0.21
-      '@storybook/csf': 0.1.1
+      '@storybook/csf': 0.1.9
       '@storybook/global': 5.0.0
       '@storybook/router': 7.0.21(react-dom@18.2.0)(react@18.2.0)
       '@storybook/theming': 7.0.21(react-dom@18.2.0)(react@18.2.0)
@@ -4977,7 +4972,7 @@ packages:
       '@storybook/channels': 7.0.20
       '@storybook/client-logger': 7.0.20
       '@storybook/core-events': 7.0.20
-      '@storybook/csf': 0.1.1
+      '@storybook/csf': 0.1.9
       '@storybook/global': 5.0.0
       '@storybook/types': 7.0.20
       '@types/qs': 6.9.7

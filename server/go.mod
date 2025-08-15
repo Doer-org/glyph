@@ -1,6 +1,6 @@
 module github.com/Doer-org/glyph
 
-go 1.20
+go 1.23.0
 
 require (
 	github.com/form3tech-oss/jwt-go v3.2.5+incompatible
@@ -14,7 +14,7 @@ require (
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/seipan/loghook v0.1.11
 	github.com/stretchr/testify v1.8.4
-	golang.org/x/oauth2 v0.13.0
+	golang.org/x/oauth2 v0.27.0
 )
 
 require (

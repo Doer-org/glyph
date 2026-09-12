@@ -91,6 +91,6 @@
     "storybook": "7.0.8",
     "storycap": "^4.1.1",
     "style-loader": "^3.3.3",
-    "vitest": "^0.30.1"
+    "vitest": "^3.0.0"
   }
 }

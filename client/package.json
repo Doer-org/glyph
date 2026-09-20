@@ -88,7 +88,7 @@
     "reg-notify-github-plugin": "^0.12.1",
     "reg-publish-gcs-plugin": "^0.12.1",
     "reg-suit": "^0.12.1",
-    "storybook": "7.0.8",
+    "storybook": "7.6.21",
     "storycap": "^4.1.1",
     "style-loader": "^3.3.3",
     "vitest": "^0.30.1"
